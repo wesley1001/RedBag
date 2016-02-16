@@ -4,22 +4,22 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="f82912158f8242a3b15e77e32158532f" Name="关系图1">
-        <EntityTypeShape EntityType="MkmModel.AccountHistory" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MkmModel.AdvHistory" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MkmModel.AdvInfo" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MkmModel.AdvReward" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MkmModel.Area" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MkmModel.AreaPosition" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MkmModel.HistoryType" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MkmModel.LoginHistory" Width="1.5" PointX="4.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MkmModel.RechargeHistory" Width="1.5" PointX="6.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MkmModel.RewardType" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MkmModel.SystemConfig" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MkmModel.SystemIncome" Width="1.5" PointX="8.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MkmModel.SystemStatus" Width="1.5" PointX="8.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MkmModel.User" Width="1.5" PointX="2.75" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MkmModel.UserAccount" Width="1.5" PointX="8.75" PointY="9.75" IsExpanded="true" />
+      <Diagram DiagramId="377c8d7b2ea64859a1fc9ff0e18f6e0a" Name="关系图1" >
+        <EntityTypeShape EntityType="MkmModel.AccountHistory" Width="1.5" PointX="9.2093076488046464" PointY="17.094951190564291" />
+        <EntityTypeShape EntityType="MkmModel.AdvHistory" Width="1.5" PointX="11.841066973209879" PointY="29.562505706009691" />
+        <EntityTypeShape EntityType="MkmModel.AdvInfo" Width="1.5" PointX="1.2812529920047395" PointY="5.8936929432180207" />
+        <EntityTypeShape EntityType="MkmModel.AdvReward" Width="1.5" PointX="0.8729051541876538" PointY="0.30377763523896117" />
+        <EntityTypeShape EntityType="MkmModel.Area" Width="1.5" PointX="11.535939898125799" PointY="11.735938688617171" />
+        <EntityTypeShape EntityType="MkmModel.AreaPosition" Width="1.5" PointX="9.5911921251524213" PointY="21.639229099098234" />
+        <EntityTypeShape EntityType="MkmModel.HistoryType" Width="1.5" PointX="7.8934377990166826" PointY="7.12156632874234" />
+        <EntityTypeShape EntityType="MkmModel.LoginHistory" Width="1.5" PointX="5.50939501706017" PointY="28.986262975719878" />
+        <EntityTypeShape EntityType="MkmModel.RechargeHistory" Width="1.5" PointX="10.00003186333926" PointY="18.622815617650197" />
+        <EntityTypeShape EntityType="MkmModel.RewardType" Width="1.5" PointX="9.5328638635263143" PointY="21.456046188928209" />
+        <EntityTypeShape EntityType="MkmModel.SystemConfig" Width="1.5" PointX="4.6462470072536952" PointY="28.705744786516643" />
+        <EntityTypeShape EntityType="MkmModel.SystemIncome" Width="1.5" PointX="10.173922759561764" PointY="9.9762192265951164" />
+        <EntityTypeShape EntityType="MkmModel.SystemStatus" Width="1.5" PointX="9.2362745279615162" PointY="10.473167886246539" />
+        <EntityTypeShape EntityType="MkmModel.User" Width="1.5" PointX="1.4387017681443606" PointY="27.176365835208617" />
+        <EntityTypeShape EntityType="MkmModel.UserAccount" Width="1.5" PointX="11.727413970850135" PointY="22.263663183089189" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
