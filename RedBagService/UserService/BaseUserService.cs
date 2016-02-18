@@ -11,10 +11,9 @@ namespace RedBagService.UserService
     {
         MkmEntities entity = new MkmEntities();
 
-        public User LoginUser(string username, string password)
+        public User GetUserByUserName(string username)
         {
-            var user = entity.User.FirstOrDefault(p => p.AccountName == username);
-            return user;
+            return entity.User.FirstOrDefault(p => p.AccountName == username);
         }
     }
 }
