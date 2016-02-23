@@ -11,6 +11,7 @@ namespace Core
     {
         public static IEnumerable<SystemStatus> UserStatus { get; set; }
 
+
         public static int LookUpUserStatusId(string lookupValue)
         {
             var lookobj = UserStatus.FirstOrDefault(p => p.ShortDescription == lookupValue);

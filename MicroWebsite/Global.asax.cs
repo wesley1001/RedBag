@@ -28,7 +28,7 @@ namespace MicroWebsite
 
             var entities = new MkmEntities();
             StaticData.UserStatus = entities.SystemStatus.Where(p => p.SystemStatusCategoryId == (int)StatusCategory.User);
-
+            
         }
     }
 }

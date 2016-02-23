@@ -14,6 +14,7 @@ namespace MicroWebsite.Controllers.User
     {
         
 
+
         public ActionResult SignIn()
         {
             return View();
@@ -39,10 +40,32 @@ namespace MicroWebsite.Controllers.User
                     {
                         user.LastLoginIn = DateTime.Now;
                         uService.SaveUserSignInLog(user,Request.UserHostAddress);
+                        if (user.IsAdmin)
+                        {
+                           return RedirectToAction("index", "SysConfig");
+                        }
                     }
                 }
             }
             return View();
+        }
+
+        public ActionResult ManageUser()
+        {
+            ManagerUserModel mu = new ManagerUserModel();
+            mu.Users = uService.AllUser();
+            return View(mu);
+        }
+        [HttpPost]
+        public ActionResult ManageUser(ManagerUserModel model)
+        {
+            model.NewUser.IsAdmin = false;
+            model.NewUser.CreateAt = DateTime.Now;
+            model.NewUser.Password = SecurityUtility.PasswordHash(model.NewUser.Password);
+            model.NewUser.Status = StaticData.LookUpUserStatusId("正常");
+            uService.AddUser(model.NewUser);
+            model.Users = uService.AllUser();
+            return View(model);
         }
 
         public ActionResult CreateAdvUser()

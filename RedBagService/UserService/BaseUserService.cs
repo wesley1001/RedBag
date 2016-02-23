@@ -22,6 +22,17 @@ namespace RedBagService.UserService
             UpdateUser(user);
         }
 
+        public IList<User> AllUser()
+        {
+            return entity.User.Where(p => !p.IsAdmin).ToList();
+        }
+
+        public int AddUser(User user)
+        {
+            entity.User.Add(user);
+            return entity.SaveChanges();
+        }
+
         public int UpdateUser(User user)
         {
             entity.User.Attach(user);
