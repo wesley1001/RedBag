@@ -19,6 +19,7 @@
           <EntitySet Name="SystemConfig" EntityType="MkmModel.Store.SystemConfig" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="SystemIncome" EntityType="MkmModel.Store.SystemIncome" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="SystemStatus" EntityType="MkmModel.Store.SystemStatus" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SystemStatusCategory" EntityType="MkmModel.Store.SystemStatusCategory" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="User" EntityType="MkmModel.Store.User" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UserAccount" EntityType="MkmModel.Store.UserAccount" store:Type="Tables" Schema="dbo" />
         </EntityContainer>
@@ -159,6 +160,15 @@
           <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="200" />
           <Property Name="ShortDescription" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="CreateAt" Type="datetime" Nullable="false" />
+          <Property Name="SystemStatusCategoryId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SystemStatusCategory">
+          <Key>
+            <PropertyRef Name="StatusCategoryId" />
+          </Key>
+          <Property Name="StatusCategoryId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryName" Type="nvarchar" Nullable="false" MaxLength="20" />
+          <Property Name="CreateAt" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -205,6 +215,7 @@
           <EntitySet Name="SystemStatus" EntityType="MkmModel.SystemStatus" />
           <EntitySet Name="User" EntityType="MkmModel.User" />
           <EntitySet Name="UserAccount" EntityType="MkmModel.UserAccount" />
+          <EntitySet Name="SystemStatusCategory" EntityType="MkmModel.SystemStatusCategory" />
         </EntityContainer>
         <EntityType Name="AccountHistory">
           <Key>
@@ -343,6 +354,7 @@
           <Property Type="String" Name="Description" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="ShortDescription" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="DateTime" Name="CreateAt" Nullable="false" Precision="3" />
+          <Property Type="Int32" Name="SystemStatusCategoryId" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -368,6 +380,14 @@
           <Property Type="Int32" Name="UserId" Nullable="false" />
           <Property Type="Int32" Name="AccountId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="Decimal" Name="AccountBalance" Nullable="false" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="SystemStatusCategory">
+          <Key>
+            <PropertyRef Name="StatusCategoryId" />
+          </Key>
+          <Property Type="Int32" Name="StatusCategoryId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="CategoryName" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="CreateAt" Nullable="false" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -519,6 +539,7 @@
           <EntitySetMapping Name="SystemStatus">
             <EntityTypeMapping TypeName="MkmModel.SystemStatus">
               <MappingFragment StoreEntitySet="SystemStatus">
+                <ScalarProperty Name="SystemStatusCategoryId" ColumnName="SystemStatusCategoryId" />
                 <ScalarProperty Name="CreateAt" ColumnName="CreateAt" />
                 <ScalarProperty Name="ShortDescription" ColumnName="ShortDescription" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -550,6 +571,15 @@
                 <ScalarProperty Name="AccountBalance" ColumnName="AccountBalance" />
                 <ScalarProperty Name="AccountId" ColumnName="AccountId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SystemStatusCategory">
+            <EntityTypeMapping TypeName="MkmModel.SystemStatusCategory">
+              <MappingFragment StoreEntitySet="SystemStatusCategory">
+                <ScalarProperty Name="CreateAt" ColumnName="CreateAt" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="StatusCategoryId" ColumnName="StatusCategoryId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

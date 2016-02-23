@@ -40,5 +40,6 @@ namespace DataAccessLayer
         public DbSet<SystemStatus> SystemStatus { get; set; }
         public DbSet<User> User { get; set; }
         public DbSet<UserAccount> UserAccount { get; set; }
+        public DbSet<SystemStatusCategory> SystemStatusCategory { get; set; }
     }
 }

@@ -15,5 +15,19 @@ namespace RedBagService.UserService
         {
             return entity.User.FirstOrDefault(p => p.AccountName == username);
         }
+
+        public void SaveUserSignInLog(User user,string ipAddress)
+        {
+            entity.LoginHistory.Add(new LoginHistory() { CreateAt = DateTime.Now, IP = ipAddress, UserId = user.UserId });
+            UpdateUser(user);
+        }
+
+        public int UpdateUser(User user)
+        {
+            entity.User.Attach(user);
+            entity.Entry(user).State = System.Data.Entity.EntityState.Modified;
+            return entity.SaveChanges();
+        }
+
     }
 }

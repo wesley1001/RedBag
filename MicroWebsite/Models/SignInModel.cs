@@ -13,4 +13,16 @@ namespace MicroWebsite.Models
         [Required]
         public string Password { get; set; }
     }
+
+    public class SignUpModel : SignInModel
+    {
+        public string Mobile { get; set; }
+        public string Telephone { get; set; }
+        [Required]
+        public string CompanyName { get; set; }
+        [Required]
+        public string LegalPersonName { get; set; }
+        [Required]
+        public string Email { get; set; }
+    }
 }

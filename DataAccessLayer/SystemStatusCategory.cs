@@ -12,12 +12,10 @@ namespace DataAccessLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class SystemStatus
+    public partial class SystemStatusCategory
     {
-        public int StatusId { get; set; }
-        public string Description { get; set; }
-        public string ShortDescription { get; set; }
+        public int StatusCategoryId { get; set; }
+        public string CategoryName { get; set; }
         public System.DateTime CreateAt { get; set; }
-        public int SystemStatusCategoryId { get; set; }
     }
 }

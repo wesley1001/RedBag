@@ -6,6 +6,8 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Core;
+using DataAccessLayer;
 
 namespace MicroWebsite
 {
@@ -23,6 +25,10 @@ namespace MicroWebsite
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
+
+            var entities = new MkmEntities();
+            StaticData.UserStatus = entities.SystemStatus.Where(p => p.SystemStatusCategoryId == (int)StatusCategory.User);
+
         }
     }
 }
