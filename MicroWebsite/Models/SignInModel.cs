@@ -8,9 +8,9 @@ namespace MicroWebsite.Models
 {
     public class SignInModel
     {
-        [Required]
+        [Required(ErrorMessage = "用户名不能为空")]
         public string UserName { get; set; }
-        [Required]
+        [Required(ErrorMessage = "密码不能为空")]
         public string Password { get; set; }
     }
 
