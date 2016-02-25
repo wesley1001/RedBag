@@ -308,15 +308,25 @@ p{
 .login{
     height: 324px;
     width:290px;
-    border-top:1px solid #FABE00;
-    border-right:1px solid #FABE00;
     background: #fff;
     border-radius: 4px;
     position: relative;
     overflow: auto;
     padding:80px 20px 50px;
     overflow: visible;
+    font-size: 12px;
+    color:#ddd;
 
+}
+.login .form-group{
+    position: relative;
+
+}
+.login i{
+    position: absolute;
+    top: 12px;
+    left: 5px;
+    color: #ccc;
 }
 .logo{
     position: absolute;
