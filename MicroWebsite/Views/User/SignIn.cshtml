@@ -1,11 +1,10 @@
 ﻿@{
     ViewBag.Title = "SignIn";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @model MicroWebsite.Models.SignInModel
 
 <div class="media-right">
-    <form action="@Html.Action("SignIn","User")" method="POST" class="login">
+    <form action="@Url.Action("SignIn","User")" method="POST" class="login">
 
         @Html.AntiForgeryToken()
         <div class="logo">
