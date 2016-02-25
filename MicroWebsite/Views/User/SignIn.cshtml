@@ -2,9 +2,40 @@
     ViewBag.Title = "SignIn";
 }
 @model MicroWebsite.Models.SignInModel
+<script>
+    $(document).ready(function() {
+
+        $("#loginForm").validate({
+            rules: {
+                modalHoaTransferInitiationFee: "number",
+                modalInputHoaName: "required",
+                modalHoaPhone: {
+                    required: true,
+                    number: true
+                },
+                modalHoaEmail: {
+                    required: true,
+                    email: true
+                }
+            },
+            messages: {
+                modalHoaTransferInitiationFee: "Please enter a valid amount",
+                modalInputHoaName: "Please enter HOA name.",
+                modalHoaPhone: {
+                    required: "Please enter HOA phone.",
+                    number: "Please enter a valid phone number."
+                },
+                modalHoaEmail: {
+                    required: "Please enter HOA email.",
+                    email: "Please enter a valid email."
+                }
+            }
+        });
+    });
+</script>
 
 <div class="media-right">
-    <form action="@Url.Action("SignIn","User")" method="POST" class="login">
+    <form action="@Url.Action("SignIn","User")" method="POST" class="login" id="loginForm">
 
         @Html.AntiForgeryToken()
         <div class="logo">
@@ -20,7 +51,7 @@
             @Html.PasswordFor(m => m.UserName, new { @class = "form-control padding-left-20", @placeholder = "密码" })
             @Html.ValidationMessageFor(m => m.Password)
         </div>
-        <div class="margin-bottom-20">忘记密码？</div>
+        
         <button type="submit" class="btn btn-warning btn-block">登 录</button>
     </form>
 
