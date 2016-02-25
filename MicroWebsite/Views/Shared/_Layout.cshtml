@@ -1,49 +1,127 @@
 ﻿<!DOCTYPE html>
-<html lang="zh">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta charset="utf-8" />
-    <title>@ViewBag.Title - 我的 ASP.NET MVC 应用程序</title>
-    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-    <meta name="viewport" content="width=device-width" />
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-</head>
-<body>
-    <header>
-        <div class="content-wrapper">
-            <div class="float-left">
-                <p class="site-title">@Html.ActionLink("将你的徽标放置在此处", "Index", "Home")</p>
-            </div>
-            <div class="float-right">
-                <section id="login">
-                    @Html.Partial("_LoginPartial")
-                </section>
-                <nav>
-                    <ul id="menu">
-                        <li>@Html.ActionLink("主页", "Index", "Home")</li>
-                        <li>@Html.ActionLink("关于", "About", "Home")</li>
-                        <li>@Html.ActionLink("联系方式", "Contact", "Home")</li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    </header>
-    <div id="body">
-        @RenderSection("featured", required: false)
-        <section class="content-wrapper main-content clear-fix">
-            @RenderBody()
-        </section>
-    </div>
-    <footer>
-        <div class="content-wrapper">
-            <div class="float-left">
-                <p>&copy; @DateTime.Now.Year - 我的 ASP.NET MVC 应用程序</p>
-            </div>
-        </div>
-    </footer>
-
-    @Scripts.Render("~/bundles/jquery")
-    @RenderSection("scripts", required: false)
-</body>
+<html>
+	<head> 
+		<meta charset="utf-8"> 
+		<meta http-equiv="X-UA-Compatible" content="IE=edage">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+		<meta http-equiv="Content-type" content="text/html;charset=utf-8">
+	    <title>麦克茂</title>
+        @Styles.Render("~/Content/themes/base/css")
+		
+	</head>
+	<body>
+	<section id="banner" class="banner">
+		<div class="container">
+			<div class="media" >
+			    <div class="media-body text-white">
+			        <h2 class=" margin-bottom-30">麦克茂</h2>
+			        <p>麦克茂是以人的能量为核心产品，以社区群落为基准对象，实现可持续发展的生态上午体系。</p>
+			        <p>每个人都有自己的么能量切未被完全释放，它需要一种激活的方式，麦克茂因此建立了一种能量转换平台。</p>
+			    </div>
+                @RenderBody()
+			    @*<div class="media-right">
+				<form action="" class="login">
+					<div class="logo"><img src="~/images/logo.png" alt=""></div>
+					<div class="form-group"><i class="glyphicon glyphicon-user"></i><input type="text" class="form-control padding-left-20" placeholder="用户名"></div>
+					<div class="form-group"> <i class="glyphicon glyphicon-lock"></i> <input type="password" class="form-control padding-left-20" placeholder="密码"></div>
+					<div class="margin-bottom-20">忘记密码？</div>
+					<button type="submit" class="btn btn-warning btn-block">登 录</button>
+				</form>
+					
+				</div>*@
+			</div>
+		</div>
+	</section>
+	<section class="servers text-center">
+		<div class="container">
+			<h2 class="margin-bottom-30">我们的服务</h2>
+			<div class="row">
+				<div class="col-md-3">
+					<div class="bg-warning servers-step"><img src="~/images/dianpu.png" alt=""></div>
+					<h4 class="margin-top-15">店铺</h4>
+					<p class="text-center">每个人都有自己的么能量切未被完全释放，它需要一种激活的方式，麦克茂因此建立了一种能量转换平台。</p>
+				</div>
+				<div class="col-md-3">
+					<div class="bg-warning servers-step"><img src="~/images/hongbao.png" alt=""></div>
+					<h4 class="margin-top-15">红包</h4>
+					<p class="text-center">每个人都有自己的么能量切未被完全释放，它需要一种激活的方式，麦克茂因此建立了一种能量转换平台。</p>
+				</div>
+				<div class="col-md-3">
+					<div class="bg-warning servers-step"><img src="~/images/ad.png" alt=""></div>
+					<h4 class="margin-top-15">广告</h4>
+					<p class="text-center">每个人都有自己的么能量切未被完全释放，它需要一种激活的方式，麦克茂因此建立了一种能量转换平台。</p>
+				</div>
+				<div class="col-md-3">
+					<div class="bg-warning servers-step"><img src="~/images/zhenghe.png" alt=""></div>
+					<h4 class="margin-top-15">整合</h4>
+					<p class="text-center">每个人都有自己的么能量切未被完全释放，它需要一种激活的方式，麦克茂因此建立了一种能量转换平台。</p>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section id="ad" class="ad">
+		<div class="container text-center">
+			<div class="row">
+				<div class="col-md-3"> <img src="~/images/pic1.png" alt=""> 	</div>
+				<div class="col-md-6"><img src="~/images/pic2.png" alt="" class="margin-left-20"></div>
+				<div class="col-md-3"><img src="~/images/pic3.png" alt="">
+				<img src="../images/pic4.png" alt=""></div>
+			</div>
+		</div>
+	</section>
+	<section class="details" id="details">
+		<div class="container">
+			<div class="media">
+				<div class="media-body padding-right-30">
+					<h4>红包</h4>
+					<p>麦克茂是以人的能量为核心产品，以社区群落为基准对象，实现可持续发展的生态上午体系。麦克茂是以人的能量为核心产品，以社区群落为基准对象，实现可持续发展的生态上午体系。</p>
+					<p>麦克茂是以人的能量为核心产品，以社区群落为基准对象，实现可持续发展的生态上午体系。</p>
+					<p>麦克茂是以人的能量为核心产品，以社区群落为基准对象，实现可持续发展的生态上午体系。</p>
+				</div>
+				<div class="media-right"><img src="~/images/pic5.png" alt=""></div>
+			</div>
+		</div>
+		<div class="bg-default">
+			<div class="container">
+			<div class="media">
+				<div class="media-left">
+					<img src="~/images/pic5.png" alt=""/>
+				</div>
+				<div class="media-body padding-left-30">
+					<h4>店铺</h4>
+					<p>麦克茂是以人的能量为核心产品，以社区群落为基准对象，实现可持续发展的生态上午体系。麦克茂是以人的能量为核心产品，以社区群落为基准对象，实现可持续发展的生态上午体系。</p>
+					<p>麦克茂是以人的能量为核心产品，以社区群落为基准对象，实现可持续发展的生态上午体系。</p>
+					<p>麦克茂是以人的能量为核心产品，以社区群落为基准对象，实现可持续发展的生态上午体系。</p></div>
+			</div>
+		</div>
+		</div>
+		
+		<div class="container">
+			<div class="media">
+				<div class="media-body padding-right-30">
+					<h4>广告</h4>
+					<p>麦克茂是以人的能量为核心产品，以社区群落为基准对象，实现可持续发展的生态上午体系。麦克茂是以人的能量为核心产品，以社区群落为基准对象，实现可持续发展的生态上午体系。</p>
+					<p>麦克茂是以人的能量为核心产品，以社区群落为基准对象，实现可持续发展的生态上午体系。</p>
+					<p>麦克茂是以人的能量为核心产品，以社区群落为基准对象，实现可持续发展的生态上午体系。</p>
+				</div>
+				<div class="media-right"><img src="~/images/pic5.png" alt=""></div>
+			</div>
+		</div>
+	</section>
+	<section class="about text-center">
+		<div class="container">
+			<h2 class="margin-bottom-30">关于我们</h2>
+			<p>麦克茂是以人的能量为核心产品，以社区群落为基准对象，实现可持续发展的生态上午体系。麦克茂是以人的能量为核心产品，以社区群落为基准对象，实现可持续发展的生态上午体系。</p>
+			<p>	麦克茂是以人的能量为核心产品，以社区群落为基准对象，实现可持续发展的生态上午体系。</p>
+			<img src="~/images/pic6.png" alt="" class="margin-top-30">
+		</div>
+		
+	</section>
+	<section class="foot text-center margin-top-30">
+		<!-- <div class="footer"> -->
+			&copy; copyright 2016	<span class="margin-left-15">公司地址：长沙市岳麓区</span> <span class="margin-left-15">电话：<span class="text-phone">0731-87659803</span></span>
+		<!-- </div> -->
+		
+	</section>
+	</body>
 </html>
