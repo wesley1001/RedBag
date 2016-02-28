@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Core
+<!DOCTYPE html>
 <html lang="zh">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -14,11 +15,23 @@
 
     <div id="body">
         <section class="content-wrapper main-content clear-fix">
-            <ul>
-                <li>@Html.ActionLink("用户管理", "UserList", "User")</li>
-            </ul>
-            @RenderBody()
+            @if (Convert.ToInt32(Session["Role"]) == (int)UserRole.Admin)
+            {
+                <ul>
+                    <li>@Html.ActionLink("用户管理", "UserList", "User")</li>
+                    <li>@Html.ActionLink("系统设定", "UserList", "User")</li>
+                    <li>@Html.ActionLink("广告管理", "UserList", "User")</li>
+                </ul>
+            }
+            else
+            {
+                <ul>
+                    <li>@Html.ActionLink("我的广告", "UAdvList", "Adv")</li>
+                </ul>
+            }
+
         </section>
+        @RenderBody()
     </div>
     @RenderSection("scripts", required: false)
 </body>

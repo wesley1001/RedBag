@@ -33,11 +33,19 @@ namespace Core
 
     }
 
+   
+
     public enum StatusCategory
     {
         User = 1,
         Adv = 2,
         SystemConfig = 3
+    }
+
+    public enum UserRole
+    {
+        Admin = 1,
+        NormalUser = 2
     }
 
 }

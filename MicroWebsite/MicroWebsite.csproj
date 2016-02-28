@@ -185,12 +185,15 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\Advertisement\AdvController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\System\SysConfigController.cs" />
     <Compile Include="Controllers\User\UserController.cs" />
+    <Compile Include="Filters\UserRoleFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AdvModel.cs" />
     <Compile Include="Models\ManagerUserModel.cs" />
     <Compile Include="Models\PartialModel.cs" />
     <Compile Include="Models\SignInModel.cs" />
@@ -303,10 +306,14 @@
     <Content Include="Views\SysConfig\Index.cshtml" />
     <Content Include="Views\User\UserList.cshtml" />
     <Content Include="Views\User\Create.cshtml" />
+    <Content Include="Views\Adv\UAdvList.cshtml" />
+    <Content Include="Views\Adv\AdvList.cshtml" />
+    <Content Include="Views\Adv\Create.cshtml" />
+    <Content Include="Views\Adv\ModifyAdv.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Filters\" />
+    <Folder Include="obj\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

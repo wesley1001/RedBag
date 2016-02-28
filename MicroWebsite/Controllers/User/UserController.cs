@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using Core;
 using DataAccessLayer;
+using MicroWebsite.Filters;
 using MicroWebsite.Models;
 using RedBagService.UserService;
 
@@ -13,9 +14,6 @@ namespace MicroWebsite.Controllers.User
 {
     public class UserController : BaseController
     {
-
-
-
         public ActionResult SignIn()
         {
             return View();
@@ -43,7 +41,13 @@ namespace MicroWebsite.Controllers.User
                         uService.SaveUserSignInLog(user, Request.UserHostAddress);
                         if (user.IsAdmin)
                         {
+                            Session["Role"] = (int)UserRole.Admin;
                             return RedirectToAction("UserList", "User");
+                        }
+                        else
+                        {
+                            Session["Role"] = (int)UserRole.NormalUser;
+                            return RedirectToAction("AdvList", "Adv");
                         }
                     }
                 }
@@ -51,6 +55,7 @@ namespace MicroWebsite.Controllers.User
             return View();
         }
 
+        [UserRoleFilter]
         public ActionResult UserList()
         {
             var model = new UserListModel();
@@ -113,7 +118,6 @@ namespace MicroWebsite.Controllers.User
             {
                 return RedirectToAction("UserList", "User");
             }
-
             var defaultPwd = ConfigurationManager.AppSettings["DefaultResetPwd"];
             user.Password = SecurityUtility.PasswordHash(defaultPwd);
             db.SaveChanges();
