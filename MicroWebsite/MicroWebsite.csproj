@@ -203,6 +203,7 @@
     <Compile Include="Models\ManagerUserModel.cs" />
     <Compile Include="Models\PartialModel.cs" />
     <Compile Include="Models\SignInModel.cs" />
+    <Compile Include="Models\SystemConfigModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -318,6 +319,8 @@
     <Content Include="Views\Adv\AdvList.cshtml" />
     <Content Include="Views\Adv\Create.cshtml" />
     <Content Include="Views\Adv\ModifyAdv.cshtml" />
+    <Content Include="Views\SysConfig\CreateReward.cshtml" />
+    <Content Include="Views\SysConfig\CreateRechargeReward.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

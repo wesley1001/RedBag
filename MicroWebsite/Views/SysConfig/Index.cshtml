@@ -2,5 +2,60 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_WorkspaceLayout.cshtml";
 }
+@using Core
+@using DataAccessLayer
+@model MicroWebsite.Models.RewardConfigModel
+<h2>广告奖励配置</h2>
+<a href="@Url.Action("CreateReward", "SysConfig")">创建奖励金额</a>
+<table>
+    <tr>
+        <td>奖励金额</td>
+        <td>描述</td>
+        <td>状态</td>
+        <td>操作</td>
+    </tr>
+    @foreach (RewardType u in Model.Rewards)
+    {
+        <tr>
+            <td>@u.RewardValue</td>
+            <td>@u.ShortDescription</td>
+            <td>@SystemStaticData.LookUpAdvRewardStatusId(u.Status)</td>
+            <td>
+                <a href="@Url.Action("DeleteRewardType", "SysConfig", new { rewardTypeId = u.RewardTypeId })">删除</a>
+            </td>
+        </tr>
+    }
+</table>
+<h2>充值奖励配置</h2>
+<a href="@Url.Action("CreateReward", "SysConfig")">创建奖励金额</a>
+<table>
+    <tr>
+        <td>奖励金额</td>
+        <td>描述</td>
+        <td>状态</td>
+        <td>操作</td>
+    </tr>
+    @foreach (RewardType u in Model.Rewards)
+    {
+        <tr>
+            <td>@u.RewardValue</td>
+            <td>@u.ShortDescription</td>
+            <td>@SystemStaticData.LookUpAdvRewardStatusId(u.Status)</td>
+            <td>
+                <a href="@Url.Action("DeleteRewardType", "SysConfig", new { rewardTypeId = u.RewardTypeId })">删除</a>
+            </td>
+        </tr>
+    }
+</table>
+<h2>系统服务费配置</h2>
+@using (Html.BeginForm("SaveSystemIncome", "SysConfig", FormMethod.Post, new { incomeModel = Model.IncomeModel }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.IncomeModel.ConfigId)
+    @Html.HiddenFor(m => m.IncomeModel.CreateAt)
+    <div>
+        <span>服务费</span> @Html.TextBoxFor(m => m.IncomeModel.SystemIncomeValue) 元/个
+        <input type="submit" value="保存" />
+    </div> 
+}
 
-<h2>系统配置</h2>

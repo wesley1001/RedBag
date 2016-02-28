@@ -9,8 +9,6 @@ namespace MicroWebsite.Controllers.Advertisement
 {
     public class AdvController : BaseController
     {
-        
-
         public ActionResult UAdvList()
         {
             AdvListModel model= new AdvListModel();

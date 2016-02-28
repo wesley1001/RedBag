@@ -93,6 +93,9 @@
     <Compile Include="RechargeHistory.cs">
       <DependentUpon>mkmEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="RechargeReward.cs">
+      <DependentUpon>mkmEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="RewardType.cs">
       <DependentUpon>mkmEntity.tt</DependentUpon>
     </Compile>

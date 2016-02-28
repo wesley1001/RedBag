@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "CreateReward";
+    Layout = "~/Views/Shared/_WorkspaceLayout.cshtml";
+}
+@model DataAccessLayer.RewardType
+<h2>创建奖励</h2>
+@using (Html.BeginForm())
+{
+    <div>
+        @Html.AntiForgeryToken()
+        <span>金额</span>: @Html.TextBoxFor(m => m.RewardValue)
+        <span>描述</span>: @Html.TextBoxFor(m => m.Description)
+        <span>简称</span>:  @Html.TextBoxFor(m => m.ShortDescription)
+        <input type="submit" value="Submit" />
+    </div>
+}

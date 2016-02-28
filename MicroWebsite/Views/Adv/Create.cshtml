@@ -2,5 +2,18 @@
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_WorkspaceLayout.cshtml";
 }
-
-<h2>Create</h2>
+@model DataAccessLayer.AdvInfo
+<h2>创建新广告</h2>
+@using (Html.BeginForm())
+{
+    <div>
+        @Html.AntiForgeryToken()
+        <span>广告标题</span>: @Html.TextBoxFor(m => m.AdvTitle)
+        <span>投放区域</span>: @Html.TextBoxFor(m => m.AreaId)
+        <span>广告主体链接</span>:  @Html.PasswordFor(m => m.ContentUrl)
+        
+        <span>红包总额</span>: @Html.TextBoxFor(m => m.TotalCash)
+        <span>红包总数</span>:  @Html.TextBoxFor(m => m.TotalCount)
+        <input type="submit" value="Submit" />
+    </div>
+}

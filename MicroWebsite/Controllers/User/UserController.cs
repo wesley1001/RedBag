@@ -31,7 +31,7 @@ namespace MicroWebsite.Controllers.User
                 }
                 else
                 {
-                    if (user.Status != StaticData.LookUpUserStatusId(StaticData.UserDictionary.Normal))
+                    if (user.Status != SystemStaticData.LookUpUserStatusId(SystemStaticData.UserDictionary.Normal))
                         ModelState.AddModelError("UserName", "该用户以封停");
                     else if (!SecurityUtility.PasswordHash(signIn.Password).Equals(user.Password))
                         ModelState.AddModelError("Password", "用户名或者密码不正确");
@@ -78,7 +78,7 @@ namespace MicroWebsite.Controllers.User
                 user.CreateAt = DateTime.Now;
                 user.IsAdmin = false;
                 user.Password = SecurityUtility.PasswordHash(user.Password);
-                user.Status = StaticData.LookUpUserStatusId(StaticData.UserDictionary.Normal);
+                user.Status = SystemStaticData.LookUpUserStatusId(SystemStaticData.UserDictionary.Normal);
                 db.User.Add(user);
                 db.SaveChanges();
                 var account = new UserAccount { UserId = user.UserId };
@@ -95,7 +95,7 @@ namespace MicroWebsite.Controllers.User
             {
                 return RedirectToAction("UserList", "User");
             }
-            user.Status = StaticData.LookUpUserStatusId(StaticData.UserDictionary.DisableAccount);
+            user.Status = SystemStaticData.LookUpUserStatusId(SystemStaticData.UserDictionary.DisableAccount);
             db.SaveChanges();
             return RedirectToAction("UserList", "User");
         }
@@ -107,7 +107,7 @@ namespace MicroWebsite.Controllers.User
             {
                 return RedirectToAction("UserList", "User");
             }
-            user.Status = StaticData.LookUpUserStatusId(StaticData.UserDictionary.Normal);
+            user.Status = SystemStaticData.LookUpUserStatusId(SystemStaticData.UserDictionary.Normal);
             db.SaveChanges();
             return RedirectToAction("UserList", "User");
         }
