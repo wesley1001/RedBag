@@ -2,5 +2,29 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_WorkspaceLayout.cshtml";
 }
-
+@using Core
+@using DataAccessLayer
+@model MicroWebsite.Models.RewardConfigModel
 <h2>系统配置</h2>
+<a href="@Url.Action("CreateReward", "SysConfig")">创建奖励金额</a>
+<table>
+    <tr>
+        <td>奖励金额</td>
+        <td>描述</td>
+        <td>状态</td>
+        <td>操作</td>
+    </tr>
+    @foreach (RewardType u in Model.Rewards)
+    {
+        <tr>
+            <td>@u.RewardValue</td>
+            <td>@u.ShortDescription</td>
+            <td>@SystemStaticData.LookUpAdvRewardStatusId(u.Status)</td>
+            <td>
+                <a href="@Url.Action("DeleteRewardType","SysConfig",new{rewardTypeId=u.RewardTypeId})">删除</a>
+            </td>
+        </tr>
+    }
+</table>
+
+

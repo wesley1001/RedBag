@@ -27,7 +27,9 @@ namespace MicroWebsite
             AuthConfig.RegisterAuth();
 
             var entities = new MkmEntities();
-            StaticData.UserStatus = entities.SystemStatus.Where(p => p.SystemStatusCategoryId == (int)StatusCategory.User);
+            SystemStaticData.UserStatus = entities.SystemStatus.Where(p => p.SystemStatusCategoryId == (int)StatusCategory.User);
+            SystemStaticData.AdvStatus = entities.SystemStatus.Where(p => p.SystemStatusCategoryId == (int)StatusCategory.Adv);
+            SystemStaticData.AdvStatus = entities.SystemStatus.Where(p => p.SystemStatusCategoryId == (int)StatusCategory.AdvReward);
             
         }
     }
