@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Core;
 using DataAccessLayer;
+using MicroWebsite.Filters;
 using MicroWebsite.Models;
 using RedBagService.UserService;
 
@@ -12,9 +14,6 @@ namespace MicroWebsite.Controllers.User
 {
     public class UserController : BaseController
     {
-        
-
-
         public ActionResult SignIn()
         {
             return View();
@@ -32,17 +31,23 @@ namespace MicroWebsite.Controllers.User
                 }
                 else
                 {
-                    if (user.Status != StaticData.LookUpUserStatusId("正常"))
+                    if (user.Status != StaticData.LookUpUserStatusId(StaticData.UserDictionary.Normal))
                         ModelState.AddModelError("UserName", "该用户以封停");
                     else if (!SecurityUtility.PasswordHash(signIn.Password).Equals(user.Password))
                         ModelState.AddModelError("Password", "用户名或者密码不正确");
                     else
                     {
                         user.LastLoginIn = DateTime.Now;
-                        uService.SaveUserSignInLog(user,Request.UserHostAddress);
+                        uService.SaveUserSignInLog(user, Request.UserHostAddress);
                         if (user.IsAdmin)
                         {
-                           return RedirectToAction("index", "SysConfig");
+                            Session["Role"] = (int)UserRole.Admin;
+                            return RedirectToAction("UserList", "User");
+                        }
+                        else
+                        {
+                            Session["Role"] = (int)UserRole.NormalUser;
+                            return RedirectToAction("AdvList", "Adv");
                         }
                     }
                 }
@@ -50,32 +55,73 @@ namespace MicroWebsite.Controllers.User
             return View();
         }
 
-        public ActionResult ManageUser()
+        [UserRoleFilter]
+        public ActionResult UserList()
         {
-            ManagerUserModel mu = new ManagerUserModel();
-            mu.Users = uService.AllUser();
-            return View(mu);
-        }
-        [HttpPost]
-        public ActionResult ManageUser(ManagerUserModel model)
-        {
-            model.NewUser.IsAdmin = false;
-            model.NewUser.CreateAt = DateTime.Now;
-            model.NewUser.Password = SecurityUtility.PasswordHash(model.NewUser.Password);
-            model.NewUser.Status = StaticData.LookUpUserStatusId("正常");
-            uService.AddUser(model.NewUser);
-            model.Users = uService.AllUser();
+            var model = new UserListModel();
+            model.Users = db.User.Where(p => !p.IsAdmin).OrderByDescending(p => p.CreateAt).ToList();
             return View(model);
         }
 
-        public ActionResult CreateAdvUser()
+
+        public ActionResult Create()
         {
-            return null;
+            return View();
         }
 
-        public string TestPwd(string pwd)
+        [HttpPost]
+        public ActionResult Create(DataAccessLayer.User user)
         {
-            return SecurityUtility.PasswordHash(pwd);
+            if (ModelState.IsValid)
+            {
+                user.CreateAt = DateTime.Now;
+                user.IsAdmin = false;
+                user.Password = SecurityUtility.PasswordHash(user.Password);
+                user.Status = StaticData.LookUpUserStatusId(StaticData.UserDictionary.Normal);
+                db.User.Add(user);
+                db.SaveChanges();
+                var account = new UserAccount { UserId = user.UserId };
+                db.UserAccount.Add(account);
+                db.SaveChanges();
+            }
+            return RedirectToAction("UserList", "User");
+        }
+
+        public ActionResult DisableUserAccount(int userId)
+        {
+            var user = db.User.FirstOrDefault(p => p.UserId == userId);
+            if (user == null)
+            {
+                return RedirectToAction("UserList", "User");
+            }
+            user.Status = StaticData.LookUpUserStatusId(StaticData.UserDictionary.DisableAccount);
+            db.SaveChanges();
+            return RedirectToAction("UserList", "User");
+        }
+
+        public ActionResult EnableUserAccount(int userId)
+        {
+            var user = db.User.FirstOrDefault(p => p.UserId == userId);
+            if (user == null)
+            {
+                return RedirectToAction("UserList", "User");
+            }
+            user.Status = StaticData.LookUpUserStatusId(StaticData.UserDictionary.Normal);
+            db.SaveChanges();
+            return RedirectToAction("UserList", "User");
+        }
+
+        public ActionResult ResetPassword(int userId)
+        {
+            var user = db.User.FirstOrDefault(p => p.UserId == userId);
+            if (user == null)
+            {
+                return RedirectToAction("UserList", "User");
+            }
+            var defaultPwd = ConfigurationManager.AppSettings["DefaultResetPwd"];
+            user.Password = SecurityUtility.PasswordHash(defaultPwd);
+            db.SaveChanges();
+            return RedirectToAction("UserList", "User");
         }
 
     }
