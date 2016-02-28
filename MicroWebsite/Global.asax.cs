@@ -32,6 +32,7 @@ namespace MicroWebsite
             SystemStaticData.AdvStatus = allStatus.Where(p => p.SystemStatusCategoryId == (int)StatusCategory.Adv);
             SystemStaticData.AdvRewardStatus = allStatus.Where(p => p.SystemStatusCategoryId == (int)StatusCategory.AdvReward);
             SystemStaticData.SystemIncomeStatus = allStatus.Where(p => p.SystemStatusCategoryId == (int)StatusCategory.SystemIncome);
+            SystemStaticData.RechargeRewardStatus = allStatus.Where(p => p.SystemStatusCategoryId == (int)StatusCategory.RechargeReward);
             
         }
     }

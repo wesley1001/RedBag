@@ -19,7 +19,9 @@ namespace MicroWebsite.Controllers.System
             RewardConfigModel rewardConfig = new RewardConfigModel();
             var statusId = SystemStaticData.LookUpAdvRewardStatusId(SystemStaticData.AdvRewardDictionary.Normal);
             var incomeStatusId = SystemStaticData.LookUpSystemIncomeStatusId(SystemStaticData.SystemIncomeDictionary.Normal);
+            var rechargeStatusId = SystemStaticData.LookUpRechargeRewardStatusId(SystemStaticData.RechargeRewardDictionary.Normal);
             rewardConfig.IncomeModel = db.SystemConfig.FirstOrDefault(p => p.Status == incomeStatusId);
+            rewardConfig.RechargeRewards = db.RechargeReward.Where(p => p.Status == rechargeStatusId).ToList();
             rewardConfig.Rewards = db.RewardType.Where(p => p.Status == statusId).ToList();
             return View(rewardConfig);
         }

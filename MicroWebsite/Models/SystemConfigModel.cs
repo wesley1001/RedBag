@@ -10,6 +10,7 @@ namespace MicroWebsite.Models
     {
         public SystemConfig IncomeModel { get; set; }
         public IList<RewardType> Rewards { get; set; }
+        public IList<RechargeReward> RechargeRewards { get; set; } 
     }
 
     

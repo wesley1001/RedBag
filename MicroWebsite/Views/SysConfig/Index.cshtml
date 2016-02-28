@@ -35,14 +35,14 @@
         <td>状态</td>
         <td>操作</td>
     </tr>
-    @foreach (RewardType u in Model.Rewards)
+    @foreach (RechargeReward u in Model.RechargeRewards)
     {
         <tr>
             <td>@u.RewardValue</td>
-            <td>@u.ShortDescription</td>
-            <td>@SystemStaticData.LookUpAdvRewardStatusId(u.Status)</td>
+            <td>@u.TargetValue</td>
+            <td>@SystemStaticData.LookUpRechargeRewardStatusId(u.Status)</td>
             <td>
-                <a href="@Url.Action("DeleteRewardType", "SysConfig", new { rewardTypeId = u.RewardTypeId })">删除</a>
+                <a href="@Url.Action("DeleteRewardType", "SysConfig", new { RechargeRewardId = u.RechargeRewardId })">删除</a>
             </td>
         </tr>
     }

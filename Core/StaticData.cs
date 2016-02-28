@@ -32,10 +32,17 @@ namespace Core
             public static string Stop = "停止";
         }
 
+        public static class RechargeRewardDictionary
+        {
+            public static string Normal = "正常";
+            public static string Stop = "停止";
+        }
+
         public static IEnumerable<SystemStatus> UserStatus { get; set; }
         public static IEnumerable<SystemStatus> AdvStatus { get; set; }
         public static IEnumerable<SystemStatus> AdvRewardStatus { get; set; }
         public static IEnumerable<SystemStatus> SystemIncomeStatus { get; set; }
+        public static IEnumerable<SystemStatus> RechargeRewardStatus { get; set; }
 
         #region 用户状态
 
@@ -96,16 +103,31 @@ namespace Core
         }
         #endregion
 
+        #region 充值奖励状态
+        public static int LookUpRechargeRewardStatusId(string lookupValue)
+        {
+            var lookobj = RechargeRewardStatus.FirstOrDefault(p => p.ShortDescription == lookupValue);
+            return lookobj == null ? 0 : lookobj.StatusId;
+        }
+
+        public static string LookUpRechargeRewardStatusId(int lookupValue)
+        {
+            var lookobj = RechargeRewardStatus.FirstOrDefault(p => p.StatusId == lookupValue);
+            return lookobj == null ? "无效" : lookobj.ShortDescription;
+        }
+        #endregion
+
     }
 
-   
+
 
     public enum StatusCategory
     {
         User = 1,
         Adv = 2,
-        AdvReward=3,
-        SystemIncome = 4
+        AdvReward = 3,
+        SystemIncome = 4,
+        RechargeReward = 5
     }
 
     public enum UserRole
