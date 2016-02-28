@@ -39,6 +39,7 @@ namespace MicroWebsite.Controllers.User
                     {
                         user.LastLoginIn = DateTime.Now;
                         uService.SaveUserSignInLog(user, Request.UserHostAddress);
+                        Session["UserId"] = user.UserId;
                         if (user.IsAdmin)
                         {
                             Session["Role"] = (int)UserRole.Admin;
@@ -47,7 +48,7 @@ namespace MicroWebsite.Controllers.User
                         else
                         {
                             Session["Role"] = (int)UserRole.NormalUser;
-                            return RedirectToAction("AdvList", "Adv");
+                            return RedirectToAction("UAdvList", "Adv");
                         }
                     }
                 }

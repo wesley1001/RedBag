@@ -10,6 +10,18 @@ namespace MicroWebsite.Controllers
 {
     public class BaseController : Controller
     {
+        protected int CurrentLoginUserId
+        {
+            get
+            {
+                if (Session["UserId"] != null)
+                {
+                    return Convert.ToInt32(Session["UserId"]);
+                }
+                return 0;
+            }
+        }
+
         protected MkmEntities db = new MkmEntities();
         protected BaseUserService uService = new BaseUserService();
     }
