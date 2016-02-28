@@ -308,16 +308,24 @@ p{
 .media, .media-body,.media-left,.media-right{
     overflow: visible;
 }
+.media-body, .media-left, .media-right{
+    display: table-cell;
+    vertical-align: top;
+}
 .text-center{
     text-align: center;
 }
 /* ==========banner===============================================*/
 .banner{
     padding:200px 0 200px;
-    background:url(../images/banner.jpg); 
+    background:url(../images/banner.jpg) no-repeat;  
     background-size: cover;
     overflow: hidden;
     font-size: 16px;
+}
+.banner .media-body{
+   width:50%;
+   float:left;
 }
 .user-password input{
     border:1px solid #ccc;
@@ -344,6 +352,9 @@ p{
     top: 12px;
     left: 5px;
     color: #ccc;
+}
+.login input{
+    padding-left:20px;
 }
 .logo{
     position: absolute;
