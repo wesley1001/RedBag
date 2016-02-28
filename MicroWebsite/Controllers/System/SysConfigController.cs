@@ -73,5 +73,35 @@ namespace MicroWebsite.Controllers.System
             return RedirectToAction("Index", "SysConfig");
         }
 
+        public ActionResult CreateRechargeReward()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateRechargeReward(RechargeReward rewardType)
+        {
+            if (ModelState.IsValid)
+            {
+                rewardType.CreateAt = DateTime.Now;
+                rewardType.Status = SystemStaticData.LookUpRechargeRewardStatusId(SystemStaticData.RechargeRewardDictionary.Normal);
+                db.RechargeReward.Add(rewardType);
+                db.SaveChanges();
+            }
+            return RedirectToAction("Index", "SysConfig");
+        }
+
+        public ActionResult DeleteRechargeReward(int rechargeRewardId)
+        {
+            var re = db.RechargeReward.FirstOrDefault(p => p.RechargeRewardId == rechargeRewardId);
+            if (re == null)
+            {
+                return RedirectToAction("Index", "SysConfig");
+            }
+            re.Status = SystemStaticData.LookUpRechargeRewardStatusId(SystemStaticData.RechargeRewardDictionary.Stop);
+            db.SaveChanges();
+            return RedirectToAction("Index", "SysConfig");
+        }
+
     }
 }
