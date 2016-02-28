@@ -314,6 +314,7 @@
     <Content Include="Views\Adv\Create.cshtml" />
     <Content Include="Views\Adv\ModifyAdv.cshtml" />
     <Content Include="Views\SysConfig\CreateReward.cshtml" />
+    <Content Include="Views\SysConfig\CreateRechargeReward.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

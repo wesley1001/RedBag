@@ -27,9 +27,11 @@ namespace MicroWebsite
             AuthConfig.RegisterAuth();
 
             var entities = new MkmEntities();
-            SystemStaticData.UserStatus = entities.SystemStatus.Where(p => p.SystemStatusCategoryId == (int)StatusCategory.User);
-            SystemStaticData.AdvStatus = entities.SystemStatus.Where(p => p.SystemStatusCategoryId == (int)StatusCategory.Adv);
-            SystemStaticData.AdvStatus = entities.SystemStatus.Where(p => p.SystemStatusCategoryId == (int)StatusCategory.AdvReward);
+            var allStatus = entities.SystemStatus.ToList();
+            SystemStaticData.UserStatus = allStatus.Where(p => p.SystemStatusCategoryId == (int)StatusCategory.User);
+            SystemStaticData.AdvStatus = allStatus.Where(p => p.SystemStatusCategoryId == (int)StatusCategory.Adv);
+            SystemStaticData.AdvRewardStatus = allStatus.Where(p => p.SystemStatusCategoryId == (int)StatusCategory.AdvReward);
+            SystemStaticData.SystemIncomeStatus = allStatus.Where(p => p.SystemStatusCategoryId == (int)StatusCategory.SystemIncome);
             
         }
     }

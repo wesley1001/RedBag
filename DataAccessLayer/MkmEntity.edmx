@@ -15,6 +15,7 @@
           <EntitySet Name="HistoryType" EntityType="MkmModel.Store.HistoryType" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="LoginHistory" EntityType="MkmModel.Store.LoginHistory" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="RechargeHistory" EntityType="MkmModel.Store.RechargeHistory" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="RechargeReward" EntityType="MkmModel.Store.RechargeReward" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="RewardType" EntityType="MkmModel.Store.RewardType" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="SystemConfig" EntityType="MkmModel.Store.SystemConfig" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="SystemIncome" EntityType="MkmModel.Store.SystemIncome" store:Type="Tables" Schema="dbo" />
@@ -122,6 +123,16 @@
           <Property Name="RechargeRewardTypeId" Type="int" Nullable="false" />
           <Property Name="Details" Type="nvarchar" Nullable="false" MaxLength="200" />
         </EntityType>
+        <EntityType Name="RechargeReward">
+          <Key>
+            <PropertyRef Name="RechargeRewardId" />
+          </Key>
+          <Property Name="RechargeRewardId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="TargetValue" Type="decimal" Nullable="false" Scale="2" />
+          <Property Name="RewardValue" Type="decimal" Nullable="false" Scale="2" />
+          <Property Name="CreateAt" Type="datetime" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="RewardType">
           <Key>
             <PropertyRef Name="RewardTypeId" />
@@ -216,6 +227,7 @@
           <EntitySet Name="User" EntityType="MkmModel.User" />
           <EntitySet Name="UserAccount" EntityType="MkmModel.UserAccount" />
           <EntitySet Name="SystemStatusCategory" EntityType="MkmModel.SystemStatusCategory" />
+          <EntitySet Name="RechargeReward" EntityType="MkmModel.RechargeReward" />
         </EntityContainer>
         <EntityType Name="AccountHistory">
           <Key>
@@ -388,6 +400,16 @@
           <Property Type="Int32" Name="StatusCategoryId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="CategoryName" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Type="DateTime" Name="CreateAt" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="RechargeReward">
+          <Key>
+            <PropertyRef Name="RechargeRewardId" />
+          </Key>
+          <Property Type="Int32" Name="RechargeRewardId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Decimal" Name="TargetValue" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="RewardValue" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="DateTime" Name="CreateAt" Nullable="false" Precision="3" />
+          <Property Type="Int32" Name="Status" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -580,6 +602,17 @@
                 <ScalarProperty Name="CreateAt" ColumnName="CreateAt" />
                 <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
                 <ScalarProperty Name="StatusCategoryId" ColumnName="StatusCategoryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RechargeReward">
+            <EntityTypeMapping TypeName="MkmModel.RechargeReward">
+              <MappingFragment StoreEntitySet="RechargeReward">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CreateAt" ColumnName="CreateAt" />
+                <ScalarProperty Name="RewardValue" ColumnName="RewardValue" />
+                <ScalarProperty Name="TargetValue" ColumnName="TargetValue" />
+                <ScalarProperty Name="RechargeRewardId" ColumnName="RechargeRewardId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

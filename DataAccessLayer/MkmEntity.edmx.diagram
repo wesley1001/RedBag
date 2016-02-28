@@ -21,6 +21,7 @@
         <EntityTypeShape EntityType="MkmModel.User" Width="1.5" PointX="1.4387017681443606" PointY="27.176365835208617" />
         <EntityTypeShape EntityType="MkmModel.UserAccount" Width="1.5" PointX="11.727413970850135" PointY="22.263663183089189" />
         <EntityTypeShape EntityType="MkmModel.SystemStatusCategory" Width="1.5" PointX="3.0375361922371837" PointY="16.927171029582233" />
+        <EntityTypeShape EntityType="MkmModel.RechargeReward" Width="1.5" PointX="1.9615225205018754" PointY="1.8492446997432246" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

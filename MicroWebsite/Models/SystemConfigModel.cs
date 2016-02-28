@@ -8,6 +8,10 @@ namespace MicroWebsite.Models
 {
     public class RewardConfigModel
     {
+        public SystemConfig IncomeModel { get; set; }
         public IList<RewardType> Rewards { get; set; }
     }
+
+    
+
 }

@@ -20,17 +20,24 @@ namespace Core
             public static string Normal = "正常";
             public static string Stop = "停止";
         }
+
         public static class AdvRewardDictionary
         {
             public static string Normal = "正常";
             public static string Stop = "停止";
         }
-
+        public static class SystemIncomeDictionary
+        {
+            public static string Normal = "正常";
+            public static string Stop = "停止";
+        }
 
         public static IEnumerable<SystemStatus> UserStatus { get; set; }
         public static IEnumerable<SystemStatus> AdvStatus { get; set; }
         public static IEnumerable<SystemStatus> AdvRewardStatus { get; set; }
+        public static IEnumerable<SystemStatus> SystemIncomeStatus { get; set; }
 
+        #region 用户状态
 
         public static int LookUpUserStatusId(string lookupValue)
         {
@@ -44,6 +51,10 @@ namespace Core
             return lookobj == null ? "无效" : lookobj.ShortDescription;
         }
 
+        #endregion
+
+
+        #region 广告状态
         public static int LookUpAdvStatusId(string lookupValue)
         {
             var lookobj = AdvStatus.FirstOrDefault(p => p.ShortDescription == lookupValue);
@@ -55,18 +66,35 @@ namespace Core
             var lookobj = AdvStatus.FirstOrDefault(p => p.StatusId == lookupValue);
             return lookobj == null ? "无效" : lookobj.ShortDescription;
         }
+        #endregion
 
+        #region 广告奖励状态
         public static int LookUpAdvRewardStatusId(string lookupValue)
         {
-            var lookobj = AdvStatus.FirstOrDefault(p => p.ShortDescription == lookupValue);
+            var lookobj = AdvRewardStatus.FirstOrDefault(p => p.ShortDescription == lookupValue);
             return lookobj == null ? 0 : lookobj.StatusId;
         }
 
         public static string LookUpAdvRewardStatusId(int lookupValue)
         {
-            var lookobj = AdvStatus.FirstOrDefault(p => p.StatusId == lookupValue);
+            var lookobj = AdvRewardStatus.FirstOrDefault(p => p.StatusId == lookupValue);
             return lookobj == null ? "无效" : lookobj.ShortDescription;
         }
+        #endregion
+
+        #region 系统服务费状态
+        public static int LookUpSystemIncomeStatusId(string lookupValue)
+        {
+            var lookobj = SystemIncomeStatus.FirstOrDefault(p => p.ShortDescription == lookupValue);
+            return lookobj == null ? 0 : lookobj.StatusId;
+        }
+
+        public static string LookUpSystemIncomeStatusId(int lookupValue)
+        {
+            var lookobj = SystemIncomeStatus.FirstOrDefault(p => p.StatusId == lookupValue);
+            return lookobj == null ? "无效" : lookobj.ShortDescription;
+        }
+        #endregion
 
     }
 
@@ -77,7 +105,7 @@ namespace Core
         User = 1,
         Adv = 2,
         AdvReward=3,
-        SystemConfig = 4
+        SystemIncome = 4
     }
 
     public enum UserRole
