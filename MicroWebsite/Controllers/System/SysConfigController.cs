@@ -36,6 +36,16 @@ namespace MicroWebsite.Controllers.System
         {
             if (ModelState.IsValid)
             {
+                //判断奖励条件是否已经存在
+                var statusId = SystemStaticData.LookUpAdvRewardStatusId(SystemStaticData.AdvRewardDictionary.Normal);
+                var existReward =
+                    db.RewardType.FirstOrDefault(
+                        p => p.RewardValue == rewardType.RewardValue && p.Status == statusId);
+                if (existReward != null)
+                {
+                    ModelState.AddModelError("RewardValue", "该红包奖励金额已经存在");
+                    return View(rewardType);
+                }
                 rewardType.CreateAt = DateTime.Now;
                 rewardType.Status = SystemStaticData.LookUpAdvRewardStatusId(SystemStaticData.AdvRewardDictionary.Normal);
                 db.RewardType.Add(rewardType);
@@ -83,6 +93,16 @@ namespace MicroWebsite.Controllers.System
         {
             if (ModelState.IsValid)
             {
+                //判断奖励条件是否已经存在
+                var rechargeStatusId = SystemStaticData.LookUpRechargeRewardStatusId(SystemStaticData.RechargeRewardDictionary.Normal);
+                var existReward =
+                    db.RechargeReward.FirstOrDefault(
+                        p => p.TargetValue == rewardType.TargetValue && p.Status == rechargeStatusId);
+                if (existReward != null)
+                {
+                    ModelState.AddModelError("TargetValue","该奖励规则已经存在");
+                    return View(rewardType);
+                }
                 rewardType.CreateAt = DateTime.Now;
                 rewardType.Status = SystemStaticData.LookUpRechargeRewardStatusId(SystemStaticData.RechargeRewardDictionary.Normal);
                 db.RechargeReward.Add(rewardType);

@@ -9,8 +9,9 @@
     <div>
         @Html.AntiForgeryToken()
         <span>奖励金额</span>: @Html.TextBoxFor(m => m.RewardValue)
+        @Html.ValidationMessageFor(m => m.RewardValue)
         <span>奖励条件</span>: @Html.TextBoxFor(m => m.TargetValue)
-        
+        @Html.ValidationMessageFor(m=>m.TargetValue)
         <input type="submit" value="Submit" />
     </div>
 }
