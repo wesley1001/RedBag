@@ -1,0 +1,123 @@
+@media (max-width: 1410px){
+    .header-search{
+        display: none;
+    }
+}
+/*=========Abby start==========*/
+@media (max-width: 1024px){
+    .header-account,.header-nav{
+        display:none;
+    }
+    .navbar-toggle {
+    display: block;
+    }
+      .header .navbar{
+        background: #3f9460;
+        border-radius: 0;
+    }
+        .navbar-default .navbar-toggle .icon-bar{
+        background-color: #fff;
+    }
+    .navbar-default .navbar-toggle{
+        border-color: #fff;
+    }
+     .navbar{
+        position: relative;
+        border-bottom: 0;
+    }
+    .navbar:after{
+        display: block;
+        content: " ";
+        height: 0;
+        font-size: 0;
+        line-height: 0;
+        border-top: 1px solid #5BAB7B;
+        border-bottom: 1px solid #2C7649;
+        margin: 0;      
+    }
+    .navbar-header::after{
+        border-top: 0;
+        border-bottom: 0;
+    }
+  
+    .header-nav {
+        display:none;
+    }
+    .sidebar{
+        display: none;
+        width: 100%;
+    }
+    .sidebar-header{
+        display: none;
+    }
+    .navbar-collapse.collapse{
+        position: absolute;
+        right: 60px;
+    }
+    .navbar-form .form-group {
+        margin-bottom: 0;
+        display: inline-block;
+    }
+    .navbar-toggle{
+        display: block;
+    }
+  
+    .navbar-default .navbar-toggle:hover,
+    .navbar-default .navbar-toggle:focus {
+        background-color: #5CB85C;
+        border-color: #5CB85C;
+    }
+    .collapse.in{
+        display: block!important;
+        position: relative;
+        z-index: 9;
+        padding: 0;
+        clear: both;
+    }
+    .main{
+        display: block;
+    }
+    .header-account li.search{
+        background: #3F9460;
+    }
+    .progress{
+        width: 100% !important;
+        margin-bottom: 5px !important;
+    }
+    .nav > li > a {
+        padding-left:5px;
+        padding-right:5px;
+    }
+    .footer-side {
+        position: static;
+        width: 100%;
+        padding: 15px;
+        height: auto;
+        background: #065771;
+    }
+    .footer-side .footer-out {
+        float: left;
+        width: auto;
+        padding: 0px 15px;
+    }
+    .footer-side .footer-copyright {
+        margin: 0px;
+        border-top: 0px none;
+        padding: 10px;
+    }
+}
+@media (max-width: 768px){
+   
+}
+
+@media (max-width: 480px){
+    table.dataTable thead th, 
+    table.dataTable thead td {
+        padding:10px 15px;
+    }
+    .table > thead > tr > th:first-child, 
+    .table > tbody > tr > td:first-child {
+    padding-left: 5px;
+    }
+}
+/*===============Abby end===========*/
