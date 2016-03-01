@@ -1,0 +1,74 @@
+﻿@{
+    ViewBag.Title = "CreateAreaPoint";
+    Layout = "~/Views/Shared/_WorkspaceLayout.cshtml";
+}
+
+<h2>创建新地标</h2>
+
+<div><span>选择区域</span>
+    <select id="firstLevel"></select>
+    <select id="secondLevel"></select>
+    <select id="thirdLevel"></select>
+    <span>地标名称：</span><input type="text" id="txtPointName"/>
+    <span>纬度：</span><input type="text" id="txtLatitude"/>
+    <span>经度：</span><input type="text" id="txtLongitude"/>
+    <input type="button" value="创建" onclick="createNewPosition()"/>
+</div>
+
+<script>
+    $(document).ready(function () {
+        loadFirstLevel();
+        $("#firstLevel").change(function() {
+            loadSecondLevel();
+        });
+        $("#secondLevel").change(function () {
+            loadThirdLevel();
+        });
+
+    });
+
+    function loadFirstLevel() {
+        $("#firstLevel option").remove();
+        $.getJSON("@Url.Action("GetAreaByParentId", "SysConfig")", { parentId: 0 }, function (response) {
+            $.each(response, function (i, ot) {
+                $("#firstLevel").append("<option value=\"" + ot.AreaId + "\">" + ot.AreaName + "</option>");
+            });
+            loadSecondLevel();
+        });
+    }
+
+    function loadSecondLevel() {
+        $("#secondLevel option").remove();
+        var currentParentId = $("#firstLevel").val();
+        $.getJSON("@Url.Action("GetAreaByParentId", "SysConfig")", { parentId: currentParentId }, function (response) {
+            $.each(response, function (i, ot) {
+                $("#secondLevel").append("<option value=\"" + ot.AreaId + "\">" + ot.AreaName + "</option>");
+            });
+            loadThirdLevel();
+        });
+    }
+
+    function loadThirdLevel() {
+        $("#thirdLevel option").remove();
+        var currentParentId = $("#secondLevel").val();
+        $.getJSON("@Url.Action("GetAreaByParentId", "SysConfig")", { parentId: currentParentId }, function (response) {
+            $.each(response, function (i, ot) {
+                $("#thirdLevel").append("<option value=\"" + ot.AreaId + "\">" + ot.AreaName + "</option>");
+            });
+        });
+    }
+
+    function createNewPosition() {
+        var pName = $("#txtPointName").val();
+        var latitude = $("#txtLatitude").val();
+        var longitude = $("#txtLongitude").val();
+        var areaId = $("#thirdLevel").val();
+        $.getJSON("@Url.Action("CreateNewAreaPoint", "SysConfig")", { pointName: pName, longitude: longitude, latitude: latitude, areaId: areaId }, function (response) {
+            alert(response.Description);
+            $("#txtPointName").val("");
+            $("#txtLatitude").val("");
+            $("#txtLongitude").val("");
+        });
+    }
+
+</script>

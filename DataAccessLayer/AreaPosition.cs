@@ -19,5 +19,7 @@ namespace DataAccessLayer
         public string PositionName { get; set; }
         public decimal Longitude { get; set; }
         public decimal Latitude { get; set; }
+        public System.DateTime CreateAt { get; set; }
+        public int Status { get; set; }
     }
 }

@@ -15,7 +15,7 @@ namespace MicroWebsite.Models
 
     public class AreaIndexModel
     {
-        public Area NewArea { get; set; }
+        
         public IList<AreaModel> AllAreaList { get; set; } 
         public IList<AreaPointModel> AreaPointList { get; set; }
         public AreaPosition NewAreaPosion { get; set; }
@@ -23,12 +23,12 @@ namespace MicroWebsite.Models
 
     public class AreaPointModel
     {
-        public int AreaId { get; set; }
         public int AreaPositionId { get; set; }
         public string AreaName { get; set; }
         public string PositionName { get; set; }
         public decimal Longitude { get; set; }
         public decimal Latitude { get; set; }
+        public DateTime CreateAt { get; set; }
     }
 
     public class AreaModel : Area

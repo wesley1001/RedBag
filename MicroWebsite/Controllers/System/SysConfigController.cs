@@ -128,8 +128,26 @@ namespace MicroWebsite.Controllers.System
         {
             int areaStatusId = SystemStaticData.LookUpSystemIncomeStatusId(SystemStaticData.SystemIncomeDictionary.Normal);
             AreaIndexModel model = new AreaIndexModel();
-            model.AllAreaList = GetDisplayList(db.Area.Where(p => p.Status == areaStatusId).ToList());
+            model.AllAreaList = GetDisplayList(db.Area.Where(p => p.Status == areaStatusId).OrderBy(p=>p.ParentAreaId).ToList());
+            model.AreaPointList = GetAreaPointList(areaStatusId);
             return View(model);
+        }
+
+        private IList<AreaPointModel> GetAreaPointList(int areaStatusId)
+        {
+            var query = from ap in db.AreaPosition
+                join a in db.Area on ap.AreaId equals a.AreaId
+                        where a.Status == areaStatusId && ap.Status == areaStatusId
+                select new AreaPointModel
+                {
+                    AreaPositionId = ap.PositionId,
+                    PositionName = ap.PositionName,
+                    AreaName = a.AreaName,
+                    Latitude = ap.Latitude,
+                    Longitude = ap.Longitude,
+                    CreateAt = ap.CreateAt
+                };
+            return query.OrderByDescending(p=>p.CreateAt).ToList();
         }
 
         private IList<AreaModel> GetDisplayList(List<Area> list)
@@ -196,6 +214,61 @@ namespace MicroWebsite.Controllers.System
             saveResult.Status = (int)DataSaveStatus.Success;
             saveResult.Description = "保存成功";
             return new JavaScriptSerializer().Serialize(saveResult);
+        }
+
+        public ActionResult CreateAreaPoint()
+        {
+            return View();
+        }
+
+        public string CreateNewAreaPoint(string pointName, decimal longitude, decimal latitude,int areaId)
+        {
+            WorkspaceDataSaveResult saveResult = new WorkspaceDataSaveResult();
+            pointName = pointName.Trim();
+            var statusId = SystemStaticData.LookUpSystemIncomeStatusId(SystemStaticData.SystemIncomeDictionary.Normal);
+            var existPoint = db.AreaPosition.FirstOrDefault(p => p.Latitude == latitude && p.Longitude == longitude);
+            if (existPoint != null)
+            {
+                saveResult.Status = (int)DataSaveStatus.DataValidationError;
+                saveResult.Description = "该点已存在地标";
+                return new JavaScriptSerializer().Serialize(saveResult);
+            }
+            AreaPosition model = new AreaPosition();
+            model.Status = statusId;
+            model.Latitude = latitude;
+            model.Longitude = longitude;
+            model.CreateAt = DateTime.Now;
+            model.AreaId = areaId;
+            model.PositionName = pointName;
+            db.AreaPosition.Add(model);
+            db.SaveChanges();
+            saveResult.Status = (int)DataSaveStatus.Success;
+            saveResult.Description = "创建成功";
+            return new JavaScriptSerializer().Serialize(saveResult);
+        }
+
+        public ActionResult DeleteArea(int areaId)
+        {
+            var re = db.Area.FirstOrDefault(p => p.AreaId == areaId);
+            if (re == null)
+            {
+                return RedirectToAction("AreaIndex", "SysConfig");
+            }
+            re.Status = SystemStaticData.LookUpSystemIncomeStatusId(SystemStaticData.SystemIncomeDictionary.Stop);
+            db.SaveChanges();
+            return RedirectToAction("AreaIndex", "SysConfig");
+        }
+
+        public ActionResult DeleteAreaPosition(int areaPositonId)
+        {
+            var re = db.AreaPosition.FirstOrDefault(p => p.PositionId == areaPositonId);
+            if (re == null)
+            {
+                return RedirectToAction("AreaIndex", "SysConfig");
+            }
+            re.Status = SystemStaticData.LookUpSystemIncomeStatusId(SystemStaticData.SystemIncomeDictionary.Stop);
+            db.SaveChanges();
+            return RedirectToAction("AreaIndex", "SysConfig");
         }
 
     }

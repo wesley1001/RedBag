@@ -419,6 +419,7 @@
     <Content Include="Views\SysConfig\CreateRechargeReward.cshtml" />
     <Content Include="Views\SysConfig\AreaIndex.cshtml" />
     <Content Include="Views\SysConfig\CreateAreaPath.cshtml" />
+    <Content Include="Views\SysConfig\CreateAreaPoint.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
