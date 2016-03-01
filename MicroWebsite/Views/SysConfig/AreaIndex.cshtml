@@ -1,0 +1,51 @@
+﻿@{
+    Layout = "~/Views/Shared/_WorkspaceLayout.cshtml";
+}
+@using Core
+@using MicroWebsite.Models
+@model AreaIndexModel
+<a href="@Url.Action("CreateAreaPath","SysConfig")">创建新区域</a>
+<h2>所有区域</h2>
+
+<table id="AreaTable" class="dataTable">
+    <thead>
+    <th>区域名称</th>
+    <th>状态</th>
+    <th>创建时间</th>
+    <th>操作</th>
+    </thead>
+    @foreach (AreaModel u in Model.AllAreaList)
+    {
+        <tr>
+            <td>@u.AreaFullName</td>
+            <td>@SystemStaticData.LookUpSystemIncomeStatusId(u.Status)</td>
+            <td>@u.CreateAt</td>
+            <td>
+                <a href="@Url.Action("DeleteRewardType", "SysConfig", new {rewardTypeId = u.AreaId})">删除</a>
+            </td>
+        </tr>
+    }
+</table>
+
+<script>
+    
+    var optionAssignedMe = {
+        "iDisplayLength": 10,
+        'bLengthChange': false,
+        "language": {
+            "search": "筛选 : "
+        },
+        "aoColumnDefs": [
+            { "bSortable": false, "aTargets": [3] },
+            { "type": "usdate", "aTargets": [2] }
+        ],
+        "fnDrawCallback": function () {
+            //setConfirmValue();
+        }
+    };
+
+    $(document).ready(function() {
+        $("#AreaTable").dataTable(optionAssignedMe);
+    });
+
+</script>

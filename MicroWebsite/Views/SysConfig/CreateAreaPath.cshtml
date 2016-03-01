@@ -1,0 +1,81 @@
+﻿@{
+    Layout = "~/Views/Shared/_WorkspaceLayout.cshtml";
+}
+<h2>创建一级区域</h2>
+<div>
+    <span>区域名称:</span><input type="text" id="txtFirstName" />
+
+</div>
+<input type="button" value="添加" onclick="addFirstArea()" />
+<h2>创建二级区域</h2>
+<div>
+    <select id="firstLevel"></select>
+    <span>区域名称:</span><input type="text" id="txtSecondName" />
+
+</div>
+<input type="button" value="添加" onclick="addSecondArea()"/>
+<h2>创建三级区域</h2>
+<div>
+    <select id="firstLevelThree"></select>
+    <select id="secondLevelThree"></select>
+    <span>区域名称:</span><input type="text" id="txtThirdName" />
+
+</div>
+<input type="button" value="添加" onclick="addThirdArea()" />
+<script>
+    $(document).ready(function() {
+        loadFirstLevel();
+
+    });
+
+    function loadFirstLevel() {
+        $("#firstLevel option").remove();
+        $("#firstLevelThree option").remove();
+        $.getJSON("@Url.Action("GetAreaByParentId", "SysConfig")", { parentId: 0 }, function (response) {
+            $.each(response, function(i,ot) {
+                $("#firstLevel").append("<option value=\"" + ot.AreaId + "\">" + ot.AreaName + "</option>");
+                $("#firstLevelThree").append("<option value=\"" + ot.AreaId + "\">" + ot.AreaName + "</option>");
+            });
+            loadSecondLevel();
+        });
+    }
+
+    function loadSecondLevel() {
+        $("#secondLevelThree option").remove();
+        var currentParentId = $("#firstLevelThree").val();
+       $.getJSON("@Url.Action("GetAreaByParentId", "SysConfig")", { parentId: currentParentId }, function (response) {
+           $.each(response, function(i,ot) {
+               $("#secondLevelThree").append("<option value=\"" + ot.AreaId + "\">" + ot.AreaName + "</option>");
+           });
+       });
+       }
+
+    function addFirstArea() {
+        var currentParentId = 0;
+        var currentName = $("#txtFirstName").val();
+        $.getJSON("@Url.Action("CreateArea", "SysConfig")", { areaName: currentName, parentId: currentParentId }, function (response) {
+            alert(response.Description);
+            $("#txtFirstName").val("");
+            loadFirstLevel();
+        });
+    }
+
+    function addSecondArea() {
+        var currentParentId = $("#firstLevel").val();
+        var currentName = $("#txtSecondName").val();
+        $.getJSON("@Url.Action("CreateArea", "SysConfig")", { areaName: currentName, parentId: currentParentId }, function (response) {
+            alert(response.Description);
+            $("#txtSecondName").val("");
+            loadSecondLevel();
+        });
+    }
+
+    function addThirdArea() {
+        var currentParentId = $("#secondLevelThree").val();
+        var currentName = $("#txtThirdName").val();
+        $.getJSON("@Url.Action("CreateArea", "SysConfig")", { areaName: currentName, parentId: currentParentId }, function (response) {
+            alert(response.Description);
+            $("#txtThirdName").val("");
+        });
+    }
+</script>

@@ -10,6 +10,8 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
+    <link href="~/Content/jquery.dataTables.min.css"/>
+    <script src="~/Scripts/jquery.dataTables.min.js"></script>
 </head>
 <body>
 
@@ -19,8 +21,10 @@
             {
                 <ul>
                     <li>@Html.ActionLink("用户管理", "UserList", "User")</li>
-                    <li>@Html.ActionLink("系统设定", "Index", "SysConfig")</li>
                     <li>@Html.ActionLink("广告管理", "UserList", "User")</li>
+                    <li>@Html.ActionLink("系统设定", "Index", "SysConfig")</li>
+                    <li>@Html.ActionLink("系统区域管理", "AreaIndex", "SysConfig")</li>
+                    
                 </ul>
             }
             else

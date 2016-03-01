@@ -8,6 +8,17 @@ using RedBagService.UserService;
 
 namespace MicroWebsite.Controllers
 {
+    public enum DataSaveStatus
+    {
+        Success = 1, DataValidationError = 2, SalesforceError = 3, SystemException = 4
+    }
+    public class WorkspaceDataSaveResult
+    {
+        public int Status { get; set; }
+        public object Data { get; set; }
+        public string Description { get; set; }
+    }
+
     public class BaseController : Controller
     {
         protected int CurrentLoginUserId

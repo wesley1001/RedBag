@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using Core;
 using DataAccessLayer;
 using MicroWebsite.Models;
@@ -100,7 +101,7 @@ namespace MicroWebsite.Controllers.System
                         p => p.TargetValue == rewardType.TargetValue && p.Status == rechargeStatusId);
                 if (existReward != null)
                 {
-                    ModelState.AddModelError("TargetValue","该奖励规则已经存在");
+                    ModelState.AddModelError("TargetValue", "该奖励规则已经存在");
                     return View(rewardType);
                 }
                 rewardType.CreateAt = DateTime.Now;
@@ -121,6 +122,80 @@ namespace MicroWebsite.Controllers.System
             re.Status = SystemStaticData.LookUpRechargeRewardStatusId(SystemStaticData.RechargeRewardDictionary.Stop);
             db.SaveChanges();
             return RedirectToAction("Index", "SysConfig");
+        }
+
+        public ActionResult AreaIndex()
+        {
+            int areaStatusId = SystemStaticData.LookUpSystemIncomeStatusId(SystemStaticData.SystemIncomeDictionary.Normal);
+            AreaIndexModel model = new AreaIndexModel();
+            model.AllAreaList = GetDisplayList(db.Area.Where(p => p.Status == areaStatusId).ToList());
+            return View(model);
+        }
+
+        private IList<AreaModel> GetDisplayList(List<Area> list)
+        {
+            var baseList = list;
+            var returnList = new List<AreaModel>();
+            foreach (var item in list)
+            {
+                AreaModel model = new AreaModel();
+                model.AreaFullName = GetAreaFullName(item, baseList);
+                model.AreaId = item.AreaId;
+                model.CreateAt = item.CreateAt;
+                model.ParentAreaId = item.ParentAreaId;
+                model.Status = item.Status;
+                returnList.Add(model);
+            }
+            return returnList;
+        }
+
+        private string GetAreaFullName(Area area, List<Area> source)
+        {
+            if (area.ParentAreaId == 0)
+            {
+                return area.AreaName;
+            }
+            else
+            {
+                var parentArea = source.FirstOrDefault(p => p.AreaId == area.ParentAreaId);
+                return GetAreaFullName(parentArea, source) + "/" + area.AreaName;
+            }
+        }
+
+
+        public string GetAreaByParentId(int parentId)
+        {
+            var result = db.Area.Where(p => p.ParentAreaId == parentId);
+            return new JavaScriptSerializer().Serialize(result);
+        }
+
+        public ActionResult CreateAreaPath()
+        {
+            return View();
+        }
+
+        public string CreateArea(string areaName, int parentId)
+        {
+            WorkspaceDataSaveResult saveResult = new WorkspaceDataSaveResult();
+            areaName = areaName.Trim();
+            var statusId = SystemStaticData.LookUpSystemIncomeStatusId(SystemStaticData.SystemIncomeDictionary.Normal);
+            var existArea = db.Area.FirstOrDefault(p => p.AreaName == areaName && p.Status == statusId);
+            if (existArea != null)
+            {
+                saveResult.Status = (int)DataSaveStatus.DataValidationError;
+                saveResult.Description = "已存在相关记录";
+                return new JavaScriptSerializer().Serialize(saveResult);
+            }
+            Area model = new Area();
+            model.AreaName = areaName;
+            model.ParentAreaId = parentId;
+            model.CreateAt = DateTime.Now;
+            model.Status = statusId;
+            db.Area.Add(model);
+            db.SaveChanges();
+            saveResult.Status = (int)DataSaveStatus.Success;
+            saveResult.Description = "保存成功";
+            return new JavaScriptSerializer().Serialize(saveResult);
         }
 
     }
