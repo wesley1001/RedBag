@@ -13,7 +13,12 @@ namespace MicroWebsite.Controllers.System
 {
     public class SysConfigController : BaseController
     {
-
+        public string GetRewardList()
+        {
+            var statusId = SystemStaticData.LookUpAdvRewardStatusId(SystemStaticData.AdvRewardDictionary.Normal);
+            var result = db.RewardType.Where(p => p.Status == statusId).ToList();
+            return new JavaScriptSerializer().Serialize(result);
+        }
 
         public ActionResult Index()
         {

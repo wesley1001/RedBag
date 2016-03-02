@@ -2,18 +2,111 @@
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_WorkspaceLayout.cshtml";
 }
-@model DataAccessLayer.AdvInfo
+
 <h2>创建新广告</h2>
-@using (Html.BeginForm())
-{
+<form>
     <div>
-        @Html.AntiForgeryToken()
-        <span>广告标题</span>: @Html.TextBoxFor(m => m.AdvTitle)
-        <span>投放区域</span>: @Html.TextBoxFor(m => m.AreaId)
-        <span>广告主体链接</span>:  @Html.PasswordFor(m => m.ContentUrl)
-        
-        <span>红包总额</span>: @Html.TextBoxFor(m => m.TotalCash)
-        <span>红包总数</span>:  @Html.TextBoxFor(m => m.TotalCount)
-        <input type="submit" value="Submit" />
+        <span>广告标题</span><input type="text" />
     </div>
-}
+    <div>
+        <span>投放区域</span><select id="firstLevel"></select>
+        <select id="secondLevel"></select>
+        <select id="thirdLevel"></select>
+    </div>
+    <div id="rewardPanel">
+        <input type="hidden" id="hidreward1" />
+        <span>奖励金额</span>
+        <div id="rewardSelectPanel">
+            <select id="reward1" onchange="changeSelect(this)">
+            </select>
+        </div>
+        <input type="button" onclick="addReward()" value="添加其他金额">
+    </div>
+    <div>
+        <span>红包总数</span><input type="text" />
+    </div>
+    <div>
+        <span>投放总额</span><input type="text" />
+    </div>
+    <input type="button" value="提交申请"  onclick="submitForm()"/>
+</form>
+
+
+<script>
+    $(document).ready(function () {
+        loadFirstLevel();
+        $("#firstLevel").change(function () {
+            loadSecondLevel();
+        });
+        $("#secondLevel").change(function () {
+            loadThirdLevel();
+        });
+        loadReward("reward1");
+    });
+
+    function loadFirstLevel() {
+        $("#firstLevel option").remove();
+        $.getJSON("@Url.Action("GetAreaByParentId", "SysConfig")", { parentId: 0 }, function (response) {
+            $.each(response, function (i, ot) {
+                $("#firstLevel").append("<option value=\"" + ot.AreaId + "\">" + ot.AreaName + "</option>");
+            });
+            loadSecondLevel();
+        });
+    }
+
+    function loadSecondLevel() {
+        $("#secondLevel option").remove();
+        var currentParentId = $("#firstLevel").val();
+        $.getJSON("@Url.Action("GetAreaByParentId", "SysConfig")", { parentId: currentParentId }, function (response) {
+            $.each(response, function (i, ot) {
+                $("#secondLevel").append("<option value=\"" + ot.AreaId + "\">" + ot.AreaName + "</option>");
+            });
+            loadThirdLevel();
+        });
+    }
+
+    function loadThirdLevel() {
+        $("#thirdLevel option").remove();
+        var currentParentId = $("#secondLevel").val();
+        $.getJSON("@Url.Action("GetAreaByParentId", "SysConfig")", { parentId: currentParentId }, function (response) {
+            $.each(response, function (i, ot) {
+                $("#thirdLevel").append("<option value=\"" + ot.AreaId + "\">" + ot.AreaName + "</option>");
+            });
+        });
+    }
+
+    function loadReward(inputName) {
+        $("#" + inputName + " option").remove();
+        $.getJSON("@Url.Action("GetRewardList", "SysConfig")", function (response) {
+            $.each(response, function (i, ot) {
+                $("#" + inputName).append("<option value=\"" + ot.RewardTypeId + "\">" + ot.ShortDescription + "</option>");
+
+            });
+            $("#hid" + inputName).val($("#" + inputName).val());
+        });
+    }
+
+    function changeSelect(changeObje) {
+        var id = $(changeObje).attr("id");
+        var hidId = "#hid" + id;
+        $(hidId).val($("#" + id).val());
+        //alert($(hidId).val());
+    }
+
+    function addReward() {
+        var index = $("#rewardSelectPanel select").length;
+        //alert(index);
+        index++;
+        var newName = "reward" + index;
+        $("#rewardSelectPanel").append("<select id='" + newName + "' onchange='changeSelect(this)'></select>");
+        $("#rewardPanel").append("<input type='hidden' id='hid" + newName + "' />");
+        loadReward(newName);
+    }
+
+    function submitForm() {
+        $("#rewardPanel input[type='hidden']").each(function() {
+            alert($(this).val());
+        });
+    }
+
+</script>
