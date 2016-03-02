@@ -245,11 +245,17 @@
 .text-white{
 	color:#fff!important;
 }
+.text-warning{
+    color:#f6a822 !important;
+}
 .text-success{
 	color:#5cb85c!important;
 }
 .text-skyblue{
 	color:#4da0cf!important;
+}
+.text-danger{
+    color: #ff6c60 !important;
 }
 .text-muted{
     color:#777 ! important;
@@ -286,6 +292,9 @@ body{
     line-height: 1.42857;
     background-color: #fff;
     -webkit-font-smoothing: antialiased;
+}
+a:hover,a:visited,a:link{
+    text-decoration: none;
 }
 .container{
     max-width: 1170px;
@@ -401,30 +410,130 @@ p{
     line-height: 50px;
     margin-top: 30px;
 }
-.text-phone{
-    color:#f6a822;
+
+
+
+/*user=================*/
+.navbar-inverse{
+    background: #fff;
+    max-height:80px;
+    border-radius: 0;
+}
+.navbar-brand {
+    width:227px;
+    background: #fabe00;
+    max-height:80px;
+     padding: 0
+}
+.navbar-brand img{
+    width: 100%;
+    border-bottom: 1px solid #fabe00;
+    width: 100%;
+}
+.navbar.navbar-inverse{
+    border:0;
+    margin: 0;
+}
+.navbar-nav{
+    max-height: 80px;
+
 }
 
-
-@media (max-width: 1200){
-    .col-md-1,.col-md-2,
-    .col-md-3,.col-md-4,
-    .col-md-5,.col-md-6,
-    .col-md-7,.col-md-8,
-    .col-md-9,.col-md-10,
-    .col-md-11,.col-md-12{
-        width:100%;
-    }
+.navbar > .container .navbar-brand,
+.navbar > .container-fluid .navbar-brand:hover{
+   background: #fcb322;
+}
+.nav.navbar-nav.margin-left-15 li{
+    margin-right: 30px;
+}
+.navbar-nav > li > a{
+    line-height: 40px;
+    color:#333;
+    padding:15px 20px;
+    margin-top: 11px ;
+    /*border:1px solid transparent;*/
+}
+.navbar-nav.pull-right> li >img{
+    margin:10px 0;
 }
 
+.navbar-inverse .navbar-nav>li>a:hover,
+.navbar-inverse .navbar-nav>.active>a,
+.navbar-inverse .navbar-nav>.active>a:focus,
+.navbar-inverse .navbar-nav>.active>a:hover{
+    color:#333;
+    border:0;
+}
+.navbar-inverse .navbar-nav>.active>a{
+    background: url(../images/imgbg.png) no-repeat;
+    background-size: 100% 100%;
 
+}
+.container-fluid > .navbar-collapse, 
+.container-fluid > .navbar-header, 
+.container > .navbar-collapse, 
+.container > .navbar-header{
+    border-bottom: 1px solid #ccc;
+}
+/*main====================================*/
+/*sidebar-================*/
+.sidebar{
+    background: #15262f;
+    width:227px;
+    height:100%;
+    color:#fff;
+    padding: 50px 0 0;
+    float: left;
+}
+.menu h4{
+    color: #7f888d;
+    text-align: center;
+}
 
+.menu-title li a{
+    display: block;
+    padding: 10px 0 10px 20px;
+    font-size: 14px;
+    color:#fff;
+}
+.menu-title .active{
+    background: #344853;
+    border-left:2px solid #fcb322;
+}
+.main-wrap{
+    background: #f8f8f8;
+    width:100%;
+    padding: 30px 15px ;
+}
+.search{
+    background: #fff;
+    overflow: hidden;
+    border:1px solid #ccc;
+    border-radius: 4px;
+    padding:30px 10px;
+    line-height: 32px;
+}
+.current{
+    padding: 0 15px;
+    overflow: hidden;
+}
 
-
-
-
-
-
+input.choose{
+    margin:0 0px 0 10px;
+}
+.table{
+    border:1px solid #ccc;
+    background: #fff;
+}
+.table th{
+    background: #f8f8f8;
+}
+.table > tbody > tr > td, .table > tbody > tr > th, 
+.table > tfoot > tr > td, .table > tfoot > tr > th, 
+.table > thead > tr > td, .table > thead > tr > th
+{
+    padding: 15px 8px;
+}
 
 
 
