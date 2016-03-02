@@ -11,14 +11,36 @@ namespace MicroWebsite.Controllers.Advertisement
     {
         public ActionResult UAdvList()
         {
-            AdvListModel model= new AdvListModel();
-            model.Advs = db.AdvInfo.Where(p => p.UserId == this.CurrentLoginUserId).ToList();
-            return View(model);
+            
+            return View();
+        }
+
+        public ActionResult AdminEditAdv(int advId)
+        {
+            return View();
         }
 
         public ActionResult AdvList()
         {
-            return View();
+            AdvListModel model = new AdvListModel();
+            var query = from adv in db.AdvInfo
+                        join a in db.Area on adv.AreaId equals a.AreaId
+                        join u in db.User on adv.UserId equals u.UserId
+                        select new AdvDisplayModel
+                        {
+                            AdvId = adv.AdvId,
+                            AreaFullName = a.AreaName,
+                            AdvTitle = adv.AdvTitle,
+                            CostFeeUrl = adv.CostFeeUrl,
+                            TotalCount = adv.TotalCount,
+                            TotalCash = adv.TotalCash,
+                            CreateAt = adv.CreateAt,
+                            Status = adv.Status,
+                            PublishUserName = u.AccountName,
+                            RemainderCash = adv.RemainderCash
+                        };
+            model.Advs = query.ToList();
+            return View(model);
         }
 
         public ActionResult Create()

@@ -420,6 +420,7 @@
     <Content Include="Views\SysConfig\AreaIndex.cshtml" />
     <Content Include="Views\SysConfig\CreateAreaPath.cshtml" />
     <Content Include="Views\SysConfig\CreateAreaPoint.cshtml" />
+    <Content Include="Views\Adv\AdminEditAdv.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

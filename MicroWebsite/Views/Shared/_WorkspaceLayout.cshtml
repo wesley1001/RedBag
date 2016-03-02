@@ -8,7 +8,7 @@
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <meta name="viewport" content="width=device-width"/>
     @Scripts.Render("~/bundles/jquery")
-    
+    @Styles.Render("~/Content/jquery.dataTables.min.css")
     @Styles.Render("~/Content/bootstrap.min.css")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/modernizr")
@@ -24,7 +24,7 @@
             {
                 <ul>
                     <li>@Html.ActionLink("用户管理", "UserList", "User")</li>
-                    <li>@Html.ActionLink("广告管理", "UserList", "User")</li>
+                    <li>@Html.ActionLink("广告管理", "AdvList", "Adv")</li>
                     <li>@Html.ActionLink("系统设定", "Index", "SysConfig")</li>
                     <li>@Html.ActionLink("区域设定", "AreaIndex", "SysConfig")</li>
                     

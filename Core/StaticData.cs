@@ -19,6 +19,7 @@ namespace Core
         {
             public static string Normal = "正常";
             public static string Stop = "停止";
+            public static string Prepare = "待补充";
         }
 
         public static class AdvRewardDictionary

@@ -8,6 +8,13 @@ namespace MicroWebsite.Models
 {
     public class AdvListModel
     {
-        public IList<AdvInfo> Advs { get; set; }
+        public IList<AdvDisplayModel> Advs { get; set; }
     }
+
+    public class AdvDisplayModel : AdvInfo
+    {
+        public string AreaFullName { get; set; }
+        public string PublishUserName { get; set; }
+    }
+
 }
