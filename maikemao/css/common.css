@@ -292,6 +292,12 @@ body{
     line-height: 1.42857;
     background-color: #fff;
     -webkit-font-smoothing: antialiased;
+    min-height: 640px;
+    font-weight: 400;
+    letter-spacing:2px;
+}
+label{
+    font-weight: 400;
 }
 a:hover,a:visited,a:link{
     text-decoration: none;
@@ -538,8 +544,17 @@ input.choose{
 {
     padding: 15px 8px;
 }
-
-
+/*change password===========================================*/
+.panel-heading{
+    padding: 20px 15px;
+    font-weight: 600;
+}
+form .btn{
+    min-width: 80px;
+}
+.password{
+    width:50%;
+}
 
 
 
