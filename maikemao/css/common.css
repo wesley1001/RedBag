@@ -292,6 +292,12 @@ body{
     line-height: 1.42857;
     background-color: #fff;
     -webkit-font-smoothing: antialiased;
+    min-height: 640px;
+    font-weight: 400;
+    letter-spacing:2px;
+}
+label{
+    font-weight: 400;
 }
 a:hover,a:visited,a:link{
     text-decoration: none;
@@ -517,6 +523,13 @@ p{
     padding:30px 10px;
     line-height: 32px;
 }
+.search .row>div{
+    border-right: 1px dashed #ccc;
+}
+.search .row>div:first-child,
+.search .row>div:last-child{
+    border:0;
+}
 .current{
     padding: 0 15px;
     overflow: hidden;
@@ -538,8 +551,32 @@ input.choose{
 {
     padding: 15px 8px;
 }
-
-
+/*change password===========================================*/
+.panel-heading{
+    padding: 20px 15px;
+    font-weight: 600;
+}
+form .btn{
+    min-width: 80px;
+}
+.time{
+     border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+    color: #555;
+    height: 34px;
+    line-height: 1.42857;
+    padding: 6px 0px 6px 12px;
+    width:auto;
+}
+form select.form-control{
+    float: left;
+    width:32%;
+    margin-right: 2%;
+}
+form select.form-control:last-child{
+    margin-right:0;
+}
 
 
 

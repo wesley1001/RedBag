@@ -34,8 +34,8 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div id="bs-example-navbar-collapse-9" class="collapse navbar-collapse">
           <ul class="nav navbar-nav navigation">
-            <li class="active"><a href="#">用户管理</a></li>
-            <li><a href="#">创建新用户</a></li>
+            <li><a href="#">所有区域</a></li>
+            <li class="active"><a href="#">所有地标</a></li>
           </ul>
           <ul class="nav navbar-nav pull-right">
             <li><img src="../images/avatar.png "style="height:60px; "></li>
@@ -49,12 +49,12 @@
 		<div class="sidebar"id="sidebar">
 			<h4 class="text-center">欢迎，麦克茂</h4>
 			<ul class="menu-title">
-				<li class="active"><i class="glyphicon glyphicon-user"></i> 用户管理</li>
+				<li><i class="glyphicon glyphicon-user"></i> 用户管理</li>
 				<li><i class="glyphicon glyphicon-cog"></i> 系统设定</li>
 				<li><i class=""></i> 广告管理</li>
-				<li><i class="glyphicon glyphicon-yen"></i> 系统收益</li>
+				<li>￥ 系统收益</li>
 				<li><i class=""></i> 我的广告</li>
-				<li><i class="glyphicon glyphicon-map-marker"></i> 区域管理</li>
+				<li class="active"><i class="glyphicon glyphicon-map-marker"></i> 区域管理</li>
 			</ul>
 		</div>
 		<div class="main-wrap" id="main-wrap">
@@ -68,80 +68,67 @@
 						<span class="pull-left"></span>
 					<div class=" margin-right-30">
 						<div class="input-group">
-					      <input type="text"  aria-describedby="basic-addon2" placeholder="Recipient's username" class="form-control">
-					      <span id="basic-addon2" class="input-group-addon"><i class="glyphicon glyphicon-search"></i> 搜索</span>
+					      <input type="text"  aria-describedby="basic-addon2" placeholder="地标名称" class="form-control">
+					      <span id="basic-addon2" class="input-group-addon"><i class="glyphicon glyphicon-search"></i>  搜索</span>
 					    </div>
 					</div>
 					</div>
 					<div class="col-md-4">
-						<div class="pull-left"> 筛选 : <input type="checkbox" class="choose"> 正常状态 <input type="checkbox" class="choose"> 异常状态</div>
+						<div class="pull-left"> 时间 : <input type="text" class="time" value="2016-01-02"> - <input type="text" value="2016-02-01" class="time"> </div>
 					</div>
-					<div class="col-md-2">
-						<a href="" class="btn btn-warning"> 添加新用户</a>
+					<div class="col-md-2 text-right">
+						<a href="" class="btn btn-warning"> <i class="glyphicon glyphicon-plus-sign"></i> 添加新用户</a>
 					</div>
 				</div>
 				</div>
 				<table class="table margin-top-30">
 					<colgroup>
+						<col width="20%"></col>
+						<col width="30%"></col>
 						<col width="10%"></col>
 						<col width="20%"></col>
-						<col width="20%"></col>
 						<col width="10%"></col>
 						<col width="10%"></col>
-						<col width="10%"></col>
-						<col width="5%"></col>
-						<col width="15%"></col>
-
 					</colgroup>
 					<tr>
-						<th>用户名</th>
-						<th>邮箱</th>
-						<th>公司名称</th>
-						<th>法定代表</th>
-						<th>电话</th>
-						<th>手机号码</th>
-						<th>状态</th>
+						<th>地标名称</th>
+						<th>区域</th>
+						<th>纬度</th>
+						<th>经度</th>
+						<th>创建时间</th>
 						<th>操作</th>
 					</tr>
 					<tr>
-						<td><a href="">严文</a></td>
-						<td>speed@shareworks.cn</td>
-						<td>麦克茂有限公司</td>
-						<td>严文</td>
-						<td>0731-84905466</td>
-						<td>15076489500</td>
-						<td class=" f18"><i class="glyphicon glyphicon-ok-sign text-success"></i></td>
-						<td><a href="">封停账户 </a> <a href="">修改密码</a></td>
+						<td>终点软件园</td>
+						<td>长沙市岳麓区尖山路</td>
+						<td>28.16</td>
+						<td>28.16</td>
+						<td>2016-01-28 00:52:58</td>
+						<td> <a href="">删除</a></td>
 					</tr>
 					<tr>
-						<td><a href="">严文</a></td>
-						<td>speed@shareworks.cn</td>
-						<td>麦克茂有限公司</td>
-						<td>严文</td>
-						<td>0731-84905466</td>
-						<td>15076489500</td>
-						<td class="f18"><i class="glyphicon glyphicon-alert text-danger"></i></td>
-						<td><a href="">封停账户 </a> <a href="">修改密码</a></td>
+						<td>终点软件园</td>
+						<td>长沙市岳麓区尖山路</td>
+						<td>28.16</td>
+						<td>28.16</td>
+						<td>2016-01-28 00:52:58</td>
+						<td> <a href="">删除</a></td>
 					</tr>
 					<tr>
-						<td><a href="">张冰</a></td>
-						<td>speed@shareworks.cn</td>
-						<td>麦克茂有限公司</td>
-						<td>张冰</td>
-						<td>0731-84905466</td>
-						<td>15076489500</td>
-						<td class=" f18"><i class="glyphicon glyphicon-ok-sign text-success"></i></td>
-						<td><a href="">封停账户 </a> <a href="">修改密码</a></td>
+						<td>终点软件园</td>
+						<td>长沙市岳麓区尖山路</td>
+						<td>28.16</td>
+						<td>28.16</td>
+						<td>2016-01-28 00:52:58</td>
+						<td> <a href="">删除</a></td>
 					</tr>
 					<tr>
-						<td><a href="">张冰</a></td>
-						<td>speed@shareworks.cn</td>
-						<td>麦克茂有限公司</td>
-						<td>张冰</td>
-						<td>0731-84905466</td>
-						<td>15076489500</td>
-						<td class=" f18"><i class="glyphicon glyphicon-ok-sign text-success"></i></td>
-						<td><a href="">封停账户 </a> <a href="">修改密码</a></td>
+						<td>终点软件园</td>
+						<td>长沙市岳麓区尖山路</td>
+						<td>28.16</td>
+						<td>28.16</td>
+						<td>2016-01-28 00:52:58</td>
+						<td> <a href="">删除</a></td>
 					</tr>
 					<tr>
 						<td colspan="8" class="padding-bottom-30 text-default">
