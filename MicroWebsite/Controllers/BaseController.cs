@@ -29,6 +29,7 @@ namespace MicroWebsite.Controllers
                 {
                     return Convert.ToInt32(Session["UserId"]);
                 }
+                
                 return 0;
             }
         }

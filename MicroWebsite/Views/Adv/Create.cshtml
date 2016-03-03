@@ -6,7 +6,7 @@
 <h2>创建新广告</h2>
 <form>
     <div>
-        <span>广告标题</span><input type="text" />
+        <span>广告标题</span><input type="text" id="txtAdvTitle"/>
     </div>
     <div>
         <span>投放区域</span><select id="firstLevel"></select>
@@ -14,25 +14,28 @@
         <select id="thirdLevel"></select>
     </div>
     <div id="rewardPanel">
-        <input type="hidden" id="hidreward1" />
+        <input type="hidden" id="hidreward1" value="0" />
         <span>奖励金额</span>
         <div id="rewardSelectPanel">
-            <select id="reward1" onchange="changeSelect(this)">
-            </select>
+            <select id="reward1" onchange="changeSelect(this)"></select>
         </div>
-        <input type="button" onclick="addReward()" value="添加其他金额">
+        <input type="button" id="btnAddReward" onclick="addReward()" value="添加其他金额">
+    </div>
+    <input type="hidden" id="allRewardValue" value="" />
+    <div>
+        <span>红包总数</span><input type="text" id="txtRbCount" />
     </div>
     <div>
-        <span>红包总数</span><input type="text" />
+        <span>投放总额</span><span id="txtTotalCash"></span><input type="button" onclick="calcTotalCost()" value="计算所需金额"/>
     </div>
-    <div>
-        <span>投放总额</span><input type="text" />
-    </div>
-    <input type="button" value="提交申请"  onclick="submitForm()"/>
+    <input type="button" value="提交申请" onclick="submitForm()" />
 </form>
 
 
 <script>
+
+
+
     $(document).ready(function () {
         loadFirstLevel();
         $("#firstLevel").change(function () {
@@ -41,7 +44,8 @@
         $("#secondLevel").change(function () {
             loadThirdLevel();
         });
-        loadReward("reward1");
+        loadReward("reward1", true);
+
     });
 
     function loadFirstLevel() {
@@ -75,14 +79,37 @@
         });
     }
 
-    function loadReward(inputName) {
+    function loadReward(inputName, isAll) {
         $("#" + inputName + " option").remove();
-        $.getJSON("@Url.Action("GetRewardList", "SysConfig")", function (response) {
-            $.each(response, function (i, ot) {
-                $("#" + inputName).append("<option value=\"" + ot.RewardTypeId + "\">" + ot.ShortDescription + "</option>");
+        var existReward = "";
+        $("#rewardSelectPanel select").each(function () {
+            if ($(this).val() != null)
+                existReward += $(this).val() + ",";
+        });
 
+        $.getJSON("@Url.Action("GetRewardList", "SysConfig")", { existReward: existReward }, function (response) {
+            $.each(response, function (i, ot) {
+                $("#" + inputName).append("<option value=\"" + ot.RewardTypeId + "|" + ot.RewardValue + "\">" + ot.ShortDescription + "</option>");
+                if (isAll) {
+                    var tempValue = $("#allRewardValue").val();
+                    if (i == 0)
+                        $("#allRewardValue").val(ot.RewardTypeId + "|" + ot.RewardValue);
+                    else
+                        $("#allRewardValue").val(tempValue + "," + ot.RewardTypeId + "|" + ot.RewardValue);
+                }
             });
             $("#hid" + inputName).val($("#" + inputName).val());
+            $("#rewardSelectPanel select").each(function () {
+                if ($(this).attr("id") != inputName) {
+                    $(this).find("option").each(function () {
+                        if ($(this).attr("value") === $("#hid" + inputName).val()) {
+                            $(this).remove();
+                        }
+                    });
+                }
+
+            });
+
         });
     }
 
@@ -90,22 +117,83 @@
         var id = $(changeObje).attr("id");
         var hidId = "#hid" + id;
         $(hidId).val($("#" + id).val());
-        //alert($(hidId).val());
+        $("#rewardSelectPanel select").each(function () {
+            if ($(this).attr("id") != id) {
+                $(this).find("option").each(function () {
+                    if ($(this).attr("value") === $("#hid" + id).val()) {
+                        $(this).remove();
+                    }
+                });
+            }
+
+        });
     }
 
     function addReward() {
+        var existReward = "";
+        $("#rewardSelectPanel select").each(function () {
+            existReward += $(this).val() + ",";
+        });
+        var allReward = $("#allRewardValue").val();
+        var compareIds = allReward.split(",");
+        var existCount = 0;
+        for (var i = 0; i < compareIds.length ; i++) {
+            $("#rewardSelectPanel select").each(function () {
+                if ($(this).val() === compareIds[i])
+                    existCount++;
+            });
+        }
+        if (existCount === compareIds.length) {
+            alert("已经添加了所有可选金额");
+            return;
+        }
         var index = $("#rewardSelectPanel select").length;
-        //alert(index);
         index++;
         var newName = "reward" + index;
         $("#rewardSelectPanel").append("<select id='" + newName + "' onchange='changeSelect(this)'></select>");
         $("#rewardPanel").append("<input type='hidden' id='hid" + newName + "' />");
-        loadReward(newName);
+        $("#btnAddReward").attr("disabled", true);
+        loadReward(newName, false);
+        $("#btnAddReward").removeAttr("disabled");
+
+
     }
 
+    function calcTotalCost() {
+        var sysIncomeFee = 0;
+        $.getJSON("@Url.Action("GetIncome", "SysConfig")", function (response) {
+            sysIncomeFee = parseInt(response.SystemIncomeValue);
+            var valueArr = new Array();
+            $("#rewardSelectPanel select").each(function () {
+                var firstValue = $(this).val();
+                var temp = firstValue.split('|');
+                valueArr.push(temp[1]);
+            });
+            valueArr.sort();
+            var totalCount = $("#txtRbCount").val();
+            var perCount = totalCount / valueArr.length;
+            var display = 0;
+            for (var i = 0; i < valueArr.length ; i++) {
+                display += valueArr[i] * perCount;
+            }
+            display += totalCount * sysIncomeFee;
+            $("#txtTotalCash").html(display);
+        });
+    }
+
+
     function submitForm() {
-        $("#rewardPanel input[type='hidden']").each(function() {
-            alert($(this).val());
+
+        var rewardStr = "";
+
+        $("#rewardSelectPanel select").each(function () {
+            rewardStr += $(this).val().split('|')[0] + ",";
+        });
+        var advTitle = $("#txtAdvTitle").val();
+        var areaId = $("#thirdLevel").val();
+        var rbCount = $("#txtRbCount").val();
+        $.getJSON("@Url.Action("CreatePreAdv", "Adv")", { advTitle: advTitle, areaId: areaId, rewardStr: rewardStr, count: rbCount }, function (response) {
+            
         });
     }
 

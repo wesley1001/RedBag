@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
+using System.Web.UI.WebControls;
 using Core;
 using DataAccessLayer;
 using MicroWebsite.Models;
@@ -13,11 +14,25 @@ namespace MicroWebsite.Controllers.System
 {
     public class SysConfigController : BaseController
     {
-        public string GetRewardList()
+        public string GetRewardList(string existReward)
         {
+            string[] existsObj = existReward.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+            List<string> existsId=new List<string>();
+            foreach (var obj in existsObj)
+            {
+                var items = obj.Split(new char[] {'|'}, StringSplitOptions.RemoveEmptyEntries);
+                existsId.Add(items[0]);
+            }
             var statusId = SystemStaticData.LookUpAdvRewardStatusId(SystemStaticData.AdvRewardDictionary.Normal);
-            var result = db.RewardType.Where(p => p.Status == statusId).ToList();
+            var result = db.RewardType.Where(p => p.Status == statusId && !existsId.Contains(p.RewardTypeId.ToString())).ToList();
             return new JavaScriptSerializer().Serialize(result);
+        }
+
+        public string GetIncome()
+        {
+            var incomeStatusId = SystemStaticData.LookUpSystemIncomeStatusId(SystemStaticData.SystemIncomeDictionary.Normal);
+            var inCo = db.SystemConfig.FirstOrDefault(p => p.Status == incomeStatusId);
+            return new JavaScriptSerializer().Serialize(inCo);
         }
 
         public ActionResult Index()
@@ -133,7 +148,7 @@ namespace MicroWebsite.Controllers.System
         {
             int areaStatusId = SystemStaticData.LookUpSystemIncomeStatusId(SystemStaticData.SystemIncomeDictionary.Normal);
             AreaIndexModel model = new AreaIndexModel();
-            model.AllAreaList = GetDisplayList(db.Area.Where(p => p.Status == areaStatusId).OrderBy(p=>p.ParentAreaId).ToList());
+            model.AllAreaList = GetDisplayList(db.Area.Where(p => p.Status == areaStatusId).OrderBy(p => p.ParentAreaId).ToList());
             model.AreaPointList = GetAreaPointList(areaStatusId);
             return View(model);
         }
@@ -141,18 +156,18 @@ namespace MicroWebsite.Controllers.System
         private IList<AreaPointModel> GetAreaPointList(int areaStatusId)
         {
             var query = from ap in db.AreaPosition
-                join a in db.Area on ap.AreaId equals a.AreaId
+                        join a in db.Area on ap.AreaId equals a.AreaId
                         where a.Status == areaStatusId && ap.Status == areaStatusId
-                select new AreaPointModel
-                {
-                    AreaPositionId = ap.PositionId,
-                    PositionName = ap.PositionName,
-                    AreaName = a.AreaName,
-                    Latitude = ap.Latitude,
-                    Longitude = ap.Longitude,
-                    CreateAt = ap.CreateAt
-                };
-            return query.OrderByDescending(p=>p.CreateAt).ToList();
+                        select new AreaPointModel
+                        {
+                            AreaPositionId = ap.PositionId,
+                            PositionName = ap.PositionName,
+                            AreaName = a.AreaName,
+                            Latitude = ap.Latitude,
+                            Longitude = ap.Longitude,
+                            CreateAt = ap.CreateAt
+                        };
+            return query.OrderByDescending(p => p.CreateAt).ToList();
         }
 
         private IList<AreaModel> GetDisplayList(List<Area> list)
@@ -226,7 +241,7 @@ namespace MicroWebsite.Controllers.System
             return View();
         }
 
-        public string CreateNewAreaPoint(string pointName, decimal longitude, decimal latitude,int areaId)
+        public string CreateNewAreaPoint(string pointName, decimal longitude, decimal latitude, int areaId)
         {
             WorkspaceDataSaveResult saveResult = new WorkspaceDataSaveResult();
             pointName = pointName.Trim();

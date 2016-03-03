@@ -56,7 +56,7 @@ namespace MicroWebsite.Controllers.User
             return View();
         }
 
-        [UserRoleFilter]
+        [UserRoleFilter(CheckRole = UserRole.Admin)]
         public ActionResult UserList()
         {
             var model = new UserListModel();
