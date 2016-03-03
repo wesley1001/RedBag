@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Web;
 using System.Web.Mvc;
 using Core;
@@ -123,6 +124,69 @@ namespace MicroWebsite.Controllers.User
             user.Password = SecurityUtility.PasswordHash(defaultPwd);
             db.SaveChanges();
             return RedirectToAction("UserList", "User");
+        }
+
+        public ActionResult AdminRechargeHistory()
+        {
+            RechargeModel model = new RechargeModel();
+            var query = from h in db.RechargeHistory
+                        join u in db.User on h.UserId equals u.UserId
+                        join rt in db.RechargeReward on h.RechargeRewardTypeId equals rt.RechargeRewardId
+                        into rewardObj
+                        from r in rewardObj.DefaultIfEmpty()
+                        join uc in db.User on h.CreateUserId equals uc.UserId
+                        select new RechargeHistoryList
+                        {
+                            RechargeHistoryId = h.RechargeHistoryId,
+                            Details = h.Details,
+                            CreateAt = h.CreateAt,
+                            RechargeCash = h.RechargeCash,
+                            ToAccountName = u.AccountName,
+                            OperatorName = uc.AccountName,
+                            RechargeRewardName = r.RewardValue.ToString()
+                        };
+            model.List = query.ToList();
+            return View(model);
+        }
+
+        public ActionResult RechargeAccount()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult RechargeAccount(RechargeAccountModel model)
+        {
+            //find account
+            var userAccount =
+                db.User.FirstOrDefault(
+                    p => p.AccountName == model.RechargeAccount || p.MobilePhone == model.RechargeAccount);
+            if (userAccount == null)
+            {
+                ModelState.AddModelError("RechargeAccount", "帐户不存在，请核对帐户");
+                return View(model);
+            }
+                
+            if (ModelState.IsValid)
+            {
+                DataAccessLayer.RechargeHistory history = new DataAccessLayer.RechargeHistory();
+                history.CreateAt = DateTime.Now;
+                history.CreateUserId = this.CurrentLoginUserId;
+                history.Details = model.Remark;
+                history.RechargeCash = model.Cash;
+                var reward = db.RechargeReward.OrderByDescending(p => p.TargetValue)
+                    .FirstOrDefault(m => m.TargetValue <= model.Cash);
+                history.RechargeRewardTypeId = reward == null ? 0 : reward.RechargeRewardId;
+                history.UserId = userAccount.UserId;
+                //账户余额增加
+                UserAccount account = db.UserAccount.First(p => p.UserId == userAccount.UserId);
+                account.AccountBalance += model.Cash;
+                if (reward != null)
+                    account.AccountBalance += reward.RewardValue;
+                db.RechargeHistory.Add(history);
+                db.SaveChanges();
+                return Content("<script>alert('充值成功');window.location.href=window.location.href</script>");
+            }
+            return View(model);
         }
 
     }

@@ -59,9 +59,11 @@ namespace MicroWebsite.Controllers.Advertisement
             //calc totalcost
             var averageCount = count/rewardIds.Length;
             decimal totalValue = 0;
+            var allAdvReward = db.RewardType.ToList();
             foreach (var id in rewardIds)
             {
-                var currentValue = db.RewardType.First(p => p.RewardTypeId == int.Parse(id)).RewardValue;
+                var queryid = int.Parse(id);
+                var currentValue = allAdvReward.First(p => p.RewardTypeId == queryid).RewardValue;
                 totalValue += averageCount*currentValue;
             }
             var incomeStatusId = SystemStaticData.LookUpSystemIncomeStatusId(SystemStaticData.SystemIncomeDictionary.Normal);

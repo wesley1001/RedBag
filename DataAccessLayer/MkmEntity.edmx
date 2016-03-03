@@ -117,13 +117,13 @@
             <PropertyRef Name="RechargeHistoryId" />
           </Key>
           <Property Name="RechargeHistoryId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="OrderNumber" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="OrderNumber" Type="nvarchar" MaxLength="50" />
           <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="RechargeCash" Type="decimal" Nullable="false" Scale="2" />
           <Property Name="CreateAt" Type="datetime" Nullable="false" />
-          <Property Name="ModifyAt" Type="datetime" />
           <Property Name="RechargeRewardTypeId" Type="int" Nullable="false" />
-          <Property Name="Details" Type="nvarchar" Nullable="false" MaxLength="200" />
+          <Property Name="Details" Type="nvarchar" MaxLength="200" />
+          <Property Name="CreateUserId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="RechargeReward">
           <Key>
@@ -324,13 +324,13 @@
             <PropertyRef Name="RechargeHistoryId" />
           </Key>
           <Property Type="Int32" Name="RechargeHistoryId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="OrderNumber" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="OrderNumber" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="Int32" Name="UserId" Nullable="false" />
-          <Property Type="Int32" Name="Status" Nullable="false" />
           <Property Type="DateTime" Name="CreateAt" Nullable="false" Precision="3" />
-          <Property Type="DateTime" Name="ModifyAt" Precision="3" />
           <Property Type="Int32" Name="RechargeRewardTypeId" Nullable="false" />
-          <Property Type="String" Name="Details" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Details" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="Decimal" Name="RechargeCash" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Int32" Name="CreateUserId" Nullable="false" />
         </EntityType>
         <EntityType Name="RewardType">
           <Key>
@@ -520,11 +520,11 @@
           <EntitySetMapping Name="RechargeHistory">
             <EntityTypeMapping TypeName="MkmModel.RechargeHistory">
               <MappingFragment StoreEntitySet="RechargeHistory">
+                <ScalarProperty Name="CreateUserId" ColumnName="CreateUserId" />
+                <ScalarProperty Name="RechargeCash" ColumnName="RechargeCash" />
                 <ScalarProperty Name="Details" ColumnName="Details" />
                 <ScalarProperty Name="RechargeRewardTypeId" ColumnName="RechargeRewardTypeId" />
-                <ScalarProperty Name="ModifyAt" ColumnName="ModifyAt" />
                 <ScalarProperty Name="CreateAt" ColumnName="CreateAt" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
                 <ScalarProperty Name="RechargeHistoryId" ColumnName="RechargeHistoryId" />

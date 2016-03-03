@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "RechargeAccount";
+    Layout = "~/Views/Shared/_WorkspaceLayout.cshtml";
+}
+@model MicroWebsite.Models.RechargeAccountModel
+<h2>账户充值</h2>
+@using (Html.BeginForm())
+{
+    <div>
+        <span>账户</span>@Html.TextBoxFor(m=>m.RechargeAccount)
+        <div style="color: red">@Html.ValidationMessageFor(m => m.RechargeAccount)</div>
+        <span>金额</span>@Html.TextBoxFor(m=>m.Cash)
+        <div style="color: red">@Html.ValidationMessageFor(m => m.Cash)</div>
+        <span>备注</span>@Html.TextBoxFor(m=>m.Remark)
+        <input type="submit" value="充值"/>
+    </div>
+}

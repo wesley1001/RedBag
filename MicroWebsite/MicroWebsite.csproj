@@ -203,6 +203,7 @@
     <Compile Include="Models\AdvModel.cs" />
     <Compile Include="Models\ManagerUserModel.cs" />
     <Compile Include="Models\PartialModel.cs" />
+    <Compile Include="Models\RechargeModel.cs" />
     <Compile Include="Models\SignInModel.cs" />
     <Compile Include="Models\SystemConfigModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -421,6 +422,8 @@
     <Content Include="Views\SysConfig\CreateAreaPath.cshtml" />
     <Content Include="Views\SysConfig\CreateAreaPoint.cshtml" />
     <Content Include="Views\Adv\AdminEditAdv.cshtml" />
+    <Content Include="Views\User\AdminRechargeHistory.cshtml" />
+    <Content Include="Views\User\RechargeAccount.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -17,10 +17,10 @@ namespace DataAccessLayer
         public int RechargeHistoryId { get; set; }
         public string OrderNumber { get; set; }
         public int UserId { get; set; }
-        public int Status { get; set; }
         public System.DateTime CreateAt { get; set; }
-        public Nullable<System.DateTime> ModifyAt { get; set; }
         public int RechargeRewardTypeId { get; set; }
         public string Details { get; set; }
+        public decimal RechargeCash { get; set; }
+        public int CreateUserId { get; set; }
     }
 }

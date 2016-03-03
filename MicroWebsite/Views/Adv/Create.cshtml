@@ -193,7 +193,7 @@
         var areaId = $("#thirdLevel").val();
         var rbCount = $("#txtRbCount").val();
         $.getJSON("@Url.Action("CreatePreAdv", "Adv")", { advTitle: advTitle, areaId: areaId, rewardStr: rewardStr, count: rbCount }, function (response) {
-            
+            alert(response.Description);
         });
     }
 
