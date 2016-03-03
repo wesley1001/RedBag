@@ -414,6 +414,9 @@ p{
 
 
 /*user=================*/
+.navigation{
+    margin-left: 15px;
+}
 .navbar-inverse{
     background: #fff;
     max-height:80px;
@@ -490,11 +493,12 @@ p{
     text-align: center;
 }
 
-.menu-title li a{
+.menu-title li{
     display: block;
     padding: 10px 0 10px 20px;
     font-size: 14px;
     color:#fff;
+    cursor: pointer;
 }
 .menu-title .active{
     background: #344853;
