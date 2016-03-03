@@ -2,18 +2,199 @@
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_WorkspaceLayout.cshtml";
 }
-@model DataAccessLayer.AdvInfo
+
 <h2>创建新广告</h2>
-@using (Html.BeginForm())
-{
+<form>
     <div>
-        @Html.AntiForgeryToken()
-        <span>广告标题</span>: @Html.TextBoxFor(m => m.AdvTitle)
-        <span>投放区域</span>: @Html.TextBoxFor(m => m.AreaId)
-        <span>广告主体链接</span>:  @Html.PasswordFor(m => m.ContentUrl)
-        
-        <span>红包总额</span>: @Html.TextBoxFor(m => m.TotalCash)
-        <span>红包总数</span>:  @Html.TextBoxFor(m => m.TotalCount)
-        <input type="submit" value="Submit" />
+        <span>广告标题</span><input type="text" id="txtAdvTitle"/>
     </div>
-}
+    <div>
+        <span>投放区域</span><select id="firstLevel"></select>
+        <select id="secondLevel"></select>
+        <select id="thirdLevel"></select>
+    </div>
+    <div id="rewardPanel">
+        <input type="hidden" id="hidreward1" value="0" />
+        <span>奖励金额</span>
+        <div id="rewardSelectPanel">
+            <select id="reward1" onchange="changeSelect(this)"></select>
+        </div>
+        <input type="button" id="btnAddReward" onclick="addReward()" value="添加其他金额">
+    </div>
+    <input type="hidden" id="allRewardValue" value="" />
+    <div>
+        <span>红包总数</span><input type="text" id="txtRbCount" />
+    </div>
+    <div>
+        <span>投放总额</span><span id="txtTotalCash"></span><input type="button" onclick="calcTotalCost()" value="计算所需金额"/>
+    </div>
+    <input type="button" value="提交申请" onclick="submitForm()" />
+</form>
+
+
+<script>
+
+
+
+    $(document).ready(function () {
+        loadFirstLevel();
+        $("#firstLevel").change(function () {
+            loadSecondLevel();
+        });
+        $("#secondLevel").change(function () {
+            loadThirdLevel();
+        });
+        loadReward("reward1", true);
+
+    });
+
+    function loadFirstLevel() {
+        $("#firstLevel option").remove();
+        $.getJSON("@Url.Action("GetAreaByParentId", "SysConfig")", { parentId: 0 }, function (response) {
+            $.each(response, function (i, ot) {
+                $("#firstLevel").append("<option value=\"" + ot.AreaId + "\">" + ot.AreaName + "</option>");
+            });
+            loadSecondLevel();
+        });
+    }
+
+    function loadSecondLevel() {
+        $("#secondLevel option").remove();
+        var currentParentId = $("#firstLevel").val();
+        $.getJSON("@Url.Action("GetAreaByParentId", "SysConfig")", { parentId: currentParentId }, function (response) {
+            $.each(response, function (i, ot) {
+                $("#secondLevel").append("<option value=\"" + ot.AreaId + "\">" + ot.AreaName + "</option>");
+            });
+            loadThirdLevel();
+        });
+    }
+
+    function loadThirdLevel() {
+        $("#thirdLevel option").remove();
+        var currentParentId = $("#secondLevel").val();
+        $.getJSON("@Url.Action("GetAreaByParentId", "SysConfig")", { parentId: currentParentId }, function (response) {
+            $.each(response, function (i, ot) {
+                $("#thirdLevel").append("<option value=\"" + ot.AreaId + "\">" + ot.AreaName + "</option>");
+            });
+        });
+    }
+
+    function loadReward(inputName, isAll) {
+        $("#" + inputName + " option").remove();
+        var existReward = "";
+        $("#rewardSelectPanel select").each(function () {
+            if ($(this).val() != null)
+                existReward += $(this).val() + ",";
+        });
+
+        $.getJSON("@Url.Action("GetRewardList", "SysConfig")", { existReward: existReward }, function (response) {
+            $.each(response, function (i, ot) {
+                $("#" + inputName).append("<option value=\"" + ot.RewardTypeId + "|" + ot.RewardValue + "\">" + ot.ShortDescription + "</option>");
+                if (isAll) {
+                    var tempValue = $("#allRewardValue").val();
+                    if (i == 0)
+                        $("#allRewardValue").val(ot.RewardTypeId + "|" + ot.RewardValue);
+                    else
+                        $("#allRewardValue").val(tempValue + "," + ot.RewardTypeId + "|" + ot.RewardValue);
+                }
+            });
+            $("#hid" + inputName).val($("#" + inputName).val());
+            $("#rewardSelectPanel select").each(function () {
+                if ($(this).attr("id") != inputName) {
+                    $(this).find("option").each(function () {
+                        if ($(this).attr("value") === $("#hid" + inputName).val()) {
+                            $(this).remove();
+                        }
+                    });
+                }
+
+            });
+
+        });
+    }
+
+    function changeSelect(changeObje) {
+        var id = $(changeObje).attr("id");
+        var hidId = "#hid" + id;
+        $(hidId).val($("#" + id).val());
+        $("#rewardSelectPanel select").each(function () {
+            if ($(this).attr("id") != id) {
+                $(this).find("option").each(function () {
+                    if ($(this).attr("value") === $("#hid" + id).val()) {
+                        $(this).remove();
+                    }
+                });
+            }
+
+        });
+    }
+
+    function addReward() {
+        var existReward = "";
+        $("#rewardSelectPanel select").each(function () {
+            existReward += $(this).val() + ",";
+        });
+        var allReward = $("#allRewardValue").val();
+        var compareIds = allReward.split(",");
+        var existCount = 0;
+        for (var i = 0; i < compareIds.length ; i++) {
+            $("#rewardSelectPanel select").each(function () {
+                if ($(this).val() === compareIds[i])
+                    existCount++;
+            });
+        }
+        if (existCount === compareIds.length) {
+            alert("已经添加了所有可选金额");
+            return;
+        }
+        var index = $("#rewardSelectPanel select").length;
+        index++;
+        var newName = "reward" + index;
+        $("#rewardSelectPanel").append("<select id='" + newName + "' onchange='changeSelect(this)'></select>");
+        $("#rewardPanel").append("<input type='hidden' id='hid" + newName + "' />");
+        $("#btnAddReward").attr("disabled", true);
+        loadReward(newName, false);
+        $("#btnAddReward").removeAttr("disabled");
+
+
+    }
+
+    function calcTotalCost() {
+        var sysIncomeFee = 0;
+        $.getJSON("@Url.Action("GetIncome", "SysConfig")", function (response) {
+            sysIncomeFee = parseInt(response.SystemIncomeValue);
+            var valueArr = new Array();
+            $("#rewardSelectPanel select").each(function () {
+                var firstValue = $(this).val();
+                var temp = firstValue.split('|');
+                valueArr.push(temp[1]);
+            });
+            valueArr.sort();
+            var totalCount = $("#txtRbCount").val();
+            var perCount = totalCount / valueArr.length;
+            var display = 0;
+            for (var i = 0; i < valueArr.length ; i++) {
+                display += valueArr[i] * perCount;
+            }
+            display += totalCount * sysIncomeFee;
+            $("#txtTotalCash").html(display);
+        });
+    }
+
+
+    function submitForm() {
+
+        var rewardStr = "";
+
+        $("#rewardSelectPanel select").each(function () {
+            rewardStr += $(this).val().split('|')[0] + ",";
+        });
+        var advTitle = $("#txtAdvTitle").val();
+        var areaId = $("#thirdLevel").val();
+        var rbCount = $("#txtRbCount").val();
+        $.getJSON("@Url.Action("CreatePreAdv", "Adv")", { advTitle: advTitle, areaId: areaId, rewardStr: rewardStr, count: rbCount }, function (response) {
+            
+        });
+    }
+
+</script>
