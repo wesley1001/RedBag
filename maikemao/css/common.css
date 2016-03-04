@@ -294,7 +294,7 @@ body{
     -webkit-font-smoothing: antialiased;
     min-height: 640px;
     font-weight: 400;
-    letter-spacing:2px;
+    letter-spacing:1px;
 }
 label{
     font-weight: 400;
@@ -415,6 +415,7 @@ p{
     color:#999;
     line-height: 50px;
     margin-top: 30px;
+    height:100px;
 }
 
 
@@ -577,7 +578,16 @@ form select.form-control{
 form select.form-control:last-child{
     margin-right:0;
 }
-
+.unit{
+    position: absolute;
+    right: 20px;
+    top:50px;
+    color:#999;
+}
+.table button{
+    background:transparent;
+    color: #0e91cc;
+}
 
 
 
