@@ -4,43 +4,23 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="MkmModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityContainer Name="MkmModelStoreContainer">
-          <EntitySet Name="AccountHistory" EntityType="MkmModel.Store.AccountHistory" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="AdvHistory" EntityType="MkmModel.Store.AdvHistory" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="AdvInfo" EntityType="MkmModel.Store.AdvInfo" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="AdvReward" EntityType="MkmModel.Store.AdvReward" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Area" EntityType="MkmModel.Store.Area" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="AreaPosition" EntityType="MkmModel.Store.AreaPosition" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="HistoryType" EntityType="MkmModel.Store.HistoryType" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="LoginHistory" EntityType="MkmModel.Store.LoginHistory" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="RechargeHistory" EntityType="MkmModel.Store.RechargeHistory" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="RechargeReward" EntityType="MkmModel.Store.RechargeReward" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="RewardType" EntityType="MkmModel.Store.RewardType" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="SystemConfig" EntityType="MkmModel.Store.SystemConfig" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="SystemIncome" EntityType="MkmModel.Store.SystemIncome" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="SystemStatus" EntityType="MkmModel.Store.SystemStatus" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="SystemStatusCategory" EntityType="MkmModel.Store.SystemStatusCategory" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="User" EntityType="MkmModel.Store.User" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="UserAccount" EntityType="MkmModel.Store.UserAccount" store:Type="Tables" Schema="dbo" />
-        </EntityContainer>
+    <Schema Namespace="MkmModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AccountHistory">
           <Key>
             <PropertyRef Name="AccountHistoryId" />
           </Key>
-          <Property Name="AccountHistoryId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="AccountHistoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="AccountId" Type="int" Nullable="false" />
-          <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="HistoryTypeId" Type="int" Nullable="false" />
-          <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="100" />
-          <Property Name="ChangeValue" Type="decimal" Nullable="false" Scale="2" />
+          <Property Name="ComeFrom" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" />
+          <Property Name="ChangeValue" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="CreateAt" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="AdvHistory">
           <Key>
             <PropertyRef Name="AdvHistoryId" />
           </Key>
-          <Property Name="AdvHistoryId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="AdvHistoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="AdvId" Type="int" Nullable="false" />
           <Property Name="AdvRewardId" Type="int" Nullable="false" />
           <Property Name="CreateAt" Type="datetime" Nullable="false" />
@@ -49,24 +29,24 @@
           <Key>
             <PropertyRef Name="AdvId" />
           </Key>
-          <Property Name="AdvId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="AdvTitle" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="AdvId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AdvTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="AreaId" Type="int" Nullable="false" />
           <Property Name="TotalCount" Type="int" Nullable="false" />
-          <Property Name="TotalCash" Type="decimal" Nullable="false" />
+          <Property Name="TotalCash" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="ContentUrl" Type="nvarchar" MaxLength="500" />
           <Property Name="Status" Type="int" Nullable="false" />
           <Property Name="CreateAt" Type="datetime" Nullable="false" />
           <Property Name="ModifyAt" Type="datetime" />
           <Property Name="CostFeeUrl" Type="nvarchar" MaxLength="500" />
-          <Property Name="RemainderCash" Type="decimal" Nullable="false" Scale="2" />
+          <Property Name="RemainderCash" Type="decimal" Precision="18" Scale="2" Nullable="false" />
         </EntityType>
         <EntityType Name="AdvReward">
           <Key>
             <PropertyRef Name="AdvRewardId" />
           </Key>
-          <Property Name="AdvRewardId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="AdvRewardId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="AdvId" Type="int" Nullable="false" />
           <Property Name="RewardTypeId" Type="int" Nullable="false" />
           <Property Name="AdvRewardUrl" Type="nvarchar" MaxLength="500" />
@@ -75,8 +55,8 @@
           <Key>
             <PropertyRef Name="AreaId" />
           </Key>
-          <Property Name="AreaId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="AreaName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="AreaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AreaName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Status" Type="int" Nullable="false" />
           <Property Name="CreateAt" Type="datetime" Nullable="false" />
           <Property Name="ModifyAt" Type="datetime" />
@@ -86,11 +66,11 @@
           <Key>
             <PropertyRef Name="PositionId" />
           </Key>
-          <Property Name="PositionId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="PositionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="AreaId" Type="int" Nullable="false" />
-          <Property Name="PositionName" Type="nvarchar" Nullable="false" MaxLength="50" />
-          <Property Name="Longitude" Type="decimal" Nullable="false" Scale="2" />
-          <Property Name="Latitude" Type="decimal" Nullable="false" Scale="2" />
+          <Property Name="PositionName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Longitude" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Latitude" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="CreateAt" Type="datetime" Nullable="false" />
           <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
@@ -98,28 +78,28 @@
           <Key>
             <PropertyRef Name="HistoryTypeId" />
           </Key>
-          <Property Name="HistoryTypeId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="100" />
-          <Property Name="ShortDescription" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="HistoryTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ShortDescription" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="CreateAt" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="LoginHistory">
           <Key>
             <PropertyRef Name="LoginHistoryId" />
           </Key>
-          <Property Name="LoginHistoryId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="LoginHistoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="IP" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="IP" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="CreateAt" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="RechargeHistory">
           <Key>
             <PropertyRef Name="RechargeHistoryId" />
           </Key>
-          <Property Name="RechargeHistoryId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="RechargeHistoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="OrderNumber" Type="nvarchar" MaxLength="50" />
           <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="RechargeCash" Type="decimal" Nullable="false" Scale="2" />
+          <Property Name="RechargeCash" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="CreateAt" Type="datetime" Nullable="false" />
           <Property Name="RechargeRewardTypeId" Type="int" Nullable="false" />
           <Property Name="Details" Type="nvarchar" MaxLength="200" />
@@ -129,9 +109,9 @@
           <Key>
             <PropertyRef Name="RechargeRewardId" />
           </Key>
-          <Property Name="RechargeRewardId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="TargetValue" Type="decimal" Nullable="false" Scale="2" />
-          <Property Name="RewardValue" Type="decimal" Nullable="false" Scale="2" />
+          <Property Name="RechargeRewardId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TargetValue" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="RewardValue" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="CreateAt" Type="datetime" Nullable="false" />
           <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
@@ -139,10 +119,10 @@
           <Key>
             <PropertyRef Name="RewardTypeId" />
           </Key>
-          <Property Name="RewardTypeId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="RewardValue" Type="decimal" Nullable="false" Scale="2" />
-          <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="200" />
-          <Property Name="ShortDescription" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="RewardTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RewardValue" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="ShortDescription" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="CreateAt" Type="datetime" Nullable="false" />
           <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
@@ -150,28 +130,28 @@
           <Key>
             <PropertyRef Name="ConfigId" />
           </Key>
-          <Property Name="ConfigId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="SystemIncomeValue" Type="decimal" Nullable="false" Scale="2" />
+          <Property Name="ConfigId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SystemIncomeValue" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Status" Type="int" Nullable="false" />
           <Property Name="CreateAt" Type="datetime" Nullable="false" />
         </EntityType>
-        <EntityType Name="SystemIncome">
+        <EntityType Name="SystemIncomeHistory">
           <Key>
-            <PropertyRef Name="SystemIncomeId" />
+            <PropertyRef Name="IncomeHistoryId" />
           </Key>
-          <Property Name="SystemIncomeId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="AdvId" Type="int" Nullable="false" />
-          <Property Name="AdvRewardId" Type="int" Nullable="false" />
-          <Property Name="IncomeValue" Type="decimal" Nullable="false" Scale="2" />
+          <Property Name="IncomeHistoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IncomeValue" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ComeFrom" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SomeId" Type="int" Nullable="false" />
           <Property Name="CreateAt" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="SystemStatus">
           <Key>
             <PropertyRef Name="StatusId" />
           </Key>
-          <Property Name="StatusId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="200" />
-          <Property Name="ShortDescription" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="StatusId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="ShortDescription" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="CreateAt" Type="datetime" Nullable="false" />
           <Property Name="SystemStatusCategoryId" Type="int" Nullable="false" />
         </EntityType>
@@ -179,25 +159,25 @@
           <Key>
             <PropertyRef Name="StatusCategoryId" />
           </Key>
-          <Property Name="StatusCategoryId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="CategoryName" Type="nvarchar" Nullable="false" MaxLength="20" />
+          <Property Name="StatusCategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryName" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="CreateAt" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="UserId" />
           </Key>
-          <Property Name="UserId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CreateAt" Type="datetime" Nullable="false" />
           <Property Name="LastLoginIn" Type="datetime" />
           <Property Name="Status" Type="int" Nullable="false" />
           <Property Name="MobilePhone" Type="nvarchar" MaxLength="20" />
           <Property Name="Telephone" Type="nvarchar" MaxLength="20" />
           <Property Name="CompanyName" Type="nvarchar" MaxLength="50" />
-          <Property Name="AccountName" Type="nvarchar" Nullable="false" MaxLength="20" />
+          <Property Name="AccountName" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="LegalPersonName" Type="nvarchar" MaxLength="20" />
-          <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="50" />
-          <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="IsAdmin" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="UserAccount">
@@ -205,9 +185,28 @@
             <PropertyRef Name="AccountId" />
           </Key>
           <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="AccountId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="AccountBalance" Type="decimal" Nullable="false" Scale="2" />
+          <Property Name="AccountId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AccountBalance" Type="decimal" Precision="18" Scale="2" Nullable="false" />
         </EntityType>
+        <EntityContainer Name="MkmModelStoreContainer">
+          <EntitySet Name="AccountHistory" EntityType="Self.AccountHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AdvHistory" EntityType="Self.AdvHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AdvInfo" EntityType="Self.AdvInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AdvReward" EntityType="Self.AdvReward" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Area" EntityType="Self.Area" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AreaPosition" EntityType="Self.AreaPosition" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HistoryType" EntityType="Self.HistoryType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoginHistory" EntityType="Self.LoginHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RechargeHistory" EntityType="Self.RechargeHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RechargeReward" EntityType="Self.RechargeReward" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RewardType" EntityType="Self.RewardType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SystemConfig" EntityType="Self.SystemConfig" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SystemIncomeHistory" EntityType="Self.SystemIncomeHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SystemStatus" EntityType="Self.SystemStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SystemStatusCategory" EntityType="Self.SystemStatusCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserAccount" EntityType="Self.UserAccount" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -224,12 +223,12 @@
           <EntitySet Name="RechargeHistory" EntityType="MkmModel.RechargeHistory" />
           <EntitySet Name="RewardType" EntityType="MkmModel.RewardType" />
           <EntitySet Name="SystemConfig" EntityType="MkmModel.SystemConfig" />
-          <EntitySet Name="SystemIncome" EntityType="MkmModel.SystemIncome" />
           <EntitySet Name="SystemStatus" EntityType="MkmModel.SystemStatus" />
           <EntitySet Name="User" EntityType="MkmModel.User" />
           <EntitySet Name="UserAccount" EntityType="MkmModel.UserAccount" />
           <EntitySet Name="SystemStatusCategory" EntityType="MkmModel.SystemStatusCategory" />
           <EntitySet Name="RechargeReward" EntityType="MkmModel.RechargeReward" />
+          <EntitySet Name="SystemIncomeHistory" EntityType="MkmModel.SystemIncomeHistory" />
         </EntityContainer>
         <EntityType Name="AccountHistory">
           <Key>
@@ -237,11 +236,10 @@
           </Key>
           <Property Type="Int32" Name="AccountHistoryId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="Int32" Name="AccountId" Nullable="false" />
-          <Property Type="Int32" Name="UserId" Nullable="false" />
-          <Property Type="Int32" Name="HistoryTypeId" Nullable="false" />
-          <Property Type="String" Name="Description" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Description" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Type="Decimal" Name="ChangeValue" Nullable="false" Precision="18" Scale="2" />
           <Property Type="DateTime" Name="CreateAt" Nullable="false" Precision="3" />
+          <Property Name="ComeFrom" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="AdvHistory">
           <Key>
@@ -352,16 +350,6 @@
           <Property Type="Int32" Name="Status" Nullable="false" />
           <Property Type="DateTime" Name="CreateAt" Nullable="false" Precision="3" />
         </EntityType>
-        <EntityType Name="SystemIncome">
-          <Key>
-            <PropertyRef Name="SystemIncomeId" />
-          </Key>
-          <Property Type="Int32" Name="SystemIncomeId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="AdvId" Nullable="false" />
-          <Property Type="Int32" Name="AdvRewardId" Nullable="false" />
-          <Property Type="Decimal" Name="IncomeValue" Nullable="false" Precision="18" Scale="2" />
-          <Property Type="DateTime" Name="CreateAt" Nullable="false" Precision="3" />
-        </EntityType>
         <EntityType Name="SystemStatus">
           <Key>
             <PropertyRef Name="StatusId" />
@@ -415,6 +403,16 @@
           <Property Type="DateTime" Name="CreateAt" Nullable="false" Precision="3" />
           <Property Type="Int32" Name="Status" Nullable="false" />
         </EntityType>
+        <EntityType Name="SystemIncomeHistory">
+          <Key>
+            <PropertyRef Name="IncomeHistoryId" />
+          </Key>
+          <Property Name="IncomeHistoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IncomeValue" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ComeFrom" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SomeId" Type="Int32" Nullable="false" />
+          <Property Name="CreateAt" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -424,11 +422,10 @@
           <EntitySetMapping Name="AccountHistory">
             <EntityTypeMapping TypeName="MkmModel.AccountHistory">
               <MappingFragment StoreEntitySet="AccountHistory">
+                <ScalarProperty Name="ComeFrom" ColumnName="ComeFrom" />
                 <ScalarProperty Name="CreateAt" ColumnName="CreateAt" />
                 <ScalarProperty Name="ChangeValue" ColumnName="ChangeValue" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="HistoryTypeId" ColumnName="HistoryTypeId" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="AccountId" ColumnName="AccountId" />
                 <ScalarProperty Name="AccountHistoryId" ColumnName="AccountHistoryId" />
               </MappingFragment>
@@ -553,17 +550,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="SystemIncome">
-            <EntityTypeMapping TypeName="MkmModel.SystemIncome">
-              <MappingFragment StoreEntitySet="SystemIncome">
-                <ScalarProperty Name="CreateAt" ColumnName="CreateAt" />
-                <ScalarProperty Name="IncomeValue" ColumnName="IncomeValue" />
-                <ScalarProperty Name="AdvRewardId" ColumnName="AdvRewardId" />
-                <ScalarProperty Name="AdvId" ColumnName="AdvId" />
-                <ScalarProperty Name="SystemIncomeId" ColumnName="SystemIncomeId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="SystemStatus">
             <EntityTypeMapping TypeName="MkmModel.SystemStatus">
               <MappingFragment StoreEntitySet="SystemStatus">
@@ -622,6 +608,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="SystemIncomeHistory">
+            <EntityTypeMapping TypeName="MkmModel.SystemIncomeHistory">
+              <MappingFragment StoreEntitySet="SystemIncomeHistory">
+                <ScalarProperty Name="CreateAt" ColumnName="CreateAt" />
+                <ScalarProperty Name="SomeId" ColumnName="SomeId" />
+                <ScalarProperty Name="ComeFrom" ColumnName="ComeFrom" />
+                <ScalarProperty Name="IncomeValue" ColumnName="IncomeValue" />
+                <ScalarProperty Name="IncomeHistoryId" ColumnName="IncomeHistoryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -639,6 +636,7 @@
         <DesignerProperty Name="EnablePluralization" Value="False" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+        <DesignerProperty Name="UseLegacyProvider" Value="True" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->

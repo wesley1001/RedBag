@@ -168,22 +168,44 @@ namespace MicroWebsite.Controllers.User
                 
             if (ModelState.IsValid)
             {
+                var rechargeStatusId = SystemStaticData.LookUpRechargeRewardStatusId(SystemStaticData.RechargeRewardDictionary.Normal);
                 DataAccessLayer.RechargeHistory history = new DataAccessLayer.RechargeHistory();
                 history.CreateAt = DateTime.Now;
                 history.CreateUserId = this.CurrentLoginUserId;
                 history.Details = model.Remark;
                 history.RechargeCash = model.Cash;
                 var reward = db.RechargeReward.OrderByDescending(p => p.TargetValue)
-                    .FirstOrDefault(m => m.TargetValue <= model.Cash);
+                    .FirstOrDefault(m => m.TargetValue <= model.Cash && m.Status == rechargeStatusId);
                 history.RechargeRewardTypeId = reward == null ? 0 : reward.RechargeRewardId;
                 history.UserId = userAccount.UserId;
                 //账户余额增加
                 UserAccount account = db.UserAccount.First(p => p.UserId == userAccount.UserId);
+                //记录账户历史记录
+                AccountHistory accountHistory = new AccountHistory();
+                accountHistory.CreateAt = DateTime.Now;
+                accountHistory.AccountId = account.AccountId;
+                accountHistory.ChangeValue = model.Cash;
+                accountHistory.ComeFrom = "账户充值";
                 account.AccountBalance += model.Cash;
                 if (reward != null)
+                {
                     account.AccountBalance += reward.RewardValue;
+                    accountHistory.ChangeValue += reward.RewardValue;
+                    accountHistory.Description = "账户充值获得奖励 "+ reward.RewardValue;
+                }
                 db.RechargeHistory.Add(history);
+                db.AccountHistory.Add(accountHistory);
                 db.SaveChanges();
+                if (reward != null)
+                {
+                    SystemIncomeHistory incomeHistory = new SystemIncomeHistory();
+                    incomeHistory.CreateAt = DateTime.Now;
+                    incomeHistory.ComeFrom = "充值奖励";
+                    incomeHistory.IncomeValue = -reward.RewardValue;
+                    incomeHistory.SomeId = history.RechargeHistoryId;
+                    db.SystemIncomeHistory.Add(incomeHistory);
+                    db.SaveChanges();
+                }
                 return Content("<script>alert('充值成功');window.location.href=window.location.href</script>");
             }
             return View(model);

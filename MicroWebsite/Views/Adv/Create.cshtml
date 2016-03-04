@@ -2,11 +2,10 @@
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_WorkspaceLayout.cshtml";
 }
-
 <h2>创建新广告</h2>
 <form>
     <div>
-        <span>广告标题</span><input type="text" id="txtAdvTitle"/>
+        <span>广告标题</span><input type="text" id="txtAdvTitle" />
     </div>
     <div>
         <span>投放区域</span><select id="firstLevel"></select>
@@ -26,15 +25,13 @@
         <span>红包总数</span><input type="text" id="txtRbCount" />
     </div>
     <div>
-        <span>投放总额</span><span id="txtTotalCash"></span><input type="button" onclick="calcTotalCost()" value="计算所需金额"/>
+        <span>投放总额</span><span id="txtTotalCash"></span><input type="button" onclick="calcTotalCost()" value="计算所需金额" />
     </div>
     <input type="button" value="提交申请" onclick="submitForm()" />
 </form>
 
 
 <script>
-
-
 
     $(document).ready(function () {
         loadFirstLevel();
@@ -155,8 +152,6 @@
         $("#btnAddReward").attr("disabled", true);
         loadReward(newName, false);
         $("#btnAddReward").removeAttr("disabled");
-
-
     }
 
     function calcTotalCost() {
@@ -185,7 +180,6 @@
     function submitForm() {
 
         var rewardStr = "";
-
         $("#rewardSelectPanel select").each(function () {
             rewardStr += $(this).val().split('|')[0] + ",";
         });

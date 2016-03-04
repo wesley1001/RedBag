@@ -102,7 +102,7 @@
     <Compile Include="SystemConfig.cs">
       <DependentUpon>mkmEntity.tt</DependentUpon>
     </Compile>
-    <Compile Include="SystemIncome.cs">
+    <Compile Include="SystemIncomeHistory.cs">
       <DependentUpon>mkmEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="SystemStatus.cs">

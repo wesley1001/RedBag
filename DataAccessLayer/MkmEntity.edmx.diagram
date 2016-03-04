@@ -13,15 +13,15 @@
         <EntityTypeShape EntityType="MkmModel.AreaPosition" Width="1.5" PointX="9.5911921251524213" PointY="21.639229099098234" />
         <EntityTypeShape EntityType="MkmModel.HistoryType" Width="1.5" PointX="7.8934377990166826" PointY="7.12156632874234" />
         <EntityTypeShape EntityType="MkmModel.LoginHistory" Width="1.5" PointX="5.50939501706017" PointY="28.986262975719878" />
-        <EntityTypeShape EntityType="MkmModel.RechargeHistory" Width="1.5" PointX="10.00003186333926" PointY="18.622815617650197" />
+        <EntityTypeShape EntityType="MkmModel.RechargeHistory" Width="1.5" PointX="13.5" PointY="18.25" />
         <EntityTypeShape EntityType="MkmModel.RewardType" Width="1.5" PointX="9.5328638635263143" PointY="21.456046188928209" />
         <EntityTypeShape EntityType="MkmModel.SystemConfig" Width="1.5" PointX="4.6462470072536952" PointY="28.705744786516643" />
-        <EntityTypeShape EntityType="MkmModel.SystemIncome" Width="1.5" PointX="10.173922759561764" PointY="9.9762192265951164" />
-        <EntityTypeShape EntityType="MkmModel.SystemStatus" Width="1.5" PointX="9.2362745279615162" PointY="10.473167886246539" />
+        <EntityTypeShape EntityType="MkmModel.SystemStatus" Width="1.5" PointX="6.5" PointY="10.25" />
         <EntityTypeShape EntityType="MkmModel.User" Width="1.5" PointX="1.4387017681443606" PointY="27.176365835208617" />
         <EntityTypeShape EntityType="MkmModel.UserAccount" Width="1.5" PointX="11.727413970850135" PointY="22.263663183089189" />
         <EntityTypeShape EntityType="MkmModel.SystemStatusCategory" Width="1.5" PointX="3.0375361922371837" PointY="16.927171029582233" />
         <EntityTypeShape EntityType="MkmModel.RechargeReward" Width="1.5" PointX="1.9615225205018754" PointY="1.8492446997432246" />
+        <EntityTypeShape EntityType="MkmModel.SystemIncomeHistory" Width="1.5" PointX="4.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

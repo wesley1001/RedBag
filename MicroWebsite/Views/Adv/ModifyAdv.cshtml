@@ -1,6 +1,47 @@
 ﻿@{
-    ViewBag.Title = "ModifyAdv";
+    ViewBag.Title = "广告审核";
     Layout = "~/Views/Shared/_WorkspaceLayout.cshtml";
 }
 
-<h2>ModifyAdv</h2>
+@using MicroWebsite.Models
+@model AdvDisplayModel
+<h2>广告审核</h2>
+<form action="@Url.Action("UpdateAdv", "Adv")" method="POST" id="advForm">
+    @Html.HiddenFor(m => m.AdvId)
+    <div>
+        <div>
+            <span>广告标题:</span>@Html.DisplayFor(m => m.AdvTitle)
+        </div>
+        <div>
+            <span>投放区域:</span>@Html.DisplayFor(m => m.AreaFullName)
+        </div>
+        <div>
+            <span>奖励金额:</span>
+            <div>
+                @foreach (AdvRewardModel item in Model.Rewards)
+                {
+                    <span>@item.RewardName</span><span>奖励链接:</span><input type="text" value="@item.AdvRewardUrl" name="rward|@item.AdvRewardId|@item.RewardTypeId" id="rward|@item.AdvRewardId|@item.RewardTypeId"/>
+                }
+            </div>
+        </div>
+        <div>
+            <span>红包总数:</span>@Html.DisplayFor(m => m.TotalCount)
+        </div>
+        <div>
+            <span>投放总额</span>@Html.DisplayFor(m => m.TotalCash)
+        </div>
+        <div>
+            <span>广告主体链接</span>@Html.TextBoxFor(m => m.ContentUrl)
+        </div>
+        <input type="hidden" id="hidRefuse" name="hidRefuse"/>
+        <input type="submit" value="审核通过"/>
+        <input type="button" value="拒绝" onclick="submitForm()"/>
+    </div>
+</form>
+<script>
+    function submitForm() {
+        $("#hidRefuse").val(1);
+        $("#advForm").submit();
+    }
+</script>
+

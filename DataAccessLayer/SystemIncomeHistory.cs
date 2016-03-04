@@ -12,19 +12,12 @@ namespace DataAccessLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class User
+    public partial class SystemIncomeHistory
     {
-        public int UserId { get; set; }
+        public int IncomeHistoryId { get; set; }
+        public decimal IncomeValue { get; set; }
+        public string ComeFrom { get; set; }
+        public int SomeId { get; set; }
         public System.DateTime CreateAt { get; set; }
-        public Nullable<System.DateTime> LastLoginIn { get; set; }
-        public int Status { get; set; }
-        public string MobilePhone { get; set; }
-        public string Telephone { get; set; }
-        public string CompanyName { get; set; }
-        public string AccountName { get; set; }
-        public string LegalPersonName { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
-        public bool IsAdmin { get; set; }
     }
 }

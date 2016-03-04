@@ -25,16 +25,45 @@
             <td>@u.AdvTitle</td>
             <td>@u.AreaFullName</td>
             <td>@u.PublishUserName</td>
-            <td>@u.CostFeeUrl</td>
             <td>@u.TotalCash</td>
             <td>@u.TotalCount</td>
             <td>@u.RemainderCash</td>
             <td>@SystemStaticData.LookUpAdvStatusId(u.Status)</td>
+            <td>@u.CostFeeUrl</td>
             <td>@u.CreateAt</td>
             <td>
-                <a href="@Url.Action("DeleteArea", "SysConfig", new {advId = u.AdvId})">详情</a>
-                <a href="@Url.Action("DeleteArea", "SysConfig", new { advId = u.AdvId })">强制下架</a>
+                <a href="@Url.Action("ModifyAdv", "Adv", new {advId = u.AdvId})">审核</a>
+                <a href="@Url.Action("DeleteArea", "SysConfig", new {advId = u.AdvId})">强制下架</a>
             </td>
         </tr>
     }
 </table>
+<script>
+
+    var optionArea = {
+        "iDisplayLength": 10,
+        'bLengthChange': false,
+        "language": {
+            "search": "筛选 : ",
+            "info": " _START_  - _END_ 总共 _TOTAL_ 记录",
+            "paginate": {
+                "first": "首页",
+                "last": "尾页",
+                "next": "下一页",
+                "previous": "上一页"
+            }
+        },
+        "aoColumnDefs": [
+            { "bSortable": false, "aTargets": [9] },
+            { "type": "usdate", "aTargets": [8] }
+        ],
+        "fnDrawCallback": function () {
+            //setConfirmValue();
+        }
+    };
+
+    $(document).ready(function () {
+        $("#AdvTable").dataTable(optionArea);
+    });
+
+</script>
