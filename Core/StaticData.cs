@@ -20,6 +20,8 @@ namespace Core
             public static string Normal = "正常";
             public static string Stop = "停止";
             public static string Prepare = "待补充";
+            public static string Refuse = "审核未通过";
+            public static string Pause = "中止";
         }
 
         public static class AdvRewardDictionary

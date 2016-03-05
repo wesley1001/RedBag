@@ -166,10 +166,17 @@
             });
             valueArr.sort();
             var totalCount = $("#txtRbCount").val();
-            var perCount = totalCount / valueArr.length;
+            var perCount = parseInt(totalCount / valueArr.length);
+            var levCount = totalCount % valueArr.length;
             var display = 0;
             for (var i = 0; i < valueArr.length ; i++) {
-                display += valueArr[i] * perCount;
+                if (i < valueArr.length - 1) {
+                    display += valueArr[i] * perCount;
+                }
+                else if (i == valueArr.length-1) {
+                    
+                    display += valueArr[i] * (perCount + levCount);
+                }
             }
             display += totalCount * sysIncomeFee;
             $("#txtTotalCash").html(display);

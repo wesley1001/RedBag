@@ -21,6 +21,7 @@ namespace MicroWebsite.Controllers.Advertisement
             var query = from adv in db.AdvInfo
                         join a in db.Area on adv.AreaId equals a.AreaId
                         join u in db.User on adv.UserId equals u.UserId
+                        where adv.UserId == this.CurrentLoginUserId
                         select new AdvDisplayModel
                         {
                             AdvId = adv.AdvId,
@@ -76,15 +77,21 @@ namespace MicroWebsite.Controllers.Advertisement
         {
             WorkspaceDataSaveResult saveResult = new WorkspaceDataSaveResult();
             var rewardIds = rewardStr.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+            var allReward = db.RewardType.Where(p => rewardIds.Contains(p.RewardTypeId.ToString())).OrderBy(p=>p.RewardValue).ToList();
             //calc totalcost
             var averageCount = count / rewardIds.Length;
+            var levValue = count % rewardIds.Length;
             decimal totalValue = 0;
-            var allAdvReward = db.RewardType.ToList();
-            foreach (var id in rewardIds)
+            for (int i = 0; i < allReward.Count; i++)
             {
-                var queryid = int.Parse(id);
-                var currentValue = allAdvReward.First(p => p.RewardTypeId == queryid).RewardValue;
-                totalValue += averageCount * currentValue;
+                if (i < allReward.Count - 1)
+                {
+                    totalValue += averageCount * allReward[i].RewardValue;
+                }
+                else
+                {
+                    totalValue += (averageCount + levValue) * allReward[i].RewardValue;
+                }
             }
             var incomeStatusId = SystemStaticData.LookUpSystemIncomeStatusId(SystemStaticData.SystemIncomeDictionary.Normal);
             var inCo = db.SystemConfig.FirstOrDefault(p => p.Status == incomeStatusId);
@@ -151,6 +158,7 @@ namespace MicroWebsite.Controllers.Advertisement
                            };
             var query = from ar in db.AdvReward
                         join rt in db.RewardType on ar.RewardTypeId equals rt.RewardTypeId
+                        where ar.AdvId == advId
                         select new AdvRewardModel
                         {
                             AdvId = ar.AdvId,
@@ -177,7 +185,7 @@ namespace MicroWebsite.Controllers.Advertisement
                 {
                     if (key.Contains("rward|"))
                     {
-                        var keyInfo = key.Split(new char[] {'|'}, StringSplitOptions.RemoveEmptyEntries);
+                        var keyInfo = key.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
                         AdvReward advReward = new AdvReward();
                         advReward.AdvId = advId;
                         advReward.AdvRewardId = int.Parse(keyInfo[1]);
@@ -187,29 +195,52 @@ namespace MicroWebsite.Controllers.Advertisement
                         db.Entry(advReward).State = EntityState.Modified;
                     }
                 }
-                
+                adv.Status = SystemStaticData.LookUpAdvStatusId(SystemStaticData.AdvDictionary.Normal);
                 adv.ContentUrl = Request.Form["ContentUrl"];
                 adv.ModifyAt = DateTime.Now;
             }
             else
             {
+                //更新adv状态
+                adv.Status = SystemStaticData.LookUpAdvStatusId(SystemStaticData.AdvDictionary.Refuse);
                 var userAccount = db.UserAccount.First(p => p.UserId == adv.UserId);
                 //退款
                 userAccount.AccountBalance += adv.TotalCash;
                 //记录账户日志
-                AccountHistory accountHistory = new AccountHistory();
-                accountHistory.CreateAt = DateTime.Now;
-                accountHistory.AccountId = userAccount.AccountId;
-                accountHistory.ChangeValue = adv.TotalCash;
-                accountHistory.ComeFrom = "广告审核未通过，退回扣款";
-                db.AccountHistory.Add(accountHistory);
+                LogAccountHistory(userAccount.AccountId, adv.TotalCash, "广告审核未通过，退回扣款");
                 db.UserAccount.Attach(userAccount);
-                db.Entry(userAccount).State=EntityState.Modified;
+                db.Entry(userAccount).State = EntityState.Modified;
             }
-           
+
             db.SaveChanges();
-            return RedirectToAction("AdvList","Adv");
+            return RedirectToAction("AdvList", "Adv");
         }
+
+        public ActionResult AdminDeleteAdv(int advId)
+        {
+            var statusId = SystemStaticData.LookUpAdvStatusId(SystemStaticData.AdvDictionary.Stop);
+            var adv = db.AdvInfo.First(p => p.AdvId == advId);
+            adv.Status = statusId;
+            //强制下架的广告不退钱
+
+            db.SaveChanges();
+            return RedirectToAction("AdvList", "Adv");
+        }
+
+        public ActionResult UserPauseAdv(int advId)
+        {
+            var statusId = SystemStaticData.LookUpAdvStatusId(SystemStaticData.AdvDictionary.Pause);
+            var adv = db.AdvInfo.First(p => p.AdvId == advId);
+            adv.Status = statusId;
+            //退回余额
+            var userAccount = db.UserAccount.First(p => p.UserId == adv.UserId);
+            LogAccountHistory(userAccount.AccountId, adv.RemainderCash, "用户终止广告，退回余额");
+            db.SaveChanges();
+            return RedirectToAction("AdvList", "Adv");
+        }
+
+
+        
 
     }
 }
