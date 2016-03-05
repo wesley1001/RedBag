@@ -378,6 +378,8 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\bootstrap3-typeahead.js" />
+    <Content Include="Scripts\form-x-editable-demo.js" />
+    <Content Include="Scripts\form-x-editable.js" />
     <Content Include="Scripts\html5shiv.min.js" />
     <Content Include="Scripts\jquery-2.1.4.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />

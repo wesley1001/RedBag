@@ -12,12 +12,21 @@
 		<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="../css/common.css">
 		<link rel="stylesheet" type="text/css" href="../Font-Awesome-3.2.1/css/font-awesome.min.css">
-		<script src="http://cdn.bootcss.com/jquery/1.12.1/jquery.min.js"></script>
-		<script type="text/javascript" href="../js/respond.min.js"></script>
-		<script type="text/javascript" href="../js/html5shiv.min.js"></script>
-		<script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-		<!-- <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
-<script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script> -->
+		<link rel="stylesheet" type="text/css" href="css/select2.css">
+    <link rel="stylesheet" type="text/css" href="css/select2-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-editable.css" />
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        
+        <script src="js/jquery.mockjax.min.js"></script>
+        <script src="js/bootstrap-editable.min.js"></script>
+        <script src="js/moment.min.js"></script>
+        <script src="js/address.min.js"></script>
+        <script src="js/typeaheadjs.min.js"></script>
+        <script src="js/select2.js"></script>
+
+        <script src="js/form-x-editable-demo.js"></script>
+        <script src="js/form-x-editable.js"></script>
 </head>
 <body>
 	<section>
@@ -74,10 +83,7 @@
 				<li><i class="glyphicon glyphicon-map-marker"></i> 区域管理</li>
 				<li><i class="glyphicon glyphicon-credit-card"></i> 充值管理</li>
 			</ul>
-			<div class="out">
-				<button class="btn btn-warning"><i class="glyphicon glyphicon-off"></i></button>
-				<div>退出</div>
-			</div>
+			
 		</div>
 		<div class="main-wrap" id="main-wrap">
 			<div class="current">
@@ -105,6 +111,7 @@
 							    </div>
 							    <div class="form-group">
 						      		<label for="money">奖励金额</label>
+						      		<a href="" id="money">hgt</a>
 								    <select class="form-control">
 								    	<option>
 								    		<input type="text" value="d">
@@ -151,6 +158,10 @@
 			
 		</div>
 	</section>
+	<div class="out">
+				<button class="btn btn-warning"><i class="glyphicon glyphicon-off"></i></button>
+				<div>退出</div>
+			</div>
 	<script type="text/javascript">
 	$(function(){
 	var a=document.getElementById("sidebar");
@@ -175,8 +186,20 @@
 			});
 
 		});
+	$(function(){
+   //defaults
+   $.fn.editable.defaults.url = '/post';
+   $.fn.editable.defaults.placement = 'right'; 
 
-
+		$('#money').editable({
+        type:'select2',
+        source: areas,
+        select2: {
+            width: 200,
+            placeholder: 'Select Area of Interest',
+            allowClear: true
+        } 
+});
 // 		$(document).ready(function(){
 //   $(".broker-interal li").click(function(){
 //     $(this).addClass("conversation");
