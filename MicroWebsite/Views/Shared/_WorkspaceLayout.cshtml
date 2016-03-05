@@ -7,14 +7,13 @@
     <title>@ViewBag.Title - 系统管理</title>
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <meta name="viewport" content="width=device-width" />
-    <script type="text/javascript" src="~/Scripts/respond.min.js"></script>
-    <script type="text/javascript" src="~/Scripts/html5shiv.min.js"></script>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
     @Scripts.Render("~/bundles/jquery")
     @Styles.Render("~/Content/common.css")
     @Styles.Render("~/Content/jquery.dataTables.min.css")
-    @Styles.Render("~/Content/bootstrap.min.css")
+    @*@Styles.Render("~/Content/bootstrap.min.css")
     @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/modernizr")*@
     <link rel="~/Content/jquery.dataTables.min.css" type="text/css" />
     <script src="~/Scripts/jquery.dataTables.min.js"></script>
 </head>
@@ -86,28 +85,4 @@
     @RenderSection("scripts", required: false)
 </body>
 </html>
-<script type="text/javascript">
-    $(function () {
-        var a = document.getElementById("sidebar");
-        var b = document.getElementById("main-wrap");
-        if (a.clientHeight < b.clientHeight) {
-            a.style.height = b.clientHeight + "px";
-        } else {
-            b.style.height = a.clientHeight + "px";
-        }
 
-    });
-    $(document).ready(function () {
-        $('.menu-title li').click(function () {
-
-            $('.menu-title li').removeClass('active');
-            $(this).addClass('active');
-        });
-        $('.navigation li').click(function () {
-
-            $('.navigation li').removeClass('active');
-            $(this).addClass('active');
-        });
-
-    });
-	</script>
