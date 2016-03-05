@@ -7,8 +7,14 @@
 @model MicroWebsite.Models.UserListModel
 
 <div  class="current">
-    <h2>用户管理</h2>
-    <a href="@Url.Action("Create", "User")" class="btn btn-warning">创建新用户</a>
+            <ul class="nav navbar-nav navigation">
+                <li class="active"><a href="#">所有广告</a></li>
+
+            </ul>
+    <!-- /.navbar-collapse -->
+    <div class="padding-15">
+        <h2 class="margin-top-15">用户管理</h2>
+    <a href="@Url.Action("Create", "User")"class="btn btn-warning pull-right"><i class="glyphicon glyphicon-plus-sign"></i> 创建新用户</a>
     <table cellpadding="0" cellspacing="0" id="userTable" class="table table-hover">
         <thead>
             <th>用户名</th>
@@ -42,6 +48,8 @@
             </tr>
         }
     </table>
+</div>
+    
 </div>
 <script>
 

@@ -428,7 +428,25 @@ p{
 
 /*user=================*/
 .navigation{
-    margin-left: 15px;
+    padding-left: 15px;
+    overflow:hidden;
+    background:#fff;
+    width:100%;
+    border-bottom:1px solid #ccc;
+    margin-bottom:30px;
+    
+    
+}
+.navigation >.active>a{
+    background: url(../images/imgbg.png) no-repeat;
+    background-size: 100% 100%;
+
+}
+.head-logo{
+    width:227px;
+    float:left;
+    min-height:60px;
+    padding:0;
 }
 .navbar-inverse{
     background: #fff;
@@ -438,8 +456,8 @@ p{
 .navbar-brand {
     width:227px;
     background: #fabe00;
-    max-height:80px;
-     padding: 0
+    min-height:80px;
+     padding: 0;
 }
 .navbar-brand img{
     width: 100%;
@@ -480,11 +498,7 @@ p{
     color:#333;
     border:0;
 }
-.navbar-inverse .navbar-nav>.active>a{
-    background: url(../images/imgbg.png) no-repeat;
-    background-size: 100% 100%;
 
-}
 .container-fluid > .navbar-collapse, 
 .container-fluid > .navbar-header, 
 .container > .navbar-collapse, 
@@ -524,7 +538,7 @@ p{
 .main-wrap{
     background: #f8f8f8;
     width:100%;
-    padding: 30px 15px ;
+    /*padding: 30px 15px ;*/
     min-height:500px;
 }
 .search{
@@ -542,8 +556,17 @@ p{
 .search .row>div:last-child{
     border:0;
 }
+#userTable_filter{
+    float:left;
+}
+#userTable_filter input{
+    padding:6px 12px ;
+    border:1px solid #ccc;
+    border-radius:4px;
+}
+
+
 .current{
-    padding: 0 15px;
     overflow: hidden;
 }
 
@@ -619,12 +642,12 @@ form .btn{
 /*redbag=================*/
 .redbag{
     background: url(../images/redbag.png);
-    background-size: cover;
+    background-size: 100% 100%;
     text-align: center;
-    /*max-width: 300px;*/
-    /*max-height: 500px;*/
+    max-width: 640px;
+    max-height: 600px;
     margin: 0 auto;
-    padding:250px 00px 100px;
+    padding:200px 0 0px 00px;
     color: #fbe234;
 }
 .step{
@@ -671,7 +694,5 @@ form .btn{
 }
 .detail{
     height:200px;
-    position: fixed;
-    bottom: 100px;
-    left:40%;
-}
+    
+}}
