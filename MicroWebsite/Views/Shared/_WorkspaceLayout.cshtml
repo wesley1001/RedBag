@@ -18,17 +18,12 @@
     <script src="~/Scripts/jquery.dataTables.min.js"></script>
 </head>
 <body>
-    <section class="head-logo">
+    <div class="head-logo">
         <nav class="navbar navbar-inverse">
             <div class="">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
-                    <button aria-expanded="false" data-target="#bs-example-navbar-collapse-9" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
+                    
                     <a href="#" class="navbar-brand">
                         <img src="~/images/Logo-Mall.png">
                     </a>
@@ -69,8 +64,8 @@
             </div>
             <!-- /.container-fluid -->
         </nav>
-    </section>
-    <section class="main">
+    </div>
+    <div class="main">
         
         <div class="main-wrap" id="main-wrap">
             @RenderBody()
@@ -81,7 +76,7 @@
                 &copy; copyright 2016	<span class="margin-left-15">湘ICP备14010744号</span> <span class="margin-left-15">电话：<span class="text-warning">0731-87659803</span></span>
             </div>
         </div>
-    </section>
+    </div>
     @RenderSection("scripts", required: false)
 </body>
 <script type="text/javascript">
