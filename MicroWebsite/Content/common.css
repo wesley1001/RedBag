@@ -538,8 +538,7 @@ p{
 .main-wrap{
     background: #f8f8f8;
     width:100%;
-    /*padding: 30px 15px ;*/
-    min-height:500px;
+    min-height:600px;
 }
 .search{
     background: #fff;
@@ -558,12 +557,19 @@ p{
 }
 #userTable_filter{
     float:left;
+    margin-bottom:15px;
 }
 #userTable_filter input{
     padding:6px 12px ;
     border:1px solid #ccc;
     border-radius:4px;
 }
+table.dataTable thead th, table.dataTable thead td,
+table.dataTable.no-footer{
+    border-bottom:1px solid #ccc;
+
+}
+
 
 
 .current{

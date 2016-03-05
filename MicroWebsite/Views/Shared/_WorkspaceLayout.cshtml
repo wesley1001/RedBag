@@ -93,9 +93,9 @@
         var b=document.getElementById("main-wrap");
         var c=document.getElementById("footer");
         if(a.clientHeight<b.clientHeight){
-            a.style.height = b.clientHeight + c.clientHeight + "px";
+            a.style.height = b.clientHeight + c.clientHeight-80 + "px";
         }else{
-            b.style.height = a.clientHeight + c.clientHeight + "px";
+            b.style.height = a.clientHeight + c.clientHeight-80 + "px";
         }
 
     });
