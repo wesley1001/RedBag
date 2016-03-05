@@ -604,8 +604,8 @@ form .btn{
     background: url(../images/redbag.png);
     background-size: cover;
     text-align: center;
-    max-width: 300px;
-    max-height: 500px;
+    /*max-width: 300px;*/
+    /*max-height: 500px;*/
     margin: 0 auto;
     padding:250px 00px 100px;
     color: #fbe234;
@@ -652,4 +652,9 @@ form .btn{
 .progress-bg{
     background: #b00e0e;
 }
-
+.detail{
+    height:200px;
+    position: fixed;
+    bottom: 100px;
+    left:40%;
+}
