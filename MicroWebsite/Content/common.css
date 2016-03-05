@@ -438,9 +438,11 @@ p{
     
 }
 .navigation >.active>a{
-    background: url(../images/imgbg.png) no-repeat;
-    background-size: 100% 100%;
-
+    /*background: url(../images/imgbg.png) no-repeat;
+    background-size: 100% 100%;*/
+    background:#f8f8f8;
+    border:1px solid #ccc;
+    border-radius:4px;
 }
 .head-logo{
     width:227px;
