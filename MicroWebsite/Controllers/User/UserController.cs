@@ -41,6 +41,7 @@ namespace MicroWebsite.Controllers.User
                         user.LastLoginIn = DateTime.Now;
                         uService.SaveUserSignInLog(user, Request.UserHostAddress);
                         Session["UserId"] = user.UserId;
+                        Session["UserName"] = user.AccountName;
                         if (user.IsAdmin)
                         {
                             Session["Role"] = (int)UserRole.Admin;

@@ -10,9 +10,9 @@
 
     <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @Styles.Render("~/Content/bootstrap.min.css")
-    @Styles.Render("~/Content/Font-Awesome-3.2.1/css/font-awesome.min.css")
+    @*@Scripts.Render("~/bundles/bootstrap")
+    @Styles.Render("~/Content/bootstrap.min.css")*@
+    @*@Styles.Render("~/Content/Font-Awesome-3.2.1/css/font-awesome.min.css")*@
     @Styles.Render("~/Content/jquery.dataTables.min.css")
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/Content/common.css")
@@ -51,7 +51,7 @@
     </section>
     <section class="main">
         <div class="sidebar" id="sidebar">
-            <h4 class="text-center">欢迎，麦克茂</h4>
+            <h4 class="text-center">@{ var x = Session["UserName"].ToString();}@x 欢迎您</h4>
             @if (Convert.ToInt32(Session["Role"]) == (int)UserRole.Admin)
             {
 
@@ -60,7 +60,6 @@
                     <li><a href="@Url.Action("Index", "SysConfig")"><i class="glyphicon glyphicon-cog"></i> 系统设定</a></li>
                     <li><a href="@Url.Action("AdvList", "Adv")"><i class="glyphicon glyphicon-tasks"></i> 广告管理</a></li>
                     <li><a href="@Url.Action("AreaIndex", "SysConfig")"><i class="glyphicon glyphicon-map-marker"></i> 区域设定</a></li>
-                    <li><a href="@Url.Action("UAdvList", "Adv")"><i class="glyphicon glyphicon-picture"></i> 我的广告</a></li>
                     <li><a href="@Url.Action("AdminRechargeHistory", "User")"><i class="glyphicon glyphicon-credit-card"></i> 充值管理</a></li>
                     <li><a href="@Url.Action("UserList", "User")"><i class="glyphicon glyphicon-yen"></i> 系统收益</a></li>
                    
@@ -70,7 +69,7 @@
             {
 
                 <ul>
-                    <li><i class="glyphicon glyphicon-picture"></i>@Html.ActionLink("我的广告", "UAdvList", "Adv")</li>
+                   <li><a href="@Url.Action("UAdvList", "Adv")"><i class="glyphicon glyphicon-picture"></i> 我的广告</a></li>
                 </ul>
             }
         </div>
