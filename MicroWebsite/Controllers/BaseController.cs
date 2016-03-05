@@ -34,6 +34,19 @@ namespace MicroWebsite.Controllers
             }
         }
 
+        protected string CurrentLoginName
+        {
+            get
+            {
+                if (Session["UserName"] != null)
+                {
+                    return Session["UserName"].ToString();
+                }
+
+                return "";
+            }
+        }
+
         protected MkmEntities db = new MkmEntities();
         protected BaseUserService uService = new BaseUserService();
 
