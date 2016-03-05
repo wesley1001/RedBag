@@ -5,31 +5,34 @@
 @using Core
 @using DataAccessLayer
 @model MicroWebsite.Models.UserListModel
-<h2>用户管理</h2>
-<a href="@Url.Action("Create", "User")">创建新用户</a>
-<table>
-    <tr>
-        <td>用户名</td>
-        <td>状态</td>
-        <td>操作</td>
-    </tr>
-    @foreach (User u in Model.Users)
-    {
+<div  class="current">
+    <h2>用户管理</h2>
+    <a href="@Url.Action("Create", "User")">创建新用户</a>
+    <table>
         <tr>
-            <td>@u.AccountName</td>
-            <td>@SystemStaticData.LookUpUserStatusId(u.Status)</td>
-            <td>
-                @if (u.Status == SystemStaticData.LookUpUserStatusId(SystemStaticData.UserDictionary.Normal))
-                {
-                    <a href="@Url.Action("DisableUserAccount","User",new{userId=u.UserId})">封停账户</a>
-                }
-                else
-                {
-                    <a href="@Url.Action("EnableUserAccount","User",new{userId=u.UserId})">解除封停</a>
-                }
-                <a href="@Url.Action("ResetPassword","User",new{userId=u.UserId})">重置密码</a>
-            </td>
+            <td>用户名</td>
+            <td>状态</td>
+            <td>操作</td>
         </tr>
-    }
-</table>
+        @foreach (User u in Model.Users)
+        {
+            <tr>
+                <td>@u.AccountName</td>
+                <td>@SystemStaticData.LookUpUserStatusId(u.Status)</td>
+                <td>
+                    @if (u.Status == SystemStaticData.LookUpUserStatusId(SystemStaticData.UserDictionary.Normal))
+                    {
+                        <a href="@Url.Action("DisableUserAccount", "User", new { userId = u.UserId })">封停账户</a>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("EnableUserAccount", "User", new { userId = u.UserId })">解除封停</a>
+                    }
+                    <a href="@Url.Action("ResetPassword", "User", new { userId = u.UserId })">重置密码</a>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
 
