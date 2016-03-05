@@ -353,6 +353,7 @@
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <Content Include="Images\about.png" />
     <Content Include="Images\ad.png" />
+    <Content Include="Images\avatar.png" />
     <Content Include="Images\banner.jpg" />
     <Content Include="Images\datatable\sort_asc.png" />
     <Content Include="Images\datatable\sort_asc_disabled.png" />
@@ -361,6 +362,8 @@
     <Content Include="Images\datatable\sort_desc_disabled.png" />
     <Content Include="Images\dianpu.png" />
     <Content Include="Images\hongbao.png" />
+    <Content Include="Images\imgbg.png" />
+    <Content Include="Images\Logo-Mall.png" />
     <Content Include="Images\logo.png" />
     <Content Include="Images\pic1.png" />
     <Content Include="Images\pic2.png" />
