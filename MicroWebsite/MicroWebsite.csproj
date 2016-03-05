@@ -194,6 +194,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Advertisement\AdvController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\GetAdv\GetAdvController.cs" />
     <Compile Include="Controllers\System\SysConfigController.cs" />
     <Compile Include="Controllers\User\UserController.cs" />
     <Compile Include="Filters\UserRoleFilter.cs" />
@@ -427,6 +428,7 @@
     <Content Include="Views\Adv\AdminEditAdv.cshtml" />
     <Content Include="Views\User\AdminRechargeHistory.cshtml" />
     <Content Include="Views\User\RechargeAccount.cshtml" />
+    <Content Include="Views\GetAdv\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
