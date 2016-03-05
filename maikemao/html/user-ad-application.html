@@ -44,8 +44,8 @@
             <li>
 				<div class="dropdown clearfix">
 			      <button class=" dropdown-toggle" type="button" id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			        Dropdown
-			        <span class="caret"></span>
+			        麦克茂 <i class="text-warning glyphicon glyphicon-chevron-down"></i>
+			        
 			      </button>
 			      <ul class="dropdown-menu" aria-labelledby="dropdownMenu3">
 			        <li class="dropdown-header">Dropdown header</li>
@@ -56,11 +56,7 @@
 			        <li><a href="#">Separated link</a></li>
 			      </ul>
 			    </div>
-
-
-
-
-            <a href="#">麦克茂 <i class="text-warning glyphicon glyphicon-chevron-down"></i></a></li>
+            <a href="#"></a></li>
           </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
@@ -190,15 +186,15 @@
 
 <a href="#" id="tags" data-type="select2" data-pk="1" data-title="Enter tags" class="editable editable-click editable-open" data-original-title="" title="">html, javascript</a>
 </html>
-<div id="user">
+<div id="a">
   <!-- empty -->
   <a href="#" data-name="username" data-type="text" class="editable-click editable-empty" data-value="" title="Username">Empty</a>
   <!-- non-empty -->
-  <a href="#" data-name="group" data-type="select" data-source="/groups" data-value="1" class="editable-click" title="Group">Operator</a>
+  <a href="javascript:void(0)" id="aa" data-name="group" data-type="select" data-source="/groups" data-value="1" class="editable-click" title="Group">Operator</a>
 </div>     
  
 <script>
-$('#user').editable({
+$('#aa').editable({
     selector: 'a',
     url: '/post',
     pk: 1
