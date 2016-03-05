@@ -32,8 +32,14 @@
             <td>@u.CostFeeUrl</td>
             <td>@u.CreateAt</td>
             <td>
-                <a href="@Url.Action("ModifyAdv", "Adv", new {advId = u.AdvId})">审核</a>
-                <a href="@Url.Action("DeleteArea", "SysConfig", new {advId = u.AdvId})">强制下架</a>
+                @if (u.Status == SystemStaticData.LookUpAdvStatusId(SystemStaticData.AdvDictionary.Prepare))
+                {
+                    <a href="@Url.Action("ModifyAdv", "Adv", new {advId = u.AdvId})">审核</a>
+                }
+                else if(u.Status == SystemStaticData.LookUpAdvStatusId(SystemStaticData.AdvDictionary.Normal))
+                {
+                    <a href="@Url.Action("AdminDeleteAdv", "Adv", new {advId = u.AdvId})">强制下架</a>
+                }
             </td>
         </tr>
     }

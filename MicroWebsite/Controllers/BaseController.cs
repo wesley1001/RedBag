@@ -36,5 +36,17 @@ namespace MicroWebsite.Controllers
 
         protected MkmEntities db = new MkmEntities();
         protected BaseUserService uService = new BaseUserService();
+
+
+        protected void LogAccountHistory(int accountId,decimal changeValue,string comefrom)
+        {
+            AccountHistory accountHistory = new AccountHistory();
+            accountHistory.CreateAt = DateTime.Now;
+            accountHistory.AccountId = accountId;
+            accountHistory.ChangeValue = changeValue;
+            accountHistory.ComeFrom = comefrom;
+            db.AccountHistory.Add(accountHistory);
+        }
+
     }
 }
