@@ -16,7 +16,9 @@
 		<script type="text/javascript" href="../js/respond.min.js"></script>
 		<script type="text/javascript" href="../js/html5shiv.min.js"></script>
 		<script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-		</head>
+		<link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
+<script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+</head>
 <body>
 	<section>
 		<nav class="navbar navbar-inverse">
@@ -35,12 +37,30 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div id="bs-example-navbar-collapse-9" class="collapse navbar-collapse">
           <ul class="nav navbar-nav navigation">
-            <li><a href="#">所有区域</a></li>
-            <li class="active"><a href="#">所有地标</a></li>
+            <li class="active"><a href="#">所有广告</a></li>
           </ul>
           <ul class="nav navbar-nav pull-right">
             <li><img src="../images/avatar.png "style="height:60px; "></li>
-            <li><a href="#">麦克茂 <i class="text-warning glyphicon glyphicon-chevron-down"></i></a></li>
+            <li>
+				<div class="dropdown clearfix">
+			      <button class=" dropdown-toggle" type="button" id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			        Dropdown
+			        <span class="caret"></span>
+			      </button>
+			      <ul class="dropdown-menu" aria-labelledby="dropdownMenu3">
+			        <li class="dropdown-header">Dropdown header</li>
+			        <li><a href="#">Action</a></li>
+			        <li><a href="#">Another action</a></li>
+			        <li><a href="#">Something else here</a></li>
+			        <li class="dropdown-header">Dropdown header</li>
+			        <li><a href="#">Separated link</a></li>
+			      </ul>
+			    </div>
+
+
+
+
+            <a href="#">麦克茂 <i class="text-warning glyphicon glyphicon-chevron-down"></i></a></li>
           </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
@@ -52,29 +72,28 @@
 			<ul class="menu-title">
 				<li><i class="glyphicon glyphicon-user"></i> 用户管理</li>
 				<li><i class="glyphicon glyphicon-cog"></i> 系统设定</li>
-				<li><i class="glyphicon glyphicon-tasks"></i> 广告管理</li>
+				<li class="active"><i class="glyphicon glyphicon-tasks"></i> 广告管理</li>
 				<li><i class="glyphicon glyphicon-yen"></i> 系统收益</li>
 				<li><i class="glyphicon glyphicon-picture"></i> 我的广告</li>
-				<li class="active"><i class="glyphicon glyphicon-map-marker"></i> 区域管理</li>
+				<li><i class="glyphicon glyphicon-map-marker"></i> 区域管理</li>
 				<li><i class="glyphicon glyphicon-credit-card"></i> 充值管理</li>
 			</ul>
 		</div>
 		<div class="main-wrap" id="main-wrap">
 			<div class="current">
 				<div class="panel panel-default">
-			      <div class="panel-heading">创建新地标</div>
+			      <div class="panel-heading">创建新广告</div>
 			      <div class="panel-body">
 					<div class="row">
 						<div class="col-md-8">
-							<form class="margin-top-15 padding-bottom-30">
+							<form class="margin-top-15 padding-bottom-30 ad-quelification">
 					        	<div class="form-group">
-							        <label for="reward">地标名称</label>
-							        <input type="text"value="中电软件园" id="reward" class="form-control">
-							      </div>
-							      <label for="money">选择区域</label>
-							      <div class="form-group area" style="overflow: hidden;">
-							        
-							        <select class="form-control">
+							        <label for="reward">广告标题</label>
+							        <input type="text"value="让红包飞" id="reward" class="form-control">
+							    </div>
+							    <label for="area">投放区域</label>
+							    <div class="form-group area" style="overflow: hidden;">
+							        <select class="form-control" id="area">
 							        	<option>长沙市</option>
 							        </select>
 							        <select class="form-control">
@@ -83,21 +102,39 @@
 							        <select class="form-control">
 							        	<option>尖山路</option>
 							        </select>
-							      </div>
+							    </div>
+							    <div class="form-group">
+						      		<label for="money">奖励金额</label>
+								    <select class="form-control">
+								    	<option>
+								    		<input type="text" value="d">
+								    	</option>
+								    	<!-- <option>
+								    		<input type="checkbox">1元
+								    	</option>
+								    	<option>
+								    		<input type="checkbox">1元
+								    	</option> -->
+								    </select>
+								    
+							    </div> <!-- form-group end -->
+							    
 							      <div class="form-group">
-							        <label for="money">经度</label>
-							        <input type="text" value="28.16" id="money" class="form-control">
-							        
-							      </div>
-							      <div class="form-group">
-							        <label for="money">纬度</label>
-							        <input type="text" value="28.16" id="money" class="form-control">
-							        
-							      </div>
+							        <label for="reward">红包总数</label>
+							        <input type="text"value="200" id="reward" class="form-control">
+							    </div>
+							    <div class="form-group">
+							        <label for="reward">投放总额</label>
+							        <input type="text"value="1000" id="reward" class="form-control">
+							    </div>
+							    <div class="form-group">
+							        <label for="reward">广告内容</label>
+							        <textarea class="form-control" rows="10" cols="300">让红包飞让红包飞让红包飞让红包飞让红包飞让红包飞让红包飞让红包飞让红包飞让红包飞</textarea>
+							    </div>
 							      <div class="margin-top-30">
 							      	<button type="submit"class="btn btn-warning margin-right-15" >
-							      		保存
-							      	</button> <a href="" class="btn btn-default">取消</a>
+							      		审核通过
+							      	</button>
 							      </div>
 							      
 					        </form>
@@ -150,4 +187,20 @@
 // });
 	</script>
 </body>
+
+<a href="#" id="tags" data-type="select2" data-pk="1" data-title="Enter tags" class="editable editable-click editable-open" data-original-title="" title="">html, javascript</a>
 </html>
+<div id="user">
+  <!-- empty -->
+  <a href="#" data-name="username" data-type="text" class="editable-click editable-empty" data-value="" title="Username">Empty</a>
+  <!-- non-empty -->
+  <a href="#" data-name="group" data-type="select" data-source="/groups" data-value="1" class="editable-click" title="Group">Operator</a>
+</div>     
+ 
+<script>
+$('#user').editable({
+    selector: 'a',
+    url: '/post',
+    pk: 1
+});
+</script>

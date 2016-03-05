@@ -35,8 +35,7 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div id="bs-example-navbar-collapse-9" class="collapse navbar-collapse">
           <ul class="nav navbar-nav navigation">
-            <li><a href="#">所有区域</a></li>
-            <li class="active"><a href="#">所有地标</a></li>
+            <li class="active"><a href="#">所有广告</a></li>
           </ul>
           <ul class="nav navbar-nav pull-right">
             <li><img src="../images/avatar.png "style="height:60px; "></li>
@@ -52,29 +51,28 @@
 			<ul class="menu-title">
 				<li><i class="glyphicon glyphicon-user"></i> 用户管理</li>
 				<li><i class="glyphicon glyphicon-cog"></i> 系统设定</li>
-				<li><i class="glyphicon glyphicon-tasks"></i> 广告管理</li>
+				<li class="active"><i class="glyphicon glyphicon-tasks"></i> 广告管理</li>
 				<li><i class="glyphicon glyphicon-yen"></i> 系统收益</li>
 				<li><i class="glyphicon glyphicon-picture"></i> 我的广告</li>
-				<li class="active"><i class="glyphicon glyphicon-map-marker"></i> 区域管理</li>
+				<li><i class="glyphicon glyphicon-map-marker"></i> 区域管理</li>
 				<li><i class="glyphicon glyphicon-credit-card"></i> 充值管理</li>
 			</ul>
 		</div>
 		<div class="main-wrap" id="main-wrap">
 			<div class="current">
 				<div class="panel panel-default">
-			      <div class="panel-heading">创建新地标</div>
+			      <div class="panel-heading">创建新广告</div>
 			      <div class="panel-body">
 					<div class="row">
 						<div class="col-md-8">
-							<form class="margin-top-15 padding-bottom-30">
+							<form class="margin-top-15 padding-bottom-30 ad-quelification">
 					        	<div class="form-group">
-							        <label for="reward">地标名称</label>
-							        <input type="text"value="中电软件园" id="reward" class="form-control">
-							      </div>
-							      <label for="money">选择区域</label>
-							      <div class="form-group area" style="overflow: hidden;">
-							        
-							        <select class="form-control">
+							        <label for="reward">广告标题</label>
+							        <input type="text"value="让红包飞" id="reward" class="form-control">
+							    </div>
+							    <label for="area">投放区域</label>
+							    <div class="form-group area" style="overflow: hidden;">
+							        <select class="form-control" id="area">
 							        	<option>长沙市</option>
 							        </select>
 							        <select class="form-control">
@@ -83,21 +81,59 @@
 							        <select class="form-control">
 							        	<option>尖山路</option>
 							        </select>
-							      </div>
+							    </div>
+							    <div class="form-group">
+								    <div class="row">
+								      	<div class="col-md-4">
+								      		<label for="money">奖励金额</label>
+								        <input type="text" value="1元" id="money" class="form-control"> <input type="text" class="">
+								      	</div>
+								        <div class="col-md-8">
+								      		<label for="money">奖励链接</label>
+								        <input type="text" value="28.16" id="money" class="form-control">
+								      	</div>
+								    </div>
+							    </div> <!-- form-group end -->
+							    <div class="form-group">
+								    <div class="row">
+								      	<div class="col-md-4">
+								      		<label for="money">奖励金额</label>
+								        <input type="text" value="2元" id="money" class="form-control"> <input type="text" class="">
+								      	</div>
+								        <div class="col-md-8">
+								      		<label for="money">奖励链接</label>
+								        <input type="text" value="28.16" id="money" class="form-control">
+								      	</div>
+								      </div>
+							    </div> <!-- form-group end -->
+							    <div class="form-group">
+								    <div class="row">
+								      	<div class="col-md-4">
+								      		<label for="money">奖励金额</label>
+								        <input type="text" value="3元" id="money" class="form-control"> <input type="text" class="">
+								      	</div>
+								        <div class="col-md-8">
+								      		<label for="money">奖励链接</label>
+								        <input type="text" value="28.16" id="money" class="form-control">
+								      	</div>
+								      </div>
+							      </div> <!-- form-group end -->
 							      <div class="form-group">
-							        <label for="money">经度</label>
-							        <input type="text" value="28.16" id="money" class="form-control">
-							        
-							      </div>
-							      <div class="form-group">
-							        <label for="money">纬度</label>
-							        <input type="text" value="28.16" id="money" class="form-control">
-							        
-							      </div>
+							        <label for="reward">红包总数</label>
+							        <input type="text"value="200" id="reward" class="form-control">
+							    </div>
+							    <div class="form-group">
+							        <label for="reward">投放总额</label>
+							        <input type="text"value="1000" id="reward" class="form-control">
+							    </div>
+							    <div class="form-group">
+							        <label for="reward">广告内容</label>
+							        <textarea class="form-control" rows="10" cols="300">让红包飞让红包飞让红包飞让红包飞让红包飞让红包飞让红包飞让红包飞让红包飞让红包飞</textarea>
+							    </div>
 							      <div class="margin-top-30">
 							      	<button type="submit"class="btn btn-warning margin-right-15" >
-							      		保存
-							      	</button> <a href="" class="btn btn-default">取消</a>
+							      		审核通过
+							      	</button>
 							      </div>
 							      
 					        </form>
