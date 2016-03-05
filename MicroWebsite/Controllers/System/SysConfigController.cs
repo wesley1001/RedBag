@@ -291,5 +291,10 @@ namespace MicroWebsite.Controllers.System
             return RedirectToAction("AreaIndex", "SysConfig");
         }
 
+        public ActionResult SystemIncomeStatic()
+        {
+            return null;
+        }
+
     }
 }
