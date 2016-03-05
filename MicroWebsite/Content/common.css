@@ -284,6 +284,10 @@
 .bgcolor-success{
 	background: #5cb85c!important;
 }
+
+.btn-warning{
+    background-color:#fabe00;
+}
 /*===============*/
 body{
     color:#333; 
@@ -521,6 +525,7 @@ p{
     background: #f8f8f8;
     width:100%;
     padding: 30px 15px ;
+    min-height:500px;
 }
 .search{
     background: #fff;
@@ -557,6 +562,12 @@ input.choose{
 .table > thead > tr > td, .table > thead > tr > th
 {
     padding: 15px 8px;
+}
+.footer-main{
+    height:100px;
+    line-height:100px;
+    text-align:center;
+    background:#f8f8f8;
 }
 /*change password===========================================*/
 .panel-heading{

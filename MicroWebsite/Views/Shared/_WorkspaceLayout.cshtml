@@ -8,10 +8,11 @@
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <meta name="viewport" content="width=device-width" />
 
-   
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Styles.Render("~/Content/bootstrap.min.css")
+    @Styles.Render("~/Content/Font-Awesome-3.2.1/css/font-awesome.min.css")
     @Styles.Render("~/Content/jquery.dataTables.min.css")
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/Content/common.css")
@@ -31,7 +32,8 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a href="#" class="navbar-brand">
-                        <img src="~/images/Logo-Mall.png"></a>
+                        <img src="~/images/Logo-Mall.png">
+                    </a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -40,11 +42,7 @@
                         <li class="active"><a href="#">所有广告</a></li>
 
                     </ul>
-                    <ul class="nav navbar-nav pull-right">
-                        <li>
-                            <img src="~/Images/avatar.png" style="height: 60px;"></li>
-                        <li><a href="#">麦克茂 <i class="text-warning glyphicon glyphicon-chevron-down"></i></a></li>
-                    </ul>
+
                 </div>
                 <!-- /.navbar-collapse -->
             </div>
@@ -58,12 +56,14 @@
             {
 
                 <ul class="menu-title">
-                    <li><i class="glyphicon glyphicon-user"></i>@Html.ActionLink("用户管理", "UserList", "User")</li>
-                    <li class="active"><i class="glyphicon glyphicon-tasks"></i>@Html.ActionLink("广告管理", "AdvList", "Adv")</li>
-                    <li><i class="glyphicon glyphicon-cog"></i>@Html.ActionLink("系统设定", "Index", "SysConfig")</li>
-                    <li><i class="glyphicon glyphicon-map-marker"></i>@Html.ActionLink("区域设定", "AreaIndex", "SysConfig")</li>
-                    <li><i class="glyphicon glyphicon-credit-card"></i>@Html.ActionLink("充值管理", "AdminRechargeHistory", "User")</li>
-                    <li><i class="glyphicon glyphicon-yen"></i>系统收益</li>
+                    <li><a href="@Url.Action("UserList", "User")"><i class="glyphicon glyphicon-user"></i> 用户管理</a></li>
+                    <li><a href="@Url.Action("Index", "SysConfig")"><i class="glyphicon glyphicon-cog"></i> 系统设定</a></li>
+                    <li><a href="@Url.Action("AdvList", "Adv")"><i class="glyphicon glyphicon-tasks"></i> 广告管理</a></li>
+                    <li><a href="@Url.Action("AreaIndex", "SysConfig")"><i class="glyphicon glyphicon-map-marker"></i> 区域设定</a></li>
+                    <li><a href="@Url.Action("UserList", "User")"><i class="glyphicon glyphicon-picture"></i> 我的广告</a></li>
+                    <li><a href="@Url.Action("AdminRechargeHistory", "User")"><i class="glyphicon glyphicon-credit-card"></i> 充值管理</a></li>
+                    <li><a href="@Url.Action("UserList", "User")"><i class="glyphicon glyphicon-yen"></i> 系统收益</a></li>
+                   
                 </ul>
             }
             else
@@ -76,10 +76,11 @@
         </div>
         <div class="main-wrap" id="main-wrap">
             @RenderBody()
-            <div class="text-center text-muted margin-top-30">
-                <!-- <div class="footer"> -->
+            
+        </div>
+        <div class="footer-main text-muted">
+            <div class="text-center">
                 &copy; copyright 2016	<span class="margin-left-15">公司地址：长沙市岳麓区</span> <span class="margin-left-15">电话：<span class="text-warning">0731-87659803</span></span>
-                <!-- </div> -->
             </div>
         </div>
     </section>
