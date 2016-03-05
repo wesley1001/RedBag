@@ -78,7 +78,7 @@
             @RenderBody()
             
         </div>
-        <div class="footer-main text-muted">
+        <div class="footer-main text-muted" id="footer">
             <div class="text-center">
                 &copy; copyright 2016	<span class="margin-left-15">公司地址：长沙市岳麓区</span> <span class="margin-left-15">电话：<span class="text-warning">0731-87659803</span></span>
             </div>
@@ -86,5 +86,18 @@
     </section>
     @RenderSection("scripts", required: false)
 </body>
-</html>
+<script type="text/javascript">
+    $(function(){
+        var a=document.getElementById("sidebar");
+        var b=document.getElementById("main-wrap");
+        var c=document.getElementById("footer");
+        if(a.clientHeight<b.clientHeight){
+            a.style.height = b.clientHeight + c.clientHeight + "px";
+        }else{
+            b.style.height = a.clientHeight + c.clientHeight + "px";
+        }
+
+    });
+    </script>
+    </html>
 
