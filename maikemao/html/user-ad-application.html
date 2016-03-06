@@ -12,21 +12,10 @@
 		<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="../css/common.css">
 		<link rel="stylesheet" type="text/css" href="../Font-Awesome-3.2.1/css/font-awesome.min.css">
-		<link rel="stylesheet" type="text/css" href="css/select2.css">
-    <link rel="stylesheet" type="text/css" href="css/select2-bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap-editable.css" />
-		<script type="text/javascript" src="js/jquery.min.js"></script>
-        <script type="text/javascript" src="js/bootstrap.min.js"></script>
-        
-        <script src="js/jquery.mockjax.min.js"></script>
-        <script src="js/bootstrap-editable.min.js"></script>
-        <script src="js/moment.min.js"></script>
-        <script src="js/address.min.js"></script>
-        <script src="js/typeaheadjs.min.js"></script>
-        <script src="js/select2.js"></script>
-
-        <script src="js/form-x-editable-demo.js"></script>
-        <script src="js/form-x-editable.js"></script>
+		<link rel="stylesheet" type="text/css" href="../css/select2.css">
+    <link rel="stylesheet" type="text/css" href="../css/select2-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap-editable.css" />
+		
 </head>
 <body>
 	<section>
@@ -158,14 +147,36 @@
 			
 		</div>
 	</section>
+	<a href="#" id="tags" data-type="select2" data-pk="1" data-title="Enter tags" class="editable editable-click editable-open" data-original-title="" title="">html, javascript</a>
+</html>
+<div id="a">
+  <!-- empty -->
+  <a href="#" data-name="username" data-type="text" class="editable-click editable-empty" data-value="" title="Username">Empty</a>
+  <!-- non-empty -->
+  <a href="" id="aa" data-name="group" data-type="select" data-source="/groups" data-value="1" class="editable-click" title="Group">Operator</a>
+</div>
 	<div class="out">
 				<button class="btn btn-warning"><i class="glyphicon glyphicon-off"></i></button>
 				<div>退出</div>
 			</div>
+<script src="http://cdn.bootcss.com/jquery/1.12.1/jquery.min.js"></script>
+	<script type="text/javascript" src="../js/jquery.min.js"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+        
+        <script src="../js/jquery.mockjax.min.js"></script>
+        <script src="../js/bootstrap-editable.min.js"></script>
+        <script src="../js/moment.min.js"></script>
+        <script src="../js/address.min.js"></script>
+        <script src="../js/typeaheadjs.min.js"></script>
+        <script src="../js/select2.js"></script>
+		
+
+        <script src="../js/form-x-editable-demo.js"></script>
+        <script src="../js/form-x-editable.js"></script>
 	<script type="text/javascript">
-	$(function(){
-	var a=document.getElementById("sidebar");
-	var b=document.getElementById("main-wrap");
+	$(document).ready(function(){
+		var a=document.getElementById("sidebar");
+		var b=document.getElementById("main-wrap");
 		if(a.clientHeight<b.clientHeight){
 			a.style.height=b.clientHeight+"px";
 		}else{
@@ -209,14 +220,7 @@
 	</script>
 </body>
 
-<a href="#" id="tags" data-type="select2" data-pk="1" data-title="Enter tags" class="editable editable-click editable-open" data-original-title="" title="">html, javascript</a>
-</html>
-<div id="a">
-  <!-- empty -->
-  <a href="#" data-name="username" data-type="text" class="editable-click editable-empty" data-value="" title="Username">Empty</a>
-  <!-- non-empty -->
-  <a href="javascript:void(0)" id="aa" data-name="group" data-type="select" data-source="/groups" data-value="1" class="editable-click" title="Group">Operator</a>
-</div>     
+     
  
 <script>
 $('#aa').editable({
