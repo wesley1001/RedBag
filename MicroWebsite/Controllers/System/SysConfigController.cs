@@ -293,7 +293,8 @@ namespace MicroWebsite.Controllers.System
 
         public ActionResult SystemIncomeStatic()
         {
-            return null;
+            SystemIncomeStaticModel model= new SystemIncomeStaticModel();
+            return View();
         }
 
     }

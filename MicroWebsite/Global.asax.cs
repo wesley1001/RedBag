@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
@@ -8,6 +9,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using Core;
 using DataAccessLayer;
+using Senparc.Weixin.MP.CommonAPIs;
 
 namespace MicroWebsite
 {
@@ -25,7 +27,10 @@ namespace MicroWebsite
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
-
+            var appid = ConfigurationManager.AppSettings["AppID"];
+            var secret = ConfigurationManager.AppSettings["AppSecret"];
+            AccessTokenContainer.Register(appid, secret);
+            
             var entities = new MkmEntities();
             var allStatus = entities.SystemStatus.ToList();
             SystemStaticData.UserStatus = allStatus.Where(p => p.SystemStatusCategoryId == (int)StatusCategory.User);

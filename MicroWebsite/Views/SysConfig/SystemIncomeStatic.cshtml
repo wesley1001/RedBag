@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "系统收益";
+    Layout = "~/Views/Shared/_WorkspaceLayout.cshtml";
+}
+@model MicroWebsite.Models.SystemIncomeStaticModel
+
+@functions {
+
+    private static List<SelectListItem> MyListBool()
+    {
+        return new List<SelectListItem>
+        {
+            new SelectListItem {Text = "-- None --", Value = "", Selected = true},
+            new SelectListItem {Text = "Yes", Value = "true"},
+            new SelectListItem {Text = "No", Value = "false"}
+        };
+    }
+
+}
+<form>
+    @Html.DropDownListFor(m=>m.ComeType,MyListBool())
+@Html.TextBoxFor(m=>m.Time.Start)
+@Html.TextBoxFor(m=>m.Time.End)
+    <input type="submit" value="检索"/>
+</form>
+
+
