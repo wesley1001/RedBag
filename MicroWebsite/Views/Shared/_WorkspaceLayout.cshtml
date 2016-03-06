@@ -8,9 +8,10 @@
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    @Styles.Render("~/Content/common.css")
+    
     <script src="http://cdn.bootcss.com/jquery/1.12.1/jquery.min.js"></script>
     @Styles.Render("~/Content/jquery.dataTables.min.css")
+    @Styles.Render("~/Content/common.css")
     <script src="~/Scripts/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="~/Scripts/respond.min.js"></script>
     <script type="text/javascript" src="~/Scripts/html5shiv.min.js"></script>
@@ -33,12 +34,12 @@
             @if (Convert.ToInt32(Session["Role"]) == (int)UserRole.Admin)
             {
                 <ul class="menu-title">
-                            <li><a href="@Url.Action("UserList", "User")"><i class="glyphicon glyphicon-user"></i>用户管理</a></li>
-                            <li><a href="@Url.Action("Index", "SysConfig")"><i class="glyphicon glyphicon-cog"></i>系统设定</a></li>
-                            <li><a href="@Url.Action("AdvList", "Adv")"><i class="glyphicon glyphicon-tasks"></i>广告管理</a></li>
-                            <li><a href="@Url.Action("AreaIndex", "SysConfig")"><i class="glyphicon glyphicon-map-marker"></i>区域设定</a></li>
-                            <li><a href="@Url.Action("AdminRechargeHistory", "User")"><i class="glyphicon glyphicon-credit-card"></i>充值管理</a></li>
-                            <li><a href="@Url.Action("UserList", "User")"><i class="glyphicon glyphicon-yen"></i>系统收益</a></li>
+                            <li><a href="@Url.Action("UserList", "User")"><i class="glyphicon glyphicon-user"></i> 用户管理</a></li>
+                            <li><a href="@Url.Action("Index", "SysConfig")"><i class="glyphicon glyphicon-cog"></i> 系统设定</a></li>
+                            <li><a href="@Url.Action("AdvList", "Adv")"><i class="glyphicon glyphicon-tasks"></i> 广告管理</a></li>
+                            <li><a href="@Url.Action("AreaIndex", "SysConfig")"><i class="glyphicon glyphicon-map-marker"></i> 区域设定</a></li>
+                            <li><a href="@Url.Action("AdminRechargeHistory", "User")"><i class="glyphicon glyphicon-credit-card"></i> 充值管理</a></li>
+                            <li><a href="@Url.Action("UserList", "User")"><i class="glyphicon glyphicon-yen"></i> 系统收益</a></li>
                    
                 </ul>
             }
@@ -76,6 +77,10 @@
                 &copy; copyright 2016	<span class="margin-left-15">湘ICP备14010744号</span> <span class="margin-left-15">电话：<span class="text-warning">0731-87659803</span></span>
             </div>
         </div>
+    </div>
+    <div class="out">
+        <button class="btn btn-warning"><i class="glyphicon glyphicon-off"></i></button>
+        <div>退出</div>
     </div>
     @RenderSection("scripts", required: false)
 </body>
