@@ -8,10 +8,9 @@
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    
+    @Styles.Render("~/Content/common.css")
     <script src="http://cdn.bootcss.com/jquery/1.12.1/jquery.min.js"></script>
     @Styles.Render("~/Content/jquery.dataTables.min.css")
-    @Styles.Render("~/Content/common.css")
     <script src="~/Scripts/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="~/Scripts/respond.min.js"></script>
     <script type="text/javascript" src="~/Scripts/html5shiv.min.js"></script>
@@ -39,15 +38,12 @@
                             <li><a href="@Url.Action("AdvList", "Adv")"><i class="glyphicon glyphicon-tasks"></i> 广告管理</a></li>
                             <li><a href="@Url.Action("AreaIndex", "SysConfig")"><i class="glyphicon glyphicon-map-marker"></i> 区域设定</a></li>
                             <li><a href="@Url.Action("AdminRechargeHistory", "User")"><i class="glyphicon glyphicon-credit-card"></i> 充值管理</a></li>
-                            <li><a href="@Url.Action("UserList", "User")"><i class="glyphicon glyphicon-yen"></i> 系统收益</a></li>
+                            <li><a href="@Url.Action("SystemIncomeStatic", "SysConfig")"><i class="glyphicon glyphicon-yen"></i> 系统收益</a></li>
                    
                 </ul>
             }
             else
             {
-
-
-
                 <ul>
                             <li><a href="@Url.Action("UAdvList", "Adv")"><i class="glyphicon glyphicon-picture"></i>我的广告</a></li>
                 </ul>
@@ -78,21 +74,17 @@
             </div>
         </div>
     </div>
-    <div class="out">
-        <button class="btn btn-warning"><i class="glyphicon glyphicon-off"></i></button>
-        <div>退出</div>
-    </div>
     @RenderSection("scripts", required: false)
 </body>
 <script type="text/javascript">
-    $(function(){
-        var a=document.getElementById("sidebar");
-        var b=document.getElementById("main-wrap");
-        var c=document.getElementById("footer");
-        if(a.clientHeight<b.clientHeight){
-            a.style.height = b.clientHeight + c.clientHeight-80 + "px";
-        }else{
-            b.style.height = a.clientHeight + c.clientHeight-80 + "px";
+    $(function () {
+        var a = document.getElementById("sidebar");
+        var b = document.getElementById("main-wrap");
+        var c = document.getElementById("footer");
+        if (a.clientHeight < b.clientHeight) {
+            a.style.height = b.clientHeight + c.clientHeight - 80 + "px";
+        } else {
+            b.style.height = a.clientHeight + c.clientHeight - 80 + "px";
         }
 
     });

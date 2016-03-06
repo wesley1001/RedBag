@@ -3,18 +3,86 @@
 }
 
 <!DOCTYPE html>
-
+@model MicroWebsite.Models.WxModel
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
+    <script src="~/Scripts/jquery-1.8.2.min.js"></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+
+    <script>
+        wx.config({
+            debug: false,
+            appId: 'wx37b646528bc2c1d2',
+            timestamp: '@Model.TimeStamp',
+            nonceStr: '@Model.NonceStr',
+            signature: '@Model.Signature',
+            jsApiList: [
+                // 所有要调用的 API 都要加到这个列表中
+                'checkJsApi',
+                'openLocation',
+                'getLocation'
+            ]
+        });
+
+        wx.checkJsApi({
+            jsApiList: [
+                'checkJsApi'
+            ],
+            success: function (res) {
+                
+                if (res.checkResult.getLocation == false) {
+                    alert('你的微信版本太低，不支持微信JS接口，请升级到最新的微信版本！');
+                    return;
+                }
+            }
+        });
+
+        wx.ready(function () {
+            wx.getLocation({
+                jsApiList: [
+                    'getLocation'
+                ],
+                success: function (res) {
+                    $("#txtLongitude").val(res.longitude);
+                    $("#txtLatitude").val(res.latitude);
+                    //var latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
+                    //var longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
+                    //var speed = res.speed; // 速度，以米/每秒计
+                    //var accuracy = res.accuracy; // 位置精度
+                },
+                cancel: function (res) {
+                    alert('用户拒绝授权获取地理位置');
+                }
+            });
+        });
+
+
+        
+
+
+
+
+        function getUrlParam(name) {
+            //构造一个含有目标参数的正则表达式对象  
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            //匹配目标参数  
+            var r = window.location.search.substr(1).match(reg);
+            //返回参数值  
+            if (r != null) return unescape(r[2]);
+            return null;
+        }
+
+    </script>
 </head>
 <body>
     <div>
-        @ViewBag.Scope
-        
-        
-        url: @ViewBag.RequestURL
+        @Html.TextBoxFor(m => m.NickName)
+        @Html.TextBoxFor(m => m.OpenId)
+
+        <input type="text" id="txtLongitude" />
+        <input type="text" id="txtLatitude" />
     </div>
 </body>
 </html>

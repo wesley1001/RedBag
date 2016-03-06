@@ -36,4 +36,19 @@ namespace MicroWebsite.Models
         public string AreaFullName { get; set; }
     }
 
+    public class SystemIncomeStaticModel
+    {
+        public int ComeType { get; set; }
+        public TimeRange Time { get; set; }
+        public IList<SystemIncomeHistory> IncomeList { get; set; }
+        public decimal TotalIncomeValue { get; set; }
+    }
+
+    public class TimeRange
+    {
+        public DateTime Start { get; set; }
+        public DateTime End { get; set; }
+    }
+
+
 }
