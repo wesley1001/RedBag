@@ -27,23 +27,6 @@ namespace MicroWebsite.Controllers.GetAdv
             var appid = ConfigurationManager.AppSettings["AppID"];
             var secret = ConfigurationManager.AppSettings["AppSecret"];
             WxModel model = new WxModel();
-
-            //var client = new WebClient();
-            //client.Encoding = Encoding.UTF8;
-
-            //var url = string.Format("https://api.weixin.qq.com/sns/oauth2/access_token?appid={0}&secret={1}&code={2}&grant_type=authorization_code", appid, secret, code);
-            //var data = client.DownloadString(url);
-
-            //var serializer = new JavaScriptSerializer();
-            //var obj = serializer.Deserialize<Dictionary<string, string>>(data);
-            //string accessToken;
-            //if (!obj.TryGetValue("access_token", out accessToken))
-            //    return View();
-
-            //var opentid = obj["openid"];
-            //url = string.Format("https://api.weixin.qq.com/sns/userinfo?access_token={0}&openid={1}&lang=zh_CN", accessToken, opentid);
-            //data = client.DownloadString(url);
-            //var userInfo = serializer.Deserialize<Dictionary<string, object>>(data);
             var accessToken = OAuthApi.GetAccessToken(appid, secret, code);
             var ticket = JsApiTicketContainer.GetJsApiTicket(appid);
             var accessUserInfo = OAuthApi.GetUserInfo(accessToken.access_token, accessToken.openid);
@@ -56,6 +39,26 @@ namespace MicroWebsite.Controllers.GetAdv
             model.Signature = signature;
             model.NonceStr = noncestr;
             return View(model);
+
+
+            ////var client = new WebClient();
+            ////client.Encoding = Encoding.UTF8;
+
+            ////var url = string.Format("https://api.weixin.qq.com/sns/oauth2/access_token?appid={0}&secret={1}&code={2}&grant_type=authorization_code", appid, secret, code);
+            ////var data = client.DownloadString(url);
+
+            ////var serializer = new JavaScriptSerializer();
+            ////var obj = serializer.Deserialize<Dictionary<string, string>>(data);
+            ////string accessToken;
+            ////if (!obj.TryGetValue("access_token", out accessToken))
+            ////    return View();
+
+            ////var opentid = obj["openid"];
+            ////url = string.Format("https://api.weixin.qq.com/sns/userinfo?access_token={0}&openid={1}&lang=zh_CN", accessToken, opentid);
+            ////data = client.DownloadString(url);
+            ////var userInfo = serializer.Deserialize<Dictionary<string, object>>(data);
+            
+            
         }
 
     }

@@ -6,11 +6,20 @@
 @model MicroWebsite.Models.WxModel
 <html>
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <title>红包送不停</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-    <script src="~/Scripts/jquery-1.8.2.min.js"></script>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    @Styles.Render("~/Content/common.css")
+    <script src="http://cdn.bootcss.com/jquery/1.12.1/jquery.min.js"></script>
+    @Styles.Render("~/Content/jquery.dataTables.min.css")
+    <script src="~/Scripts/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/respond.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/html5shiv.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-
     <script>
         wx.config({
             debug: false,
@@ -45,8 +54,8 @@
                     'getLocation'
                 ],
                 success: function (res) {
-                    $("#txtLongitude").val(res.longitude);
-                    $("#txtLatitude").val(res.latitude);
+                    alert(res.longitude);
+                    alert(res.latitude);
                     //var latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
                     //var longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
                     //var speed = res.speed; // 速度，以米/每秒计
@@ -57,12 +66,6 @@
                 }
             });
         });
-
-
-        
-
-
-
 
         function getUrlParam(name) {
             //构造一个含有目标参数的正则表达式对象  
@@ -77,12 +80,23 @@
     </script>
 </head>
 <body>
-    <div>
-        @Html.TextBoxFor(m => m.NickName)
-        @Html.TextBoxFor(m => m.OpenId)
-
-        <input type="text" id="txtLongitude" />
-        <input type="text" id="txtLatitude" />
+    <div class="container">
+        <section class="redbag" id="redbag">
+            <!-- <img src="../images/redbag.png"style="width:100%;"> -->
+            <div class="detail">
+                <div>已有 <span>278,890</span> 人成功领取 </div>
+                <div class="margin-top-15 margin-bottom-15"><a href="" class="btn btn-warning">立即领取</a></div>
+                <div class="progress-status">
+                    <span class="step">阅读内容</span>
+                    <span class="step">回答问题</span>
+                    <span class="step">领取红包</span>
+                    <div class="progress">
+                        <div class="progress-bar progress-bg active" style="width: 100%">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
 </body>
 </html>

@@ -381,6 +381,7 @@
     <Content Include="Images\pic4.png" />
     <Content Include="Images\pic5.png" />
     <Content Include="Images\pic6.png" />
+    <Content Include="Images\redbag.png" />
     <Content Include="Images\zhenghe.png" />
     <Content Include="Scripts\bootstrap-dropdown-hover.min.js" />
     <Content Include="Scripts\bootstrap-editable.min.js" />
